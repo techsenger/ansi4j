@@ -1,4 +1,8 @@
-**Important!** I will work at the next version (ver.2) only if project has 50 stars. So, if you need it star the project!
+
+| New Project  |
+|:-------------|
+| [JediTermFX](https://github.com/PavelKastornyy/jeditermfx) - Terminal Emulator for JavaFX  that is a port of JediTerm from Swing to JavaFX.JediTermFX exclusively utilizes JavaFX components. Therefore, the Terminal Emulator based on this library can be seamlessly integrated into any JavaFX application.  |
+
 # Table of contents
 * [ANSI4J](#ansi4j)
     * [Core](#ansi4j-core)
