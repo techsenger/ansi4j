@@ -3,8 +3,8 @@
 |:-------------|
 | [JediTermFX](https://github.com/PavelKastornyy/jeditermfx) - Terminal Emulator for JavaFX  that is a port of JediTerm from Swing to JavaFX.JediTermFX exclusively utilizes JavaFX components. Therefore, the Terminal Emulator based on this library can be seamlessly integrated into any JavaFX application.  |
 
-# Table of contents
-* [ANSI4J](#ansi4j)
+# ANSI4J
+* [Overview](#ansi4j-overview)
     * [Core](#ansi4j-core)
         * [Overview](#ansi4j-core-overview)
         * [Dependencies](#ansi4j-core-dependencies)
@@ -32,7 +32,7 @@
     * [Parameter examples](#theory-parameters)
 * [Useful resources](#resources)
 
-# ANSI4J <a name="ansi4j"></a>
+# Overview <a name="ansi4j-overview"></a>
 
 ANSI4J is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992. It supports all
 functions of all five types. At the same time parser architecture allows to add easily any other custom types of
