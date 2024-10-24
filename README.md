@@ -1,4 +1,4 @@
-# Techsenger ANSI4J
+# Techsenger Ansi4j
 * [Overview](#ansi4j-overview)
     * [Core](#ansi4j-core)
         * [Overview](#ansi4j-core-overview)
@@ -28,11 +28,11 @@
 
 # Overview <a name="ansi4j-overview"></a>
 
-Techsenger ANSI4J is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992.
+Techsenger Ansi4j is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992.
 It supports all functions of all five types. At the same time parser architecture allows to add easily any other custom
 types of functions and mechanism to process them.
 
-Techsenger ANSI4J consists of a core that includes parser and CSS extension that allows to create CSS declaration using
+Techsenger Ansi4j consists of a core that includes parser and CSS extension that allows to create CSS declaration using
 function arguments.
 
 ## Core <a name="ansi4j-core"></a>
