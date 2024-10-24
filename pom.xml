@@ -11,7 +11,7 @@
     <artifactId>ansi4j</artifactId>
     <version>1.2.0</version>
     <packaging>pom</packaging>
-    <name>Techsenger ANSI4J</name>
+    <name>Techsenger Ansi4j</name>
 
     <licenses>
         <license>

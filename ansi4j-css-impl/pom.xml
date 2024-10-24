@@ -10,7 +10,7 @@
     <groupId>com.techsenger.ansi4j</groupId>
     <artifactId>ansi4j-css-impl</artifactId>
     <packaging>jar</packaging>
-    <name>Techsenger ANSI4J - CSS IMPL</name>
+    <name>Techsenger Ansi4j - CSS IMPL</name>
 
     <dependencies>
         <dependency>

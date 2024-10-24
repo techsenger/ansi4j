@@ -10,7 +10,7 @@
     <groupId>com.techsenger.ansi4j</groupId>
     <artifactId>ansi4j-core-it</artifactId>
     <packaging>jar</packaging>
-    <name>Techsenger ANSI4J - Core IT</name>
+    <name>Techsenger Ansi4j - Core IT</name>
 
     <dependencies>
         <dependency>
