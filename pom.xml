@@ -17,6 +17,7 @@
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
         <maven.compiler.release>14</maven.compiler.release>
+        <javafx.version>14</javafx.version>
     </properties>
 
     <licenses>
