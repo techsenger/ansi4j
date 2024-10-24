@@ -1,9 +1,4 @@
-
-| New Project  |
-|:-------------|
-| [JediTermFX](https://github.com/PavelKastornyy/jeditermfx) - Terminal Emulator for JavaFX  that is a port of JediTerm from Swing to JavaFX.JediTermFX exclusively utilizes JavaFX components. Therefore, the Terminal Emulator based on this library can be seamlessly integrated into any JavaFX application.  |
-
-# ANSI4J
+# Techsenger ANSI4J
 * [Overview](#ansi4j-overview)
     * [Core](#ansi4j-core)
         * [Overview](#ansi4j-core-overview)
@@ -17,7 +12,6 @@
         * [Thread-safety](#ansi4j-css-thread)
         * [Example](#ansi4j-css-example)
     * [Code building](#ansi4j-building)
-    * [License](#ansi4j-license)
     * [Feedback](#ansi4j-feedback)
 * [Theory](#theory)
     * [Control character](#theory-control)
@@ -34,11 +28,11 @@
 
 # Overview <a name="ansi4j-overview"></a>
 
-ANSI4J is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992. It supports all
-functions of all five types. At the same time parser architecture allows to add easily any other custom types of
-functions and mechanism to process them.
+Techsenger ANSI4J is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992.
+It supports all functions of all five types. At the same time parser architecture allows to add easily any other custom
+types of functions and mechanism to process them.
 
-ANSI4J consists of a core that includes parser and CSS extension that allows to create CSS declaration using
+Techsenger ANSI4J consists of a core that includes parser and CSS extension that allows to create CSS declaration using
 function arguments.
 
 ## Core <a name="ansi4j-core"></a>
@@ -51,7 +45,7 @@ Base components:
 
 * `ParserFactory` is thread-safe instance of factory, that can be used for creating N parsers for parsing N texts.
 So, usually there is only one factory.
-* `Parser` is a non thread-safe object that reads text, manages finder and handlers and returns parsed fragment. 
+* `Parser` is a non thread-safe object that reads text, manages finder and handlers and returns parsed fragment.
 There are two types of parsers:
     * `StringParser` for parsing `String`. `StringParser` is very light, so it is possible to create it for every text line.
     * `StreamParser` for parsing `InputStream`. One instance of `StreamParser` is created for one instance of `InputStream`.
@@ -60,7 +54,7 @@ There are two types of parsers:
     * `TextHandler` is a handler for processing a text that doesn't contain any control functions in it.
       This handler allows to modify this text within system. Default implementation doesn't modify text and just wraps
       it in `TextFragment`.
-    * `FunctionHandler` is a handler for processing functions in a text. For every type of function separate function 
+    * `FunctionHandler` is a handler for processing functions in a text. For every type of function separate function
     handler exists. As a result `FunctionHandler` returns `FunctionFragment`.
 * `Fragment` is a processed piece of text. There are two types of fragments:
     * `TextFragment` that contains information about text pieces without functions.
@@ -68,40 +62,19 @@ There are two types of parsers:
 
 ### Dependencies <a name="ansi4j-core-dependencies"></a>
 
-You can use dependencies either from your local maven repo (after [code building](#ansi4j-building)) or from [JitPack](https://jitpack.io/#PavelKastornyy/ansi4j) maven repo.
-
-Using local maven repo:
+This project will be added to the central Maven repository soon. Until then, you can only use the local repository
+ (after [code building](#ansi4j-building)):
 
     <dependency>
-        <groupId>pk.ansi4j</groupId>
+        <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j-core-api</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
     </dependency>
     <dependency>
-        <groupId>pk.ansi4j</groupId>
+        <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j-core-impl</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
     </dependency>
-
-Using JitPack maven repo:
-
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-    ...
-    <dependency>
-        <groupId>com.github.PavelKastornyy.ansi4j</groupId>
-        <artifactId>ansi4j-core-api</artifactId>
-        <version>ansi4j-1.1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.PavelKastornyy.ansi4j</groupId>
-        <artifactId>ansi4j-core-impl</artifactId>
-        <version>ansi4j-1.1.0</version>
-    </dependency>    
 
 ### Usage <a name="ansi4j-core-usage"></a>
 
@@ -159,8 +132,8 @@ Step 2 - Parsing
 
 ### Thread-safety <a name="ansi4j-core-thread"></a>
 
-`ParserFactory` is thread-safe. `StringParser` and `StreamParser` are not thread-safe. `FunctionFinder`, `TextHandler` and 
-`FunctionHandler`s are thread-safe. Detailed information about thread-safety is provided in every interface in core API 
+`ParserFactory` is thread-safe. `StringParser` and `StreamParser` are not thread-safe. `FunctionFinder`, `TextHandler` and
+`FunctionHandler`s are thread-safe. Detailed information about thread-safety is provided in every interface in core API
 module.
 
 ## CSS extension <a name="ansi4j-css"></a>
@@ -196,39 +169,18 @@ Such architecture allows easily to create new attribute types and resolvers with
 
 ### Dependencies <a name="ansi4j-css-dependencies"></a>
 
-You can use dependencies either from your local maven repo (after [code building](#ansi4j-building)) or from [JitPack](https://jitpack.io/#PavelKastornyy/ansi4j) maven repo.
-
-Using local maven repo:
+This project will be added to the central Maven repository soon. Until then, you can only use the local repository
+(after [code building](#ansi4j-building)):
 
     <dependency>
-        <groupId>pk.ansi4j</groupId>
+        <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j-css-api</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
     </dependency>
     <dependency>
-        <groupId>pk.ansi4j</groupId>
+        <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j-css-impl</artifactId>
-        <version>1.1.0</version>
-    </dependency>
-
-Using JitPack maven repo:
-
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-    ...
-    <dependency>
-        <groupId>com.github.PavelKastornyy.ansi4j</groupId>
-        <artifactId>ansi4j-css-api</artifactId>
-        <version>ansi4j-1.1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.PavelKastornyy.ansi4j</groupId>
-        <artifactId>ansi4j-css-impl</artifactId>
-        <version>ansi4j-1.1.0</version>
+        <version>1.2.0</version>
     </dependency>
 
 ### Usage <a name="ansi4j-css-usage"></a>
@@ -289,13 +241,9 @@ was styled this way in JavaFX (RichTextFX):
 
 To build the library use standard Git and Maven commands:
 
-    git clone https://github.com/PavelKastornyy/ansi4j.git
+    git clone https://github.com/techsenger/ansi4j.git
     cd ansi4j
     mvn clean install
-
-## License <a name="ansi4j-license"></a>
-
-ANSI4J is under the Apache License, Version 2.0, January 2004.
 
 ## Feedback <a name="ansi4j-feedback"></a>
 
@@ -369,7 +317,6 @@ standard, ISO 6429. In 1994, ANSI withdrew its standard in favor of the internat
 * ISO 6429:1988(withdrawn),
 * ISO/IEC 6429:1992 (current), almost identical to the fifth edition of ECMA-48. It seems that there is only one
 difference - ISO/IEC 6429:1992 has one function more - DEL-DELETE.
-
 
 ## Types of control functions <a name="theory-types"></a>
 
