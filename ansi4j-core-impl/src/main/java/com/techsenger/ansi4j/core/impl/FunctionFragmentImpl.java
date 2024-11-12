@@ -40,28 +40,19 @@ public class FunctionFragmentImpl extends AbstractFragment implements FunctionFr
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Function getFunction() {
         return this.function;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<FunctionArgument> getArguments() {
         return this.arguments;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
-        return "FunctionFragmentImpl{" + "function=" + function + ", arguments=" + arguments + '}'
+        return "FunctionFragment{" + "function=" + function + ", arguments=" + arguments + '}'
                 + "->" + super.toString();
     }
 }

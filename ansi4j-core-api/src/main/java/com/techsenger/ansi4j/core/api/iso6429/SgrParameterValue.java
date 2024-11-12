@@ -87,7 +87,7 @@ public final class SgrParameterValue {
 
     public static final int WHITE_DISPLAY = 37;
 
-    public static final int DEFAULT_DISPLAY_COLOUR = 39;
+    public static final int DEFAULT_COLOUR_DISPLAY = 39;
 
     public static final int BLACK_BACKGROUND = 40;
 

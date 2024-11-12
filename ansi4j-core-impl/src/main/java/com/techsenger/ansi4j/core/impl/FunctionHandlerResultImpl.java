@@ -25,9 +25,6 @@ public class FunctionHandlerResultImpl extends AbstractFragmentHandlerResult imp
         this.fragment = fragment;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Optional<FunctionFragment> getFragment() {
         return this.fragment;

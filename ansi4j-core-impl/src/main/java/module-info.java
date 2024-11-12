@@ -9,6 +9,6 @@ module com.techsenger.ansi4j.core.impl {
     requires com.techsenger.ansi4j.core.api;
     requires org.slf4j;
 
-    exports com.techsenger.ansi4j.core;
-    exports com.techsenger.ansi4j.core.iso6429;
+    provides com.techsenger.ansi4j.core.api.spi.ParserFactoryService
+            with com.techsenger.ansi4j.core.impl.ParserFactoryProvider;
 }

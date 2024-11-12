@@ -13,5 +13,7 @@ package com.techsenger.ansi4j.css.api.color;
  */
 public interface Palette {
 
+    PaletteType getType();
+
     int[] getColors();
 }

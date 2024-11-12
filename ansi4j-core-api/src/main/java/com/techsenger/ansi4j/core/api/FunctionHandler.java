@@ -23,7 +23,7 @@ public interface FunctionHandler extends FragmentHandler {
      *
      * @return
      */
-    FunctionType getTargetFunctionType();
+    FunctionType getFunctionType();
 
     /**
      * Parses function text.

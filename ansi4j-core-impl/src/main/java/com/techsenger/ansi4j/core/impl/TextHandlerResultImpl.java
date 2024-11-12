@@ -25,12 +25,8 @@ public class TextHandlerResultImpl extends AbstractFragmentHandlerResult impleme
         this.fragment = fragment;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Optional<TextFragment> getFragment() {
         return this.fragment;
     }
-
 }

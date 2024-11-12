@@ -13,4 +13,8 @@ package com.techsenger.ansi4j.css.api.color;
  */
 public interface Palette16 extends Palette8 {
 
+    @Override
+    default PaletteType getType() {
+        return PaletteType.PALETTE_16;
+    }
 }

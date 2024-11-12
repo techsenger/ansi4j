@@ -23,6 +23,24 @@ public final class Characters {
      */
     public static final char LEFT_SB = '[';
 
+    /**
+     * Replaces invisible characters with unicodes in a string.
+     *
+     * @param input
+     * @return
+     */
+    public static String invisibleToUnicode(String input) {
+        StringBuilder result = new StringBuilder();
+        for (char ch : input.toCharArray()) {
+            if (Character.isISOControl(ch) || (ch >= 0x200B && ch <= 0x200D) || (ch >= 0x202A && ch <= 0x202E)) {
+                result.append(String.format("\\u%04x", (int) ch));
+            } else {
+                result.append(ch);
+            }
+        }
+        return result.toString();
+    }
+
     private Characters() {
         //empty
     }

@@ -60,9 +60,6 @@ public class StreamParserImpl extends AbstractParser implements StreamParser {
         bufferedReader = new BufferedReader(inputStreamReader);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Fragment parse() {
         try {
@@ -88,9 +85,6 @@ public class StreamParserImpl extends AbstractParser implements StreamParser {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() throws IOException {
         if (this.bufferedReader != null) {
@@ -101,9 +95,6 @@ public class StreamParserImpl extends AbstractParser implements StreamParser {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected boolean delayFunctionParsing(FailureReason reason) {
         return reason == FunctionFailureReason.NO_END_OF_FUNCTION;

@@ -29,33 +29,21 @@ public class FunctionFinderResultImpl implements FunctionFinderResult {
         this.function = function;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getFunctionIndex() {
         return this.functionIndex;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public FunctionType getFunctionType() {
         return this.functionType;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ControlFunction getFunction() {
         return function;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
         return "FunctionFinderResultImpl{" + "functionIndex=" + functionIndex + ", functionType=" + functionType

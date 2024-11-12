@@ -20,9 +20,6 @@ public class TextFragmentImpl extends AbstractFragment implements TextFragment {
         super(FragmentType.TEXT, text, currentIndex);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
         return "TextFragmentImpl{" + '}' + "->" + super.toString();

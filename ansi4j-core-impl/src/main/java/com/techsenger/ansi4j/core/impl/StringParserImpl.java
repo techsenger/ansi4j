@@ -26,9 +26,6 @@ public class StringParserImpl extends AbstractParser implements StringParser {
         super(text, factory);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Fragment parse() {
         try {
@@ -39,9 +36,6 @@ public class StringParserImpl extends AbstractParser implements StringParser {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected boolean delayFunctionParsing(FailureReason reason) {
         return false;

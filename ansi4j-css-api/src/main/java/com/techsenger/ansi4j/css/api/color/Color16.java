@@ -8,7 +8,7 @@
 package com.techsenger.ansi4j.css.api.color;
 
 /**
- * All these colors are indexes in palette.
+ * All these colors are indexes in a palette.
  *
  * @author Pavel Castornii
  */

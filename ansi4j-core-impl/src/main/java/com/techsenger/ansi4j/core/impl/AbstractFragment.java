@@ -9,6 +9,7 @@ package com.techsenger.ansi4j.core.impl;
 
 import com.techsenger.ansi4j.core.api.Fragment;
 import com.techsenger.ansi4j.core.api.FragmentType;
+import com.techsenger.ansi4j.core.api.utils.Characters;
 
 /**
  *
@@ -31,44 +32,33 @@ abstract class AbstractFragment implements Fragment {
         this.endIndex = currentIndex + text.length();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public FragmentType getType() {
         return type;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getStartIndex() {
         return startIndex;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getEndIndex() {
         return endIndex;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getText() {
         return text;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
-        return "AbstractFragmentImpl{" + "type=" + type + ", text=" + text + ", startIndex=" + startIndex
+        var t = this.text;
+        if (t != null) {
+            t = Characters.invisibleToUnicode(t);
+        }
+        return "AbstractFragmentImpl{" + "type=" + type + ", text=" + t + ", startIndex=" + startIndex
                 + ", endIndex=" + endIndex + '}';
     }
 }

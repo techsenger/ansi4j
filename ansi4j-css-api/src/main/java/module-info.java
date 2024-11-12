@@ -11,6 +11,10 @@ module com.techsenger.ansi4j.css.api {
     requires jsr305;
 
     exports com.techsenger.ansi4j.css.api;
+    exports com.techsenger.ansi4j.css.api.attribute;
     exports com.techsenger.ansi4j.css.api.color;
+    exports com.techsenger.ansi4j.css.api.spi to com.techsenger.ansi4j.css.impl;
     exports com.techsenger.ansi4j.css.api.text;
+
+    uses com.techsenger.ansi4j.css.api.spi.StyleProcessorService;
 }

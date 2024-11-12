@@ -22,9 +22,6 @@ abstract class AbstractFragmentHandlerResult implements FragmentHandlerResult {
         this.failureReason = failureReason;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public FailureReason getFailureReason() {
         return this.failureReason;

@@ -8,10 +8,13 @@
 package com.techsenger.ansi4j.css.api.color;
 
 /**
- * This palette is used when extra color support is disabled in config.
  *
  * @author Pavel Castornii
  */
 public interface Palette8 extends Palette {
 
+    @Override
+    default PaletteType getType() {
+        return PaletteType.PALETTE_8;
+    }
 }

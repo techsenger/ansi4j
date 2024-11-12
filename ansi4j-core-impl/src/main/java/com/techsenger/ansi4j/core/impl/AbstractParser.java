@@ -52,9 +52,6 @@ abstract class AbstractParser implements Parser {
         this.factory = factory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getCurrentIndex() {
         return currentIndex;

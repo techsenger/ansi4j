@@ -12,5 +12,8 @@ module com.techsenger.ansi4j.core.api {
     exports com.techsenger.ansi4j.core.api;
     exports com.techsenger.ansi4j.core.api.function;
     exports com.techsenger.ansi4j.core.api.iso6429;
+    exports com.techsenger.ansi4j.core.api.spi to com.techsenger.ansi4j.core.impl;
     exports com.techsenger.ansi4j.core.api.utils;
+
+    uses com.techsenger.ansi4j.core.api.spi.ParserFactoryService;
 }
