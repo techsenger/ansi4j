@@ -68,12 +68,12 @@ This project will be added to the central Maven repository soon. Until then, you
     <dependency>
         <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j-core-api</artifactId>
-        <version>1.2.0</version>
+        <version>2.0.0</version>
     </dependency>
     <dependency>
         <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j-core-impl</artifactId>
-        <version>1.2.0</version>
+        <version>2.0.0</version>
     </dependency>
 
 ### Usage <a name="ansi4j-core-usage"></a>
@@ -175,12 +175,12 @@ This project will be added to the central Maven repository soon. Until then, you
     <dependency>
         <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j-css-api</artifactId>
-        <version>1.2.0</version>
+        <version>2.0.0</version>
     </dependency>
     <dependency>
         <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j-css-impl</artifactId>
-        <version>1.2.0</version>
+        <version>2.0.0</version>
     </dependency>
 
 ### Usage <a name="ansi4j-css-usage"></a>

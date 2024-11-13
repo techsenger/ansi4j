@@ -4,13 +4,17 @@
     <parent>
         <groupId>com.techsenger.ansi4j</groupId>
         <artifactId>ansi4j</artifactId>
-        <version>1.2.0</version>
+        <version>2.0.0</version>
     </parent>
 
     <groupId>com.techsenger.ansi4j</groupId>
     <artifactId>ansi4j-core-it</artifactId>
     <packaging>jar</packaging>
     <name>Ansi4j - Core IT</name>
+
+    <properties>
+        <javadoc.plugin.skip>true</javadoc.plugin.skip>
+    </properties>
 
     <dependencies>
         <dependency>

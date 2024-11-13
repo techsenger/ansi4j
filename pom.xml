@@ -4,19 +4,14 @@
     <parent>
         <groupId>com.techsenger.maven-root</groupId>
         <artifactId>maven-root</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
     </parent>
 
     <groupId>com.techsenger.ansi4j</groupId>
     <artifactId>ansi4j</artifactId>
-    <version>1.2.0</version>
+    <version>2.0.0</version>
     <packaging>pom</packaging>
     <name>Ansi4j</name>
-
-    <properties>
-        <maven.compiler.release>14</maven.compiler.release>
-        <javafx.version>14</javafx.version>
-    </properties>
 
     <licenses>
         <license>
@@ -34,6 +29,12 @@
         <system>GitHub</system>
         <url>https://github.com/techsenger/ansi4j/issues</url>
     </issueManagement>
+
+    <properties>
+        <maven.compiler.release>14</maven.compiler.release>
+        <javafx.version>14</javafx.version>
+        <publishing.plugin.exclusions>ansi4j-core-it,ansi4j-css-it,ansi4j-css-demo</publishing.plugin.exclusions>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
