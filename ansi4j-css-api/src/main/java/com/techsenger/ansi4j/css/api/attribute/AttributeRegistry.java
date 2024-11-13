@@ -20,7 +20,7 @@ public interface AttributeRegistry {
     /**
      * Returns an attribute group by group key.
      *
-     * @param attribute
+     * @param key
      * @return
      */
     <T extends AttributeGroup<T>> T getGroup(AttributeGroup.Key<T> key);
