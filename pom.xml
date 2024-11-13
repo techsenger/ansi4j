@@ -23,6 +23,10 @@
             <name>GNU AGPL version 3</name>
             <url>https://www.gnu.org/licenses/agpl-3.0.html</url>
         </license>
+        <license>
+			<name>Commercial License</name>
+			<comments>Commercial license and support are available</comments>
+		</license>
     </licenses>
 
     <url>https://github.com/techsenger/ansi4j</url>
@@ -36,7 +40,7 @@
             <dependency>
                 <groupId>com.techsenger.osp-bom</groupId>
                 <artifactId>osp-bom</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -49,6 +53,8 @@
         <module>ansi4j-core-it</module>
         <module>ansi4j-css-api</module>
         <module>ansi4j-css-impl</module>
+        <module>ansi4j-css-it</module>
+        <module>ansi4j-css-demo</module>
     </modules>
 </project>
 

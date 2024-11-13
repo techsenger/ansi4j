@@ -10,6 +10,8 @@ module com.techsenger.ansi4j.css.impl {
     requires com.techsenger.ansi4j.css.api;
     requires org.slf4j;
 
+    exports com.techsenger.ansi4j.css.impl.attribute to com.techsenger.ansi4j.css.demo;
+
     provides com.techsenger.ansi4j.css.api.spi.StyleProcessorService
             with com.techsenger.ansi4j.css.impl.StyleProcessorProvider;
 }

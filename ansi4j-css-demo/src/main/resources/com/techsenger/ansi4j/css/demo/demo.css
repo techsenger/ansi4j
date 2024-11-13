@@ -1,0 +1,62 @@
+/*
+ * Copyright 2022-2024 Pavel Castornii.
+ *
+ * This project is dual-licensed under the GNU AGPL version 3 and a commercial license.
+ * See the file LICENSE.md in the root directory of the project for full license information.
+ */
+
+.root {
+    -fx-font-size: 13px;
+}
+
+.table-view {
+    -fx-fixed-cell-size:27px;
+}
+
+.modal-pane {
+  -color-modal-pane-overlay: rgba(255, 255, 255, 0);
+  -fx-padding: 0 0 100 0;
+}
+
+.ikonli-font-icon {
+    -fx-icon-size: 18px;
+}
+
+.menu-item {
+    -fx-padding: 7 8 7 8;
+}
+
+.tool-bar .button {
+    -fx-padding: 5 10 5 10;
+}
+
+.tool-bar .button .ikonli-font-icon {
+    -fx-icon-size: 22px;
+}
+
+.status-bar {
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1 0 0 0;
+    -fx-min-height: 2em;
+    -fx-background-color: -color-bg-overlay;
+}
+
+.modal-dialog {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 25, 0, 0, 0);
+}
+
+.modal-dialog .main {
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+}
+
+.modal-dialog .title {
+    -fx-padding: 12 10 12 10;
+    -fx-background-color: -color-bg-subtle;
+    -fx-font-weight: bold;
+}
+
+.modal-dialog .content {
+    -fx-padding: 10;
+}
+
