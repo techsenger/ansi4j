@@ -315,8 +315,8 @@ standard, ISO 6429. In 1994, ANSI withdrew its standard in favor of the internat
 
 * ISO 6429:1983 (withdrawn),
 * ISO 6429:1988(withdrawn),
-* ISO/IEC 6429:1992 (current), almost identical to the fifth edition of ECMA-48. It seems that there is only one
-difference - ISO/IEC 6429:1992 has one function more - DEL-DELETE.
+* ISO/IEC 6429:1992 (current), almost identical to the fifth edition of ECMA-48. There is only one
+difference in function set - ISO/IEC 6429:1992 has one extra function DEL-DELETE.
 
 ## Types of control functions <a name="theory-types"></a>
 

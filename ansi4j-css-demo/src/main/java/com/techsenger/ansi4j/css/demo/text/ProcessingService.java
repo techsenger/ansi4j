@@ -77,7 +77,7 @@ class ProcessingService {
             if (fragment.getType() == FragmentType.FUNCTION) {
                 String style;
                 FunctionFragment functionFragment = (FunctionFragment) fragment;
-                if (functionFragment.getFunction() == ControlSequenceFunction.SGR_SELECT_GRAPHIC_RENDITION) {
+                if (functionFragment.getFunction() == ControlSequenceFunction.SGR) {
                     if (styleStarted) {
                         contentBuilder.endStyle();
                         styleStarted = false;
@@ -88,7 +88,7 @@ class ProcessingService {
                         styleStarted = true;
                         contentBuilder.startStyle(style);
                     }
-                } else if (functionFragment.getFunction() == C0ControlFunction.LF_LINE_FEED) {
+                } else if (functionFragment.getFunction() == C0ControlFunction.LF) {
                     contentBuilder.terminateLine();
                 }
             } else if (fragment.getType() == FragmentType.TEXT) {

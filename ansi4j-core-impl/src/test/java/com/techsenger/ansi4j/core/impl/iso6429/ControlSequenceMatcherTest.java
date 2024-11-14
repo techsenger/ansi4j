@@ -29,16 +29,16 @@ public class ControlSequenceMatcherTest {
 
     @Test
     public void createDescriptor_oneParameter_success() {
-        var descriptor = matcher.createDescriptor(ControlSequenceFunction.CBT_CURSOR_BACKWARD_TABULATION);
-        assertThat(descriptor.getFunction()).isSameAs(ControlSequenceFunction.CBT_CURSOR_BACKWARD_TABULATION);
+        var descriptor = matcher.createDescriptor(ControlSequenceFunction.CBT);
+        assertThat(descriptor.getFunction()).isSameAs(ControlSequenceFunction.CBT);
         assertThat(descriptor.getParameters()).containsExactly("{s}");
         assertThat(descriptor.getCodes()).containsExactly("{s}", "Z");
     }
 
     @Test
     public void createDescriptor_manyParameters_success() {
-        var descriptor = matcher.createDescriptor(ControlSequenceFunction.DTA_DIMENSION_TEXT_AREA);
-        assertThat(descriptor.getFunction()).isSameAs(ControlSequenceFunction.DTA_DIMENSION_TEXT_AREA);
+        var descriptor = matcher.createDescriptor(ControlSequenceFunction.DTA);
+        assertThat(descriptor.getFunction()).isSameAs(ControlSequenceFunction.DTA);
         assertThat(descriptor.getParameters()).containsExactly("{s}", "{s}");
         assertThat(descriptor.getCodes()).containsExactly("{s}", ";", "{s}", " ", "T");
     }
@@ -46,12 +46,12 @@ public class ControlSequenceMatcherTest {
     @Test
     public void match_oneParameter_success() {
         var descriptor = matcher.match(0, Characters.ESC + "[12Z");
-        assertThat(descriptor.getFunction()).isSameAs(ControlSequenceFunction.CBT_CURSOR_BACKWARD_TABULATION);
+        assertThat(descriptor.getFunction()).isSameAs(ControlSequenceFunction.CBT);
     }
 
     @Test
     public void match_manyParameters_success() {
         var descriptor = matcher.match(3, "abc" + Characters.ESC + "[28;14 T");
-        assertThat(descriptor.getFunction()).isSameAs(ControlSequenceFunction.DTA_DIMENSION_TEXT_AREA);
+        assertThat(descriptor.getFunction()).isSameAs(ControlSequenceFunction.DTA);
     }
 }

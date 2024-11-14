@@ -40,10 +40,10 @@ public class ControlStringHandler extends AbstractFunctionHandler {
         String terminatingTerminator = null;
         if (this.getEnvironment() == Environment._7_BIT) {
             openingDelimiter = ((C1ControlFunction) function).getPattern();
-            terminatingTerminator = C1ControlFunction.ST_STRING_TERMINATOR.getPattern();
+            terminatingTerminator = C1ControlFunction.ST.getPattern();
         } else if (this.getEnvironment() == Environment._8_BIT) {
             openingDelimiter = ((C1ControlFunction) function).get8BitPattern();
-            terminatingTerminator = C1ControlFunction.ST_STRING_TERMINATOR.get8BitPattern();
+            terminatingTerminator = C1ControlFunction.ST.get8BitPattern();
         }
         int endIndex = text.indexOf(terminatingTerminator, startIndex);
         if (endIndex == -1) {

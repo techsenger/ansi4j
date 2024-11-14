@@ -86,20 +86,20 @@ public class FunctionFinderImpl implements FunctionFinder {
     public void initialize(Environment environment) {
         this.environment = environment;
         //C0
-        //we adding all 34 functions, where 4 functions have code duplicates, so, after we have 32 entries in map.
+        //we adding all N functions, where 2 pairs have code duplicates, so, after we have N-2 entries in map.
         Arrays.asList(C0ControlFunction.values()).forEach(f -> {
             c0FunctionsByCode.put((int) f.getPattern().charAt(0), f);
         });
         //now we set correct functions by environment
         if (this.environment == Environment._7_BIT) {
-            var f = C0ControlFunction.SO_SHIFT_OUT;
+            var f = C0ControlFunction.SO;
             c0FunctionsByCode.put((int) f.getPattern().charAt(0), f);
-            f = C0ControlFunction.SI_SHIFT_IN;
+            f = C0ControlFunction.SI;
             c0FunctionsByCode.put((int) f.getPattern().charAt(0), f);
         } else if (this.environment == Environment._8_BIT) {
-            var f = C0ControlFunction.LS0_LOCKING_SHIFT_ZERO;
+            var f = C0ControlFunction.LS0;
             c0FunctionsByCode.put((int) f.getPattern().charAt(0), f);
-            f = C0ControlFunction.LS1_LOCKING_SHIFT_ONE;
+            f = C0ControlFunction.LS1;
             c0FunctionsByCode.put((int) f.getPattern().charAt(0), f);
         }
         logger.debug("Added {} C0 functions to index in {}", c0FunctionsByCode.size(), this.environment);
@@ -160,7 +160,7 @@ public class FunctionFinderImpl implements FunctionFinder {
             return null;
         }
         var openingDelimiters = C1ControlFunction.getControlStringOpeningDelimiters();
-        if (function == C1ControlFunction.CSI_CONTROL_SEQUENCE_INTRODUCER) {
+        if (function == C1ControlFunction.CSI) {
             return new FunctionPair(ControlFunctionType.CONTROL_SEQUENCE, function);
         } else if (openingDelimiters.contains(function)) {
             return new FunctionPair(ControlFunctionType.CONTROL_STRING, function);

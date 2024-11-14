@@ -461,7 +461,7 @@ public class SgrFunctionEvaluator implements FunctionEvaluator {
 
     @Override
     public Function getFunction() {
-        return ControlSequenceFunction.SGR_SELECT_GRAPHIC_RENDITION;
+        return ControlSequenceFunction.SGR;
     }
 }
 

@@ -76,7 +76,7 @@ public class StyleProcessorIT {
 
             } else if (fragment.getType() == FragmentType.FUNCTION) {
                 FunctionFragment functionFragment = (FunctionFragment) fragment;
-                if (functionFragment.getFunction() == ControlSequenceFunction.SGR_SELECT_GRAPHIC_RENDITION) {
+                if (functionFragment.getFunction() == ControlSequenceFunction.SGR) {
                     var result = processor.process(functionFragment, TargetControl.WEB_VIEW);
                     assertThat(result.getAttributeChanges()).hasSize(1);
                     var change = (AttributeChange<TextAttributeGroup.Weight>) result.getAttributeChanges().get(0);

@@ -187,7 +187,7 @@ public class ParserIT {
 
     @ParameterizedTest
     @MethodSource(_7_BIT_PARSER_PROVIDER)
-    public void nparse_textFnFn_success(ParserProvider parserProvider) {
+    public void parse_textFnFn_success(ParserProvider parserProvider) {
         var text = "2022-03-14 02:32:24.130 [main] [WARN] abc.def.0123.ghi\u001b[33;1m\u001b[5;R";
 
         var parser = parserProvider.provide(text);
@@ -247,7 +247,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("2022-03-14 02:32:24.130 ");
 
         FunctionFragment ff = (FunctionFragment) fragments.get(1);
-        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.VT_LINE_TABULATION);
+        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.VT);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u000B");
 
@@ -255,7 +255,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("[main] ");
 
         ff = (FunctionFragment) fragments.get(3);
-        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.SO_SHIFT_OUT);
+        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.SO);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u000e");
 
@@ -263,7 +263,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo(" [WARN] ");
 
         ff = (FunctionFragment) fragments.get(5);
-        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.SI_SHIFT_IN);
+        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.SI);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u000f");
 
@@ -288,7 +288,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("2022-03-14 02:32:24.130 ");
 
         FunctionFragment ff = (FunctionFragment) fragments.get(1);
-        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.VT_LINE_TABULATION);
+        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.VT);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u000B");
 
@@ -296,7 +296,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("[main] ");
 
         ff = (FunctionFragment) fragments.get(3);
-        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.LS1_LOCKING_SHIFT_ONE);
+        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.LS1);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u000e");
 
@@ -304,7 +304,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo(" [WARN] ");
 
         ff = (FunctionFragment) fragments.get(5);
-        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.LS0_LOCKING_SHIFT_ZERO);
+        assertThat(ff.getFunction()).isSameAs(C0ControlFunction.LS0);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u000f");
 
@@ -329,7 +329,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("2022-03-14 02:32:24.130 ");
 
         FunctionFragment ff = (FunctionFragment) fragments.get(1);
-        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.ESA_END_OF_SELECTED_AREA);
+        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.ESA);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001bG");
 
@@ -337,7 +337,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("[main] ");
 
         ff = (FunctionFragment) fragments.get(3);
-        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.SPA_START_OF_GUARDED_AREA);
+        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.SPA);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001bV");
 
@@ -345,7 +345,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo(" [WARN] ");
 
         ff = (FunctionFragment) fragments.get(5);
-        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.PU1_PRIVATE_USE_ONE);
+        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.PU1);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001bQ");
 
@@ -370,7 +370,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("2022-03-14 02:32:24.130 ");
 
         FunctionFragment ff = (FunctionFragment) fragments.get(1);
-        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.ESA_END_OF_SELECTED_AREA);
+        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.ESA);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u0087");
 
@@ -378,7 +378,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("[main] ");
 
         ff = (FunctionFragment) fragments.get(3);
-        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.SPA_START_OF_GUARDED_AREA);
+        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.SPA);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u0096");
 
@@ -386,7 +386,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo(" [WARN] ");
 
         ff = (FunctionFragment) fragments.get(5);
-        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.PU1_PRIVATE_USE_ONE);
+        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.PU1);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u0091");
 
@@ -411,7 +411,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("2022-03-14 02:32:24.130 ");
 
         FunctionFragment ff = (FunctionFragment) fragments.get(1);
-        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.LS3_LOCKING_SHIFT_THREE);
+        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.LS3);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001bo");
 
@@ -419,7 +419,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("[main] ");
 
         ff = (FunctionFragment) fragments.get(3);
-        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.LS3R_LOCKING_SHIFT_THREE_RIGHT);
+        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.LS3R);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001b|");
 
@@ -427,7 +427,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo(" [WARN] ");
 
         ff = (FunctionFragment) fragments.get(5);
-        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.DMI_DISABLE_MANUAL_INPUT);
+        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.DMI);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001b`");
 
@@ -452,7 +452,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("2022-03-14 02:32:24.130 ");
 
         FunctionFragment ff = (FunctionFragment) fragments.get(1);
-        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.LS3_LOCKING_SHIFT_THREE);
+        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.LS3);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001bo");
 
@@ -460,7 +460,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("[main] ");
 
         ff = (FunctionFragment) fragments.get(3);
-        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.LS3R_LOCKING_SHIFT_THREE_RIGHT);
+        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.LS3R);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001b|");
 
@@ -468,7 +468,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo(" [WARN] ");
 
         ff = (FunctionFragment) fragments.get(5);
-        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.DMI_DISABLE_MANUAL_INPUT);
+        assertThat(ff.getFunction()).isSameAs(IndependentControlFunction.DMI);
         assertThat(ff.getArguments()).hasSize(0);
         assertThat(ff.getText()).isEqualTo("\u001b`");
 
@@ -493,7 +493,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("one two three ");
 
         FunctionFragment ff = (FunctionFragment) fragments.get(1);
-        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.OSC_OPERATING_SYSTEM_COMMAND);
+        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.OSC);
         assertThat(ff.getArguments()).hasSize(3);
         assertThat(ff.getText()).isEqualTo("\u001b]4;6;some text\u001b\\");
 
@@ -518,7 +518,7 @@ public class ParserIT {
         assertThat(ft.getText()).isEqualTo("one two three ");
 
         FunctionFragment ff = (FunctionFragment) fragments.get(1);
-        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.OSC_OPERATING_SYSTEM_COMMAND);
+        assertThat(ff.getFunction()).isSameAs(C1ControlFunction.OSC);
         assertThat(ff.getArguments()).hasSize(3);
         assertThat(ff.getText()).isEqualTo("\u009d4;6;some text\u009c");
 
@@ -551,7 +551,7 @@ public class ParserIT {
         assertThat(text.substring(f2.getStartIndex(), f2.getEndIndex())).isEqualTo(f2.getText());
 
         FunctionFragment f3 = (FunctionFragment) fragments.get(3);
-        assertThat(f3.getFunction()).isSameAs(C1ControlFunction.OSC_OPERATING_SYSTEM_COMMAND);
+        assertThat(f3.getFunction()).isSameAs(C1ControlFunction.OSC);
         assertThat(f3.getArguments()).hasSize(3);
         assertThat(f3.getText()).isEqualTo("\u001b]4;6;some text\u001b\\");
         assertThat(text.substring(f3.getStartIndex(), f3.getEndIndex())).isEqualTo(f3.getText());
@@ -594,7 +594,7 @@ public class ParserIT {
         assertThat(text.substring(f2.getStartIndex(), f2.getEndIndex())).isEqualTo(f2.getText());
 
         FunctionFragment f3 = (FunctionFragment) fragments.get(3);
-        assertThat(f3.getFunction()).isSameAs(C1ControlFunction.OSC_OPERATING_SYSTEM_COMMAND);
+        assertThat(f3.getFunction()).isSameAs(C1ControlFunction.OSC);
         assertThat(f3.getArguments()).hasSize(3);
         assertThat(f3.getText()).isEqualTo("\u009d4;6;some text\u009c");
         assertThat(text.substring(f3.getStartIndex(), f3.getEndIndex())).isEqualTo(f3.getText());
@@ -622,7 +622,7 @@ public class ParserIT {
         var mFragmentText = Characters.ESC + "[33;1m";
         assertThat(mFragment.getText()).isEqualTo(mFragmentText);
         assertThat(text.substring(mFragment.getStartIndex(), mFragment.getEndIndex())).isEqualTo(mFragmentText);
-        assertThat(mFragment.getFunction()).isSameAs(ControlSequenceFunction.SGR_SELECT_GRAPHIC_RENDITION);
+        assertThat(mFragment.getFunction()).isSameAs(ControlSequenceFunction.SGR);
         assertThat(mFragment.getArguments().size()).isEqualTo(2);
         assertThat(mFragment.getArguments().get(0).getValue()).isEqualTo(33);
         assertThat(mFragment.getArguments().get(0).isDefault()).isEqualTo(false);
@@ -635,7 +635,7 @@ public class ParserIT {
         var rFragmentText = Characters.ESC + "[5;R";
         assertThat(rFragment.getText()).isEqualTo(rFragmentText);
         assertThat(text.substring(rFragment.getStartIndex(), rFragment.getEndIndex())).isEqualTo(rFragmentText);
-        assertThat(rFragment.getFunction()).isSameAs(ControlSequenceFunction.CPR_ACTIVE_POSITION_REPORT);
+        assertThat(rFragment.getFunction()).isSameAs(ControlSequenceFunction.CPR);
         assertThat(rFragment.getArguments().size()).isEqualTo(2);
         assertThat(rFragment.getArguments().get(0).getValue()).isEqualTo(5);
         assertThat(rFragment.getArguments().get(0).isDefault()).isEqualTo(false);

@@ -11,67 +11,86 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Control sequence functions. This file was created on the base of the fifth edition of ECMA-48. All descriptions of
- * the functions (that are used as Java documentation comments in this file) were taken from this ECMA-48 standard.
+ * Control sequence functions. This file was created on the base of the fifth edition of ECMA-48. All the descriptions
+ * of the functions (that are used as Java documentation comments here) were taken from the file available at:
+ * <a href="https://ecma-international.org/publications-and-standards/standards/ecma-48/">ECMA-48 Standard</a>.
  *
- * These functions don't include CSI code because there are two patterns for CSI.
+ * <p>These functions don't include CSI code because there are two patterns for CSI.
  *
  * @author Pavel Castornii
  */
 public enum ControlSequenceFunction implements ControlFunction {
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 05/10=0x5a='Z'
-     * Parameter default value: Pn = 1
-     * CBT causes the active presentation position to be moved to the character position corresponding to the
+     * CURSOR BACKWARD TABULATION.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 05/10 = 0x5a = 'Z'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CBT causes the active presentation position to be moved to the character position corresponding to the
      * n-th preceding character tabulation stop in the presentation component, according to the character path,
      * where n equals the value of Pn.
      */
-    CBT_CURSOR_BACKWARD_TABULATION("{s}Z", List.of(1)),
+    CBT("{s}Z", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/07=0x47='G'
-     * Parameter default value: Pn = 1
-     * CHA causes the active presentation position to be moved to character position n in the active line in the
+     * CURSOR CHARACTER ABSOLUTE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/07 = 0x47 = 'G'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CHA causes the active presentation position to be moved to character position n in the active line in the
      * presentation component, where n equals the value of Pn.
      */
-    CHA_CURSOR_CHARACTER_ABSOLUTE("{s}G", List.of(1)),
+    CHA("{s}G", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/09=0x49='I'
-     * Parameter default value: Pn = 1
-     * CHT causes the active presentation position to be moved to the character position corresponding to the
+     * CURSOR FORWARD TABULATION.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/09 = 0x49 = 'I'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CHT causes the active presentation position to be moved to the character position corresponding to the
      * n-th following character tabulation stop in the presentation component, according to the character path,
      * where n equals the value of Pn.
      */
-    CHT_CURSOR_FORWARD_TABULATION("{s}I", List.of(1)),
+    CHT("{s}I", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/05=0x45='E'
-     * Parameter default value: Pn = 1
-     * CNL causes the active presentation position to be moved to the first character position of the n-th
+     * CURSOR NEXT LINE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/05 = 0x45 = 'E'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CNL causes the active presentation position to be moved to the first character position of the n-th
      * following line in the presentation component, where n equals the value of Pn.
      */
-    CNL_CURSOR_NEXT_LINE("{s}E", List.of(1)),
+    CNL("{s}E", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/06=0x46='F'
-     * Parameter default value: Pn = 1
-     * CPL causes the active presentation position to be moved to the first character position of the n-th
+     * CURSOR PRECEDING LINE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/06 = 0x46 = 'F'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CPL causes the active presentation position to be moved to the first character position of the n-th
      * preceding line in the presentation component, where n equals the value of Pn.
      */
-    CPL_CURSOR_PRECEDING_LINE("{s}F", List.of(1)),
+    CPL("{s}F", List.of(1)),
 
     /**
-     * Notation: (Pn1;Pn2)
-     * Representation: CSI Pn1;Pn2 05/02=0x52='R'
-     * Parameter default values: Pn1 = 1; Pn2 = 1
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, CPR is used to
+     * ACTIVE POSITION REPORT.
+     *
+     * <p>Notation: (Pn1;Pn2).<br>
+     * Representation: CSI Pn1;Pn2 05/02 = 0x52 = 'R'.<br>
+     * Parameter default values: Pn1 = 1; Pn2 = 1.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, CPR is used to
      * report the active presentation position of the sending device as residing in the presentation component at
      * the n-th line position according to the line progression and at the m-th character position according to
      * the character path, where n equals the value of Pn1 and m equals the value of Pn2.
@@ -81,108 +100,128 @@ public enum ControlSequenceFunction implements ControlFunction {
      * progression, where n equals the value of Pn1 and m equals the value of Pn2.
      * CPR may be solicited by a DEVICE STATUS REPORT (DSR) or be sent unsolicited.
      */
-    CPR_ACTIVE_POSITION_REPORT("{s};{s}R", List.of(1, 1)),
+    CPR("{s};{s}R", List.of(1, 1)),
 
     /**
-     * Notation: (Ps...)
-     * Representation: CSI Ps... 05/07=0x57='W'
-     * Parameter default value: Ps = 0
-     * CTC causes one or more tabulation stops to be set or cleared in the presentation component, depending
+     * CURSOR TABULATION CONTROL.
+     *
+     * <p>Notation: (Ps...).<br>
+     * Representation: CSI Ps... 05/07 = 0x57 = 'W'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>CTC causes one or more tabulation stops to be set or cleared in the presentation component, depending
      * on the parameter values:
-     * 0
-     * 1
-     * 2
-     * 3
-     * 4
-     * 5
-     * 6
-     * a character tabulation stop is set at the active presentation position
-     * a line tabulation stop is set at the active line (the line that contains the active presentation position)
-     * the character tabulation stop at the active presentation position is cleared
-     * the line tabulation stop at the active line is cleared
-     * all character tabulation stops in the active line are cleared
-     * all character tabulation stops are cleared
-     * all line tabulation stops are cleared
+     * 0 a character tabulation stop is set at the active presentation position
+     * 1 a line tabulation stop is set at the active line (the line that contains the active presentation position)
+     * 2 the character tabulation stop at the active presentation position is cleared
+     * 3 the line tabulation stop at the active line is cleared
+     * 4 all character tabulation stops in the active line are cleared
+     * 5 all character tabulation stops are cleared
+     * 6 all line tabulation stops are cleared
      * In the case of parameter values 0, 2 or 4 the number of lines affected depends on the setting of the
      * TABULATION STOP MODE (TSM).
      */
-    CTC_CURSOR_TABULATION_CONTROL("{m}W", List.of(0)),
+    CTC("{m}W", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/04=0x44='D'
-     * Parameter default value: Pn = 1
-     * CUB causes the active presentation position to be moved leftwards in the presentation component by n
+     * CURSOR LEFT.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/04 = 0x44 = 'D'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CUB causes the active presentation position to be moved leftwards in the presentation component by n
      * character positions if the character path is horizontal, or by n line positions if the character path is
      * vertical, where n equals the value of Pn.
      */
-    CUB_CURSOR_LEFT("{s}D", List.of(1)),
+    CUB("{s}D", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/02=0x42='B'
-     * Parameter default value: Pn = 1
-     * CUD causes the active presentation position to be moved downwards in the presentation component by n
+     * CURSOR DOWN.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/02 = 0x42 = 'B'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CUD causes the active presentation position to be moved downwards in the presentation component by n
      * line positions if the character path is horizontal, or by n character positions if the character path is
      * vertical, where n equals the value of Pn.
      */
-    CUD_CURSOR_DOWN("{s}B", List.of(1)),
+    CUD("{s}B", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/03=0x43='C'
-     * Parameter default value: Pn = 1
-     * CUF causes the active presentation position to be moved rightwards in the presentation component by n
+     * CURSOR RIGHT.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/03 = 0x43 = 'C'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CUF causes the active presentation position to be moved rightwards in the presentation component by n
      * character positions if the character path is horizontal, or by n line positions if the character path is
      * vertical, where n equals the value of Pn.
      */
-    CUF_CURSOR_RIGHT("{s}C", List.of(1)),
+    CUF("{s}C", List.of(1)),
 
     /**
-     * Notation: (Pn1;Pn2)
-     * Representation: CSI Pn1;Pn2 04/08=0x48='H'
-     * Parameter default values: Pn1 = 1; Pn2 = 1
-     * CUP causes the active presentation position to be moved in the presentation component to the n-th line
+     * CURSOR POSITION.
+     *
+     * <p>Notation: (Pn1;Pn2).<br>
+     * Representation: CSI Pn1;Pn2 04/08 = 0x48 = 'H'.<br>
+     * Parameter default values: Pn1 = 1; Pn2 = 1.
+     *
+     * <p>CUP causes the active presentation position to be moved in the presentation component to the n-th line
      * position according to the line progression and to the m-th character position according to the character
      * path, where n equals the value of Pn1 and m equals the value of Pn2.
      */
-    CUP_CURSOR_POSITION("{s};{s}H", List.of(1, 1)),
+    CUP("{s};{s}H", List.of(1, 1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/01=0x41='A'
-     * Parameter default value: Pn = 1
-     * CUU causes the active presentation position to be moved upwards in the presentation component by n
+     * CURSOR UP.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/01 = 0x41 = 'A'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CUU causes the active presentation position to be moved upwards in the presentation component by n
      * line positions if the character path is horizontal, or by n character positions if the character path is
      * vertical, where n equals the value of Pn.
      */
-    CUU_CURSOR_UP("{s}A", List.of(1)),
+    CUU("{s}A", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 05/09=0x59='Y'
-     * Parameter default value: Pn = 1
-     * CVT causes the active presentation position to be moved to the corresponding character position of the
+     * CURSOR LINE TABULATION.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 05/09 = 0x59 = 'Y'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>CVT causes the active presentation position to be moved to the corresponding character position of the
      * line corresponding to the n-th following line tabulation stop in the presentation component, where n
      * equals the value of Pn.
      */
-    CVT_CURSOR_LINE_TABULATION("{s}Y", List.of(1)),
+    CVT("{s}Y", List.of(1)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 06/03=0x63='c'
-     * Parameter default value: Ps = 0
-     * With a parameter value not equal to 0, DA is used to identify the device which sends the DA. The
+     * DEVICE ATTRIBUTES.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 06/03 = 0x63 = 'c'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>With a parameter value not equal to 0, DA is used to identify the device which sends the DA. The
      * parameter value is a device type identification code according to a register which is to be established. If
      * the parameter value is 0, DA is used to request an identifying DA from a device.
      */
-    DA_DEVICE_ATTRIBUTES("{s}c", List.of(0)),
+    DA("{s}c", List.of(0)),
 
     /**
-     * Notation: (Ps...)
-     * Representation: CSI Ps... 06/15=0x6f='o'
-     * Parameter default value: Ps = 0
-     * DAQ is used to indicate that the active presentation position in the presentation component is the first
+     * DEFINE AREA QUALIFICATION.
+     *
+     * <p>Notation: (Ps...).<br>
+     * Representation: CSI Ps... 06/15 = 0x6f = 'o'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>DAQ is used to indicate that the active presentation position in the presentation component is the first
      * character position of a qualified area. The last character position of the qualified area is the character
      * position in the presentation component immediately preceding the first character position of the
      * following qualified area.
@@ -207,13 +246,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The control functions for area definition (DAQ, EPA, ESA, SPA, SSA) should not be used within an SRS
      * string or an SDS string.
      */
-    DAQ_DEFINE_AREA_QUALIFICATION("{m}o", List.of(0)),
+    DAQ("{m}o", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 05/00=0x50='P'
-     * Parameter default value: Pn = 1
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, DCH causes the
+     * DELETE CHARACTER.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 05/00 = 0x50 = 'P'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, DCH causes the
      * contents of the active presentation position and, depending on the setting of the CHARACTER
      * EDITING MODE (HEM), the contents of the n-1 preceding or following character positions to be
      * removed from the presentation component, where n equals the value of Pn. The resulting gap is closed
@@ -229,13 +271,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * adjacent character positions towards the active data position. At the other end of the shifted part, n
      * character positions are put into the erased state.
      */
-    DCH_DELETE_CHARACTER("{s}P", List.of(1)),
+    DCH("{s}P", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/13=0x4d='M'
-     * Parameter default value: Pn = 1
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, DL causes the
+     * DELETE LINE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/13 = 0x4d = 'M'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, DL causes the
      * contents of the active line (the line that contains the active presentation position) and, depending on the
      * setting of the LINE EDITING MODE (VEM), the contents of the n-1 preceding or following lines to be
      * removed from the presentation component, where n equals the value of Pn. The resulting gap is closed
@@ -256,13 +301,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * the erased state. The active data position is moved to the line home position in the active line. The line
      * home position is established by the parameter value of SET LINE HOME (SLH).
      */
-    DL_DELETE_LINE("{s}M", List.of(1)),
+    DL("{s}M", List.of(1)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 06/14=0x6e='n'
-     * Parameter default value: Ps = 0
-     * DSR is used either to report the status of the sending device or to request a status report from the
+     * DEVICE STATUS REPORT.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 06/14 = 0x6e = 'n'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>DSR is used either to report the status of the sending device or to request a status report from the
      * receiving device, depending on the parameter values:
      * 0 ready, no malfunction detected
      * 1 busy, another DSR must be requested later
@@ -275,26 +323,32 @@ public enum ControlSequenceFunction implements ControlFunction {
      * DSR with parameter value 0, 1, 2, 3 or 4 may be sent either unsolicited or as a response to a request such
      * as a DSR with a parameter value 5 or MESSAGE WAITING (MW).
      */
-    DSR_DEVICE_STATUS_REPORT("{s}n", List.of(0)),
+    DSR("{s}n", List.of(0)),
 
     /**
-     * Notation: (Pn1;Pn2)
-     * Representation: CSI Pn1;Pn2 02/00=0x20=' ' 05/04=0x54='T'
+     * DIMENSION TEXT AREA.
+     *
+     * <p>Notation: (Pn1;Pn2).<br>
+     * Representation: CSI Pn1;Pn2 02/00 = 0x20 = ' ' 05/04 = 0x54 = 'T'.<br>
      * No parameter default value.
-     * DTA is used to establish the dimensions of the text area for subsequent pages.
+     *
+     * <p>DTA is used to establish the dimensions of the text area for subsequent pages.
      * The established dimensions remain in effect until the next occurrence of DTA in the data stream.
      * Pn1 specifies the dimension in the direction perpendicular to the line orientation
      * Pn2 specifies the dimension in the direction parallel to the line orientation
      * The unit in which the parameter value is expressed is that established by the parameter value of SELECT
      * SIZE UNIT (SSU).
      */
-    DTA_DIMENSION_TEXT_AREA("{s};{s} T"),
+    DTA("{s};{s} T"),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 04/15=0x4f='O'
-     * Parameter default value: Ps = 0
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, EA causes some or
+     * ERASE IN AREA.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 04/15 = 0x4f = 'O'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, EA causes some or
      * all character positions in the active qualified area (the qualified area in the presentation component
      * which contains the active presentation position) to be put into the erased state, depending on the
      * parameter values:
@@ -308,7 +362,7 @@ public enum ControlSequenceFunction implements ControlFunction {
      * character positions in the active qualified area (the qualified area in the data component which contains
      * the active data position) to be put into the erased state, depending on the parameter values:
      * 0 the active data position and the character positions up to the end of the qualified area are put into the
-     * erased state- 41 -
+     * erased state
      * 1 the character positions from the beginning of the qualified area up to and including the active data
      * position are put into the erased state
      * 2
@@ -316,13 +370,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * Whether the character positions of protected areas are put into the erased state, or the character positions
      * of unprotected areas only, depends on the setting of the ERASURE MODE (ERM).
      */
-    EA_ERASE_IN_AREA("{s}O", List.of(0)),
+    EA("{s}O", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 05/08=0x58='X'
-     * Parameter default value: Pn = 1
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, ECH causes the
+     * ERASE CHARACTER.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 05/08 = 0x58 = 'X'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, ECH causes the
      * active presentation position and the n-1 following character positions in the presentation component to
      * be put into the erased state, where n equals the value of Pn.
      * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to DATA, ECH causes the active data
@@ -331,13 +388,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * Whether the character positions of protected areas are put into the erased state, or the character positions
      * of unprotected areas only, depends on the setting of the ERASURE MODE (ERM).
      */
-    ECH_ERASE_CHARACTER("{s}X", List.of(1)),
+    ECH("{s}X", List.of(1)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 04/10=0x4a='J'
-     * Parameter default value: Ps = 0
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, ED causes some or
+     * ERASE IN PAGE.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 04/10 = 0x4a = 'J'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, ED causes some or
      * all character positions of the active page (the page which contains the active presentation position in the
      * presentation component) to be put into the erased state, depending on the parameter values:
      * 0 the active presentation position and the character positions up to the end of the page are put into the
@@ -358,13 +418,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * Whether the character positions of protected areas are put into the erased state, or the character positions
      * of unprotected areas only, depends on the setting of the ERASURE MODE (ERM).
      */
-    ED_ERASE_IN_PAGE("{s}J", List.of(0)),
+    ED("{s}J", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 04/14=0x4e='N'
-     * Parameter default value: Ps = 0
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, EF causes some or
+     * ERASE IN FIELD.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 04/14 = 0x4e = 'N'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, EF causes some or
      * all character positions of the active field (the field which contains the active presentation position in the
      * presentation component) to be put into the erased state, depending on the parameter values:
      * 0 the active presentation position and the character positions up to the end of the field are put into the
@@ -385,13 +448,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * Whether the character positions of protected areas are put into the erased state, or the character positions
      * of unprotected areas only, depends on the setting of the ERASURE MODE (ERM).
      */
-    EF_ERASE_IN_FIELD("{s}N", List.of(0)),
+    EF("{s}N", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 04/11=0x4b='K'
-     * Parameter default value: Ps = 0
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, EL causes some or
+     * ERASE IN LINE.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 04/11 = 0x4b = 'K'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, EL causes some or
      * all character positions of the active line (the line which contains the active presentation position in the
      * presentation component) to be put into the erased state, depending on the parameter values:
      * 0 the active presentation position and the character positions up to the end of the line are put into the
@@ -412,22 +478,28 @@ public enum ControlSequenceFunction implements ControlFunction {
      * Whether the character positions of protected areas are put into the erased state, or the character positions
      * of unprotected areas only, depends on the setting of the ERASURE MODE (ERM).
      */
-    EL_ERASE_IN_LINE("{s}K", List.of(0)),
+    EL("{s}K", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 05/07=0x57='W'
+     * FUNCTION KEY.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 05/07 = 0x57 = 'W'.<br>
      * No parameter default value.
-     * FNK is a control function in which the parameter value identifies the function key which has been
+     *
+     * <p>FNK is a control function in which the parameter value identifies the function key which has been
      * operated.
      */
-    FNK_FUNCTION_KEY("{s} W"),
+    FNK("{s} W"),
 
     /**
-     * Notation: (Ps1;Ps2)
-     * Representation: CSI Ps1;Ps2 02/00=0x20=' ' 04/04=0x44='D'
-     * Parameter default values: Ps1 = 0; Ps2 =0
-     * FNT is used to identify the character font to be selected as primary or alternative font by subsequent
+     * FONT SELECTION.
+     *
+     * <p>Notation: (Ps1;Ps2).<br>
+     * Representation: CSI Ps1;Ps2 02/00 = 0x20 = ' ' 04/04 = 0x44 = 'D'.<br>
+     * Parameter default values: Ps1 = 0; Ps2 =0.
+     *
+     * <p>FNT is used to identify the character font to be selected as primary or alternative font by subsequent
      * occurrences of SELECT GRAPHIC RENDITION (SGR) in the data stream. Ps1 specifies the primary or
      * alternative font concerned:
      * 0 primary font
@@ -442,13 +514,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * 9 ninth alternative font
      * Ps2 identifies the character font according to a register which is to be established.
      */
-    FNT_FONT_SELECTION("{s};{s} D", List.of(0, 0)),
+    FNT("{s};{s} D", List.of(0, 0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 05/15=0x5f='_'
-     * Parameter default value: Ps = 0
-     * GCC is used to indicate that two or more graphic characters are to be imaged as one single graphic
+     * GRAPHIC CHARACTER COMBINATION.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 05/15 = 0x5f = '_'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>GCC is used to indicate that two or more graphic characters are to be imaged as one single graphic
      * symbol. GCC with a parameter value of 0 indicates that the following two graphic characters are to be
      * imaged as one single graphic symbol; GCC with a parameter value of 1 and GCC with a parameter value
      * of 2 indicate respectively the beginning and the end of a string of graphic characters which are to be
@@ -459,75 +534,96 @@ public enum ControlSequenceFunction implements ControlFunction {
      * example, in Japanese text a pair of characters may be presented side-by-side, and occupy the space of a
      * normal-size Kanji character.
      */
-    GCC_GRAPHIC_CHARACTER_COMBINATION("{s} _", List.of(0)),
+    GCC("{s} _", List.of(0)),
 
     /**
-     * Notation: (Pn1;Pn2)
-     * Representation: CSI Pn1;Pn2 02/00=0x20=' ' 04/02=0x42='B'
-     * Parameter default values: Pn1 = 100; Pn2 = 100
-     * GSM is used to modify for subsequent text the height and/or the width of all primary and alternative
+     * GRAPHIC SIZE MODIFICATION.
+     *
+     * <p>Notation: (Pn1;Pn2).<br>
+     * Representation: CSI Pn1;Pn2 02/00 = 0x20 = ' ' 04/02 = 0x42 = 'B'.<br>
+     * Parameter default values: Pn1 = 100; Pn2 = 100.
+     *
+     * <p>GSM is used to modify for subsequent text the height and/or the width of all primary and alternative
      * fonts identified by FONT SELECTION (FNT) and established by GRAPHIC SIZE SELECTION (GSS).
      * The established values remain in effect until the next occurrence of GSM or GSS in the data steam.
      * Pn1
      * Pn2
      */
-    GSM_GRAPHIC_SIZE_MODIFICATION("{s};{s} B", List.of(100, 100)),
+    GSM("{s};{s} B", List.of(100, 100)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 04/03=0x43='C'
+     * GRAPHIC SIZE SELECTION.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 04/03 = 0x43 = 'C'.<br>
      * No parameter default value.
-     * GSS is used to establish for subsequent text the height and the width of all primary and alternative fonts
+     *
+     * <p>GSS is used to establish for subsequent text the height and the width of all primary and alternative fonts
      * identified by FONT SELECTION (FNT). The established values remain in effect until the next
      * occurrence of GSS in the data stream.
      * Pn specifies the height, the width is implicitly defined by the height.
      * The unit in which the parameter value is expressed is that established by the parameter value of SELECT
      * SIZE UNIT (SSU).
      */
-    GSS_GRAPHIC_SIZE_SELECTION("{s} C"),
+    GSS("{s} C"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 06/00=0x60='`'
-     * Parameter default value: Pn = 1
-     * HPA causes the active data position to be moved to character position n in the active line (the line in the
+     * CHARACTER POSITION ABSOLUTE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 06/00 = 0x60 = '`'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>HPA causes the active data position to be moved to character position n in the active line (the line in the
      * data component that contains the active data position), where n equals the value of Pn.
      */
-    HPA_CHARACTER_POSITION_ABSOLUTE("{s}`", List.of(1)),
+    HPA("{s}`", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 06/10=0x6a='j'
-     * Parameter default value: Pn = 1
-     * HPB causes the active data position to be moved by n character positions in the data component in the
+     * CHARACTER POSITION BACKWARD.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 06/10 = 0x6a = 'j'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>HPB causes the active data position to be moved by n character positions in the data component in the
      * direction opposite to that of the character progression, where n equals the value of Pn.
      */
-    HPB_CHARACTER_POSITION_BACKWARD("{s}j", List.of(1)),
+    HPB("{s}j", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 06/01=0x61='a'
-     * Parameter default value: Pn = 1
-     * HPR causes the active data position to be moved by n character positions in the data component in the
+     * CHARACTER POSITION FORWARD.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 06/01 = 0x61 = 'a'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>HPR causes the active data position to be moved by n character positions in the data component in the
      * direction of the character progression, where n equals the value of Pn.
      */
-    HPR_CHARACTER_POSITION_FORWARD("{s}a", List.of(1)),
+    HPR("{s}a", List.of(1)),
 
     /**
-     * Notation: (Pn1;Pn2)
-     * Representation: CSI Pn1;Pn2 06/06=0x66='f'
-     * Parameter default values: Pn1 = 1; Pn2 = 1
-     * HVP causes the active data position to be moved in the data component to the n-th line position
+     * CHARACTER AND LINE POSITION.
+     *
+     * <p>Notation: (Pn1;Pn2).<br>
+     * Representation: CSI Pn1;Pn2 06/06 = 0x66 = 'f'.<br>
+     * Parameter default values: Pn1 = 1; Pn2 = 1.
+     *
+     * <p>HVP causes the active data position to be moved in the data component to the n-th line position
      * according to the line progression and to the m-th character position according to the character
      * progression, where n equals the value of Pn1 and m equals the value of Pn2.
      */
-    HVP_CHARACTER_AND_LINE_POSITION("{s};{s}f", List.of(1, 1)),
+    HVP("{s};{s}f", List.of(1, 1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/00=0x40='@'
-     * Parameter default value: Pn = 1
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, ICH is used to
+     * INSERT CHARACTER.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/00 = 0x40 = '@'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, ICH is used to
      * prepare the insertion of n characters, by putting into the erased state the active presentation position and,
      * depending on the setting of the CHARACTER EDITING MODE (HEM), the n-1 preceding or following
      * character positions in the presentation component, where n equals the value of Pn. The previous contents
@@ -547,41 +643,49 @@ public enum ControlSequenceFunction implements ControlFunction {
      * position is moved to the line home position in the active line. The line home position is established by
      * the parameter value of SET LINE HOME (SLH).
      */
-    ICH_INSERT_CHARACTER("{s}@", List.of(1)),
+    ICH("{s}@", List.of(1)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 04/15=0x4f='O'
+     * IDENTIFY DEVICE CONTROL STRING.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 04/15 = 0x4f = 'O'.<br>
      * No parameter default value.
-     * IDCS is used to specify the purpose and format of the command string of subsequent DEVICE
+     *
+     * <p>IDCS is used to specify the purpose and format of the command string of subsequent DEVICE
      * CONTROL STRINGs (DCS). The specified purpose and format remain in effect until the next
      * occurrence of IDCS in the data stream.
      * The parameter values are
      * 1 reserved for use with the DIAGNOSTIC state of the STATUS REPORT TRANSFER MODE (SRTM)
-     * 2
-     * reserved for Dynamically Redefinable Character Sets (DRCS) according to Standard ECMA-35.
+     * 2 reserved for Dynamically Redefinable Character Sets (DRCS) according to Standard ECMA-35.
      * The format and interpretation of the command string corresponding to these parameter values are to be
      * defined in appropriate standards. If this control function is used to identify a private command string, a
      * private parameter value shall be used.
      */
-    IDCS_IDENTIFY_DEVICE_CONTROL_STRING("{s} O"),
+    IDCS("{s} O"),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 04/13=0x4d='M'
+     * IDENTIFY GRAPHIC SUBREPERTOIRE.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 04/13 = 0x4d = 'M'.<br>
      * No parameter default value.
-     * IGS is used to indicate that a repertoire of the graphic characters of ISO/IEC 10367 is used in the
+     *
+     * <p>IGS is used to indicate that a repertoire of the graphic characters of ISO/IEC 10367 is used in the
      * subsequent text.
      * The parameter value of IGS identifies a graphic character repertoire registered in accordance with
      * ISO/IEC 7350.
      */
-    IGS_IDENTIFY_GRAPHIC_SUBREPERTOIRE("{s} M"),
+    IGS("{s} M"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 04/12=0x4c='L'
-     * Parameter default value: Pn = 1
-     * If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, IL is used to
+     * INSERT LINE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 04/12 = 0x4c = 'L'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE (DCSM) is set to PRESENTATION, IL is used to
      * prepare the insertion of n lines, by putting into the erased state in the presentation component the active
      * line (the line that contains the active presentation position) and, depending on the setting of the LINE
      * EDITING MODE (VEM), the n-1 preceding or following lines, where n equals the value of Pn. The
@@ -600,15 +704,18 @@ public enum ControlSequenceFunction implements ControlFunction {
      * the n-1 preceding or following lines, where n equals the value of Pn. The previous contents of the active
      * line and of adjacent lines are shifted away from the active line. The contents of n lines at the other end
      * of the shifted part are removed. The active data position is moved to the line home position in the active
-     * line. The line home position is established by the parameter value of SET LINE HOME (SLH).- 48 -
+     * line. The line home position is established by the parameter value of SET LINE HOME (SLH).
      */
-    IL_INSERT_LINE("{s}L", List.of(1)),
+    IL("{s}L", List.of(1)),
 
     /**
-     * Notation: (Ps...)
-     * Representation: CSI Ps... 02/00=0x20=' ' 04/06=0x46='F'
-     * Parameter default value: Ps = 0
-     * JFY is used to indicate the beginning of a string of graphic characters in the presentation component that
+     * JUSTIFY.
+     *
+     * <p>Notation: (Ps...).<br>
+     * Representation: CSI Ps... 02/00 = 0x20 = ' ' 04/06 = 0x46 = 'F'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>JFY is used to indicate the beginning of a string of graphic characters in the presentation component that
      * are to be justified according to the layout specified by the parameter values, see annex C:
      * 0 no justification, end of justification of preceding text
      * 1 word fill
@@ -623,13 +730,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The line home position is established by the parameter value of SET LINE HOME (SLH). The line limit
      * position is established by the parameter value of SET LINE LIMIT (SLL).
      */
-    JFY_JUSTIFY("{m} F", List.of(0)),
+    JFY("{m} F", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 06/09=0x69='i'
-     * Parameter default value: Ps = 0
-     * MC is used either to initiate a transfer of data from or to an auxiliary input/output device or to enable or
+     * MEDIA COPY.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 06/09 = 0x69 = 'i'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>MC is used either to initiate a transfer of data from or to an auxiliary input/output device or to enable or
      * disable the relay of the received data stream to an auxiliary input/output device, depending on the
      * parameter value:
      * 0 initiate transfer to a primary auxiliary device
@@ -642,36 +752,45 @@ public enum ControlSequenceFunction implements ControlFunction {
      * 7 start relay to a secondary auxiliary device
      * This control function may not be used to switch on or off an auxiliary device.
      */
-    MC_MEDIA_COPY("{s}i", List.of(0)),
+    MC("{s}i", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 05/05=0x55='U'
-     * Parameter default value: Pn = 1
-     * NP causes the n-th following page in the presentation component to be displayed, where n equals the
+     * NEXT PAGE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 05/05 = 0x55 = 'U'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>NP causes the n-th following page in the presentation component to be displayed, where n equals the
      * value of Pn.
      * The effect of this control function on the active presentation position is not defined by this Standard.
      */
-    NP_NEXT_PAGE("{s}U", List.of(1)),
+    NP("{s}U", List.of(1)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 05/10=0x5a='Z'
-     * Parameter default value: Ps = 0
-     * PEC is used to establish the spacing and the extent of the graphic characters for subsequent text. The
+     * PRESENTATION EXPAND OR CONTRACT.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 05/10 = 0x5a = 'Z'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>PEC is used to establish the spacing and the extent of the graphic characters for subsequent text. The
      * spacing is specified in the line as multiples of the spacing established by the most recent occurrence of
      * SET CHARACTER SPACING (SCS) or of SELECT CHARACTER SPACING (SHS) or of SPACING
      * INCREMENT (SPI) in the data stream. The extent of the characters is implicitly established by these
      * control functions. The established spacing and the extent remain in effect until the next occurrence of
      * PEC, of SCS, of SHS or of SPI in the data stream. The parameter values are
      */
-    PEC_PRESENTATION_EXPAND_OR_CONTRACT("{s} Z", List.of(0)),
+    PEC("{s} Z", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 04/10=0x4a='J'
-     * Parameter default value: Ps = 0
-     * PFS is used to establish the available area for the imaging of pages of text based on paper size. The
+     * PAGE FORMAT SELECTION.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 04/10 = 0x4a = 'J'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>PFS is used to establish the available area for the imaging of pages of text based on paper size. The
      * pages are introduced by the subsequent occurrence of FORM FEED (FF) in the data stream.
      * The established image area remains in effect until the next occurrence of PFS in the data stream. The
      * parameter values are (see also annex E):
@@ -694,50 +813,65 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The page home position is established by the parameter value of SET PAGE HOME (SPH), the page
      * limit position is established by the parameter value of SET PAGE LIMIT (SPL).
      */
-    PFS_PAGE_FORMAT_SELECTION("{s} J", List.of(0)),
+    PFS("{s} J", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 05/06=0x56='V'
-     * Parameter default value: Pn = 1
-     * PP causes the n-th preceding page in the presentation component to be displayed, where n equals the
+     * PRECEDING PAGE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 05/06 = 0x56 = 'V'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>PP causes the n-th preceding page in the presentation component to be displayed, where n equals the
      * value of Pn. The effect of this control function on the active presentation position is not defined by this
      * Standard.
      */
-    PP_PRECEDING_PAGE("{s}V", List.of(1)),
+    PP("{s}V", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 05/00=0x50='P'
-     * Parameter default value: Pn = 1
-     * PPA causes the active data position to be moved in the data component to the corresponding character
+     * PAGE POSITION ABSOLUTE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 05/00 = 0x50 = 'P'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>PPA causes the active data position to be moved in the data component to the corresponding character
      * position on the n-th page, where n equals the value of Pn.
      */
-    PPA_PAGE_POSITION_ABSOLUTE("{s} P", List.of(1)),
+    PPA("{s} P", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 05/02=0x52='R'
-     * Parameter default value: Pn = 1
-     * PPB causes the active data position to be moved in the data component to the corresponding character
+     * PAGE POSITION BACKWARD.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 05/02 = 0x52 = 'R'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>PPB causes the active data position to be moved in the data component to the corresponding character
      * position on the n-th preceding page, where n equals the value of Pn.
      */
-    PPB_PAGE_POSITION_BACKWARD("{s} R", List.of(1)),
+    PPB("{s} R", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 05/01=0x51='Q'
-     * Parameter default value: Pn = 1
-     * PPR causes the active data position to be moved in the data component to the corresponding character
+     * PAGE POSITION FORWARD.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 05/01 = 0x51 = 'Q'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>PPR causes the active data position to be moved in the data component to the corresponding character
      * position on the n-th following page, where n equals the value of Pn.
      */
-    PPR_PAGE_POSITION_FORWARD("{s} Q", List.of(1)),
+    PPR("{s} Q", List.of(1)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 05/12=0x5c='\'
-     * Parameter default value: Ps = 0
-     * PTX is used to delimit strings of graphic characters that are communicated one after another in the data
+     * PARALLEL TEXTS.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 05/12 = 0x5c = '\'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>PTX is used to delimit strings of graphic characters that are communicated one after another in the data
      * stream but that are intended to be presented in parallel with one another, usually in adjacent lines.
      * The parameter values are
      * 0 end of parallel texts
@@ -776,13 +910,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * following the respective Hanzi characters. The Pinyin characters will then be presented within enclosing
      * pairs of parentheses.
      */
-    PTX_PARALLEL_TEXTS("{s}\\", List.of(0)),
+    PTX("{s}\\", List.of(0)),
 
     /**
-     * Notation: (Ps...)
-     * Representation: CSI Ps... 02/00=0x20=' ' 04/08=0x48='H'
-     * Parameter default value: Ps = 0
-     * QUAD is used to indicate the end of a string of graphic characters that are to be positioned on a single
+     * QUAD.
+     *
+     * <p>Notation: (Ps...).<br>
+     * Representation: CSI Ps... 02/00 = 0x20 = ' ' 04/08 = 0x48 = 'H'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>QUAD is used to indicate the end of a string of graphic characters that are to be positioned on a single
      * line according to the layout specified by the parameter values, see annex C:
      * 0 flush to line home position margin
      * 1 flush to line home position margin and fill with leader
@@ -800,24 +937,30 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The line home position is established by the parameter value of SET LINE HOME (SLH). The line limit
      * position is established by the parameter value of SET LINE LIMIT (SLL).
      */
-    QUAD_QUAD("{m} H", List.of(0)),
+    QUAD("{m} H", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 06/02=0x62='b'
-     * Parameter default value: Pn = 1
-     * REP is used to indicate that the preceding character in the data stream, if it is a graphic character
+     * REPEAT.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 06/02 = 0x62 = 'b'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>REP is used to indicate that the preceding character in the data stream, if it is a graphic character
      * (represented by one or more bit combinations) including SPACE, is to be repeated n times, where n
      * equals the value of Pn. If the character preceding REP is a control function or part of a control function,
      * the effect of REP is not defined by this Standard.
      */
-    REP_REPEAT("{s}b", List.of(1)),
+    REP("{s}b", List.of(1)),
 
     /**
-     * Notation: (Ps...)
-     * Representation: CSI Ps... 06/12=0x6c='l'
+     * RESET MODE.
+     *
+     * <p>Notation: (Ps...).<br>
+     * Representation: CSI Ps... 06/12 = 0x6c = 'l'.<br>
      * No parameter default value.
-     * RM causes the modes of the receiving device to be reset as specified by the parameter values:
+     *
+     * <p>RM causes the modes of the receiving device to be reset as specified by the parameter values:
      * 1 GUARDED AREA TRANSFER MODE (GATM)
      * 2 KEYBOARD ACTION MODE (KAM)
      * 3 CONTROL REPRESENTATION MODE (CRM)
@@ -843,13 +986,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * NOTE
      * Private modes may be implemented using private parameters, see 5.4.1 and 7.4.
      */
-    RM_RESET_MODE("{m}l"),
+    RM("{m}l"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 05/12=0x5c='\'
-     * Parameter default value: Pn = 0
-     * SACS is used to establish extra inter-character escapement for subsequent text. The established extra
+     * SET ADDITIONAL CHARACTER SEPARATION.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 05/12 = 0x5c = '\'.<br>
+     * Parameter default value: Pn = 0.
+     *
+     * <p>SACS is used to establish extra inter-character escapement for subsequent text. The established extra
      * escapement remains in effect until the next occurrence of SACS or of SET REDUCED CHARACTER
      * SEPARATION (SRCS) in the data stream or until it is reset to the default value by a subsequent
      * occurrence of CARRIAGE RETURN/LINE FEED (CR LF) or of NEXT LINE (NEL) in the data stream,
@@ -858,13 +1004,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The unit in which the parameter value is expressed is that established by the parameter value of SELECT
      * SIZE UNIT (SSU).
      */
-    SACS_SET_ADDITIONAL_CHARACTER_SEPARATION("{s} \\", List.of(0)),
+    SACS("{s} \\", List.of(0)),
 
     /**
-     * Notation: (Ps...)
-     * Representation: CSI Ps... 02/00=0x20=' ' 05/13=0x5d=']'
-     * Parameter default value: Ps = 0
-     * SAPV is used to specify one or more variants for the presentation of subsequent text. The parameter
+     * SELECT ALTERNATIVE PRESENTATION VARIANTS.
+     *
+     * <p>Notation: (Ps...).<br>
+     * Representation: CSI Ps... 02/00 = 0x20 = ' ' 05/13 = 0x5d = ']'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SAPV is used to specify one or more variants for the presentation of subsequent text. The parameter
      * values are
      * 0 default presentation (implementation-defined); cancels the effect of any preceding occurrence of
      * SAPV in the data stream
@@ -907,13 +1056,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * 22 cancels the effect of parameter value 21, i.e. re-establishes the effect of parameter values 5, 6, 7, and
      * 8 for the next single graphic character only.
      */
-    SAPV_SELECT_ALTERNATIVE_PRESENTATION_VARIANTS("{m} ]", List.of(0)),
+    SAPV("{m} ]", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 06/05=0x65='e'
-     * Parameter default value: Ps = 0
-     * SCO is used to establish the amount of rotation of the graphic characters following in the data stream.
+     * SELECT CHARACTER ORIENTATION.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 06/05 = 0x65 = 'e'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SCO is used to establish the amount of rotation of the graphic characters following in the data stream.
      * The established value remains in effect until the next occurrence of SCO in the data stream.
      * The parameter values are
      * 0 0°
@@ -928,13 +1080,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * characters along the character path. The centre of rotation of the affected graphic characters is not
      * defined by this Standard.
      */
-    SCO_SELECT_CHARACTER_ORIENTATION("{s} e", List.of(0)),
+    SCO("{s} e", List.of(0)),
 
     /**
-     * Notation: (Ps1;Ps2)
-     * Representation: CSI Ps1;Ps2 02/00=0x20=' ' 06/11=0x6b='k'
+     * SELECT CHARACTER PATH.
+     *
+     * <p>Notation: (Ps1;Ps2).<br>
+     * Representation: CSI Ps1;Ps2 02/00 = 0x20 = ' ' 06/11 = 0x6b = 'k'.<br>
      * No parameter default values.
-     * SCP is used to select the character path, relative to the line orientation, for the active line (the line that
+     *
+     * <p>SCP is used to select the character path, relative to the line orientation, for the active line (the line that
      * contains the active presentation position) and subsequent lines in the presentation component. It is also
      * used to update the content of the active line in the presentation component and the content of the active
      * line (the line that contains the active data position) in the data component. This takes effect immediately.
@@ -964,37 +1119,46 @@ public enum ControlSequenceFunction implements ControlFunction {
      * character position in the active line in the presentation component, the active data position in the data
      * component is updated accordingly.
      */
-    SCP_SELECT_CHARACTER_PATH("{s};{s} k"),
+    SCP("{s};{s} k"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/07=0x67='g'
+     * SET CHARACTER SPACING.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/07 = 0x67 = 'g'.<br>
      * No parameter default value.
-     * SCS is used to establish the character spacing for subsequent text. The established spacing remains in
+     *
+     * <p>SCS is used to establish the character spacing for subsequent text. The established spacing remains in
      * effect until the next occurrence of SCS, or of SELECT CHARACTER SPACING (SHS) or of SPACING
      * INCREMENT (SPI) in the data stream, see annex C.
      * Pn specifies the character spacing.
      * The unit in which the parameter value is expressed is that established by the parameter value of SELECT
      * SIZE UNIT (SSU).
      */
-    SCS_SET_CHARACTER_SPACING("{s} g"),
+    SCS("{s} g"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 05/04=0x54='T'
-     * Parameter default value: Pn = 1
-     * SD causes the data in the presentation component to be moved by n line positions if the line orientation
+     * SCROLL DOWN.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 05/04 = 0x54 = 'T'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>SD causes the data in the presentation component to be moved by n line positions if the line orientation
      * is horizontal, or by n character positions if the line orientation is vertical, such that the data appear to
      * move down; where n equals the value of Pn.
      * The active presentation position is not affected by this control function.
      */
-    SD_SCROLL_DOWN("{s}T", List.of(1)),
+    SD("{s}T", List.of(1)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 05/13=0x5d=']'
-     * Parameter default value: Ps = 0
-     * SDS is used to establish in the data component the beginning and the end of a string of characters as
+     * START DIRECTED STRING.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 05/13 = 0x5d = ']'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SDS is used to establish in the data component the beginning and the end of a string of characters as
      * well as the direction of the string. This direction may be different from that currently established. The
      * indicated string follows the preceding text. The established character progression is not affected.
      * The beginning of a directed string is indicated by SDS with a parameter value not equal to 0. A directed
@@ -1018,23 +1182,29 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The control functions for area definition (DAQ, EPA, ESA, SPA, SSA) should not be used within an SDS
      * string.
      */
-    SDS_START_DIRECTED_STRING("{s}]", List.of(0)),
+    SDS("{s}]", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 05/01=0x51='Q'
-     * Parameter default value: Ps = 0
-     * SEE is used to establish the editing extent for subsequent character or line insertion or deletion. The
+     * SELECT EDITING EXTENT.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 05/01 = 0x51 = 'Q'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SEE is used to establish the editing extent for subsequent character or line insertion or deletion. The
      * established extent remains in effect until the next occurrence of SEE in the data stream. The editing
      * extent depends on the parameter value:
      */
-    SEE_SELECT_EDITING_EXTENT("{s}Q", List.of(0)),
+    SEE("{s}Q", List.of(0)),
 
     /**
-     * Notation: (Ps1;Ps2)
-     * Representation: CSI Ps1;Ps2 02/00=0x20=' ' 05/09=0x59='Y'
-     * Parameter default values: Ps1 = 0; Ps2 = 0
-     * SEF causes a sheet of paper to be ejected from a printing device into a specified output stacker and
+     * SHEET EJECT AND FEED.
+     *
+     * <p>Notation: (Ps1;Ps2).<br>
+     * Representation: CSI Ps1;Ps2 02/00 = 0x20 = ' ' 05/09 = 0x59 = 'Y'.<br>
+     * Parameter default values: Ps1 = 0; Ps2 = 0.
+     *
+     * <p>SEF causes a sheet of paper to be ejected from a printing device into a specified output stacker and
      * another sheet to be loaded into the printing device from a specified paper bin.
      * Parameter values of Ps1 are:
      * 0 eject sheet, no new sheet loaded
@@ -1048,13 +1218,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * 2 eject sheet into stacker 2
      * n
      */
-    SEF_SHEET_EJECT_AND_FEED("{s};{s} Y", List.of(0, 0)),
+    SEF("{s};{s} Y", List.of(0, 0)),
 
     /**
-     * Notation: (Ps...)
-     * Representation: CSI Ps... 06/13=0x6d='m'
-     * Parameter default value: Ps = 0
-     * SGR is used to establish one or more graphic rendition aspects for subsequent text. The established
+     * SELECT GRAPHIC RENDITION.
+     *
+     * <p>Notation: (Ps...).<br>
+     * Representation: CSI Ps... 06/13 = 0x6d = 'm'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SGR is used to establish one or more graphic rendition aspects for subsequent text. The established
      * aspects remain in effect until the next occurrence of SGR in the data stream, depending on the setting of
      * the GRAPHIC RENDITION COMBINATION MODE (GRCM). Each graphic rendition aspect is
      * specified by a parameter value:
@@ -1131,13 +1304,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * NOTE
      * The usable combinations of parameter values are determined by the implementation.
      */
-    SGR_SELECT_GRAPHIC_RENDITION("{m}m", List.of(0)),
+    SGR("{m}m", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 04/11=0x4b='K'
-     * Parameter default value: Ps = 0
-     * SHS is used to establish the character spacing for subsequent text. The established spacing remains in
+     * SELECT CHARACTER SPACING.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 04/11 = 0x4b = 'K'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SHS is used to establish the character spacing for subsequent text. The established spacing remains in
      * effect until the next occurrence of SHS or of SET CHARACTER SPACING (SCS) or of SPACING
      * INCREMENT (SPI) in the data stream. The parameter values are
      * 0 10 characters per 25,4 mm
@@ -1148,34 +1324,43 @@ public enum ControlSequenceFunction implements ControlFunction {
      * 5 9 characters per 50,8 mm
      * 6 4 characters per 25,4 mm
      */
-    SHS_SELECT_CHARACTER_SPACING("{s} K", List.of(0)),
+    SHS("{s} K", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 05/14=0x5e='^'
-     * Parameter default value: Ps = 0
-     * SIMD is used to select the direction of implicit movement of the data position relative to the character
+     * SELECT IMPLICIT MOVEMENT DIRECTION.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 05/14 = 0x5e = '^'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SIMD is used to select the direction of implicit movement of the data position relative to the character
      * progression. The direction selected remains in effect until the next occurrence of SIMD.
      * The parameter values are:
      */
-    SIMD_SELECT_IMPLICIT_MOVEMENT_DIRECTION("{s}^", List.of(0)),
+    SIMD("{s}^", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 04/00=0x40='@'
-     * Parameter default value: Pn = 1
-     * SL causes the data in the presentation component to be moved by n character positions if the line
+     * SCROLL LEFT.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 04/00 = 0x40 = '@'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>SL causes the data in the presentation component to be moved by n character positions if the line
      * orientation is horizontal, or by n line positions if the line orientation is vertical, such that the data appear
      * to move to the left; where n equals the value of Pn.
      * The active presentation position is not affected by this control function.
      */
-    SL_SCROLL_LEFT("{s} @", List.of(1)),
+    SL("{s} @", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 05/05=0x55='U'
+     * SET LINE HOME.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 05/05 = 0x55 = 'U'.<br>
      * No parameter default value.
-     * If the DEVICE COMPONENT SELECT MODE is set to PRESENTATION, SLH is used to establish at
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE is set to PRESENTATION, SLH is used to establish at
      * character position n in the active line (the line that contains the active presentation position) and lines of
      * subsequent text in the presentation component the position to which the active presentation position will
      * be moved by subsequent occurrences of CARRIAGE RETURN (CR), DELETE LINE (DL), INSERT
@@ -1191,13 +1376,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The established position is called the line home position and remains in effect until the next occurrence
      * of SLH in the data stream.
      */
-    SLH_SET_LINE_HOME("{s} U"),
+    SLH("{s} U"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 05/06=0x56='V'
+     * SET LINE LIMIT.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 05/06 = 0x56 = 'V'.<br>
      * No parameter default value.
-     * If the DEVICE COMPONENT SELECT MODE is set to PRESENTATION, SLL is used to establish at
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE is set to PRESENTATION, SLL is used to establish at
      * character position n in the active line (the line that contains the active presentation position) and lines of
      * subsequent text in the presentation component the position to which the active presentation position will
      * be moved by subsequent occurrences of CARRIAGE RETURN (CR), or NEXT LINE (NEL) in the data
@@ -1213,26 +1401,32 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The established position is called the line limit position and remains in effect until the next occurrence
      * of SLL in the data stream.
      */
-    SLL_SET_LINE_LIMIT("{s} V"),
+    SLL("{s} V"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/08=0x68='h'
+     * SET LINE SPACING.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/08 = 0x68 = 'h'.<br>
      * No parameter default value.
-     * SLS is used to establish the line spacing for subsequent text. The established spacing remains in effect
+     *
+     * <p>SLS is used to establish the line spacing for subsequent text. The established spacing remains in effect
      * until the next occurrence of SLS or of SELECT LINE SPACING (SVS) or of SPACING INCREMENT
      * (SPI) in the data stream.
      * Pn specifies the line spacing.
      * The unit in which the parameter value is expressed is that established by the parameter value of SELECT
      * SIZE UNIT (SSU).
      */
-    SLS_SET_LINE_SPACING("{s} h"),
+    SLS("{s} h"),
 
     /**
-     * Notation: (Ps...)
-     * Representation: CSI Ps... 06/08=0x68='h'
+     * SET MODE.
+     *
+     * <p>Notation: (Ps...).<br>
+     * Representation: CSI Ps... 06/08 = 0x68 = 'h'.<br>
      * No parameter default value.
-     * SM causes the modes of the receiving device to be set as specified by the parameter values:
+     *
+     * <p>SM causes the modes of the receiving device to be set as specified by the parameter values:
      * 1 GUARDED AREA TRANSFER MODE (GATM)
      * 2 KEYBOARD ACTION MODE (KAM)
      * 3 CONTROL REPRESENTATION MODE (CRM)
@@ -1258,13 +1452,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * NOTE
      * Private modes may be implemented using private parameters, see 5.4.1 and 7.4.
      */
-    SM_SET_MODE("{m}h"),
+    SM("{m}h"),
 
     /**
-     * Notation: (Ps1;Ps2)
-     * Representation: CSI Ps1;Ps2 02/00=0x20=' ' 05/03=0x53='S'
-     * Parameter default value: Ps1 = 0; Ps2 = 0
-     * SPD is used to select the line orientation, the line progression, and the character path in the presentation
+     * SELECT PRESENTATION DIRECTIONS.
+     *
+     * <p>Notation: (Ps1;Ps2).<br>
+     * Representation: CSI Ps1;Ps2 02/00 = 0x20 = ' ' 05/03 = 0x53 = 'S'.<br>
+     * Parameter default value: Ps1 = 0; Ps2 = 0.
+     *
+     * <p>SPD is used to select the line orientation, the line progression, and the character path in the presentation
      * component. It is also used to update the content of the presentation component and the content of the
      * data component. This takes effect immediately.
      * Ps1 specifies the line orientation, the line progression and the character path:
@@ -1325,13 +1522,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * active presentation position is moved to the first character position in the first line in the presentation
      * component, the active data position in the data component is updated accordingly.
      */
-    SPD_SELECT_PRESENTATION_DIRECTIONS("{s};{s} S", List.of(0, 0)),
+    SPD("{s};{s} S", List.of(0, 0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/09=0x69='i'
+     * SET PAGE HOME.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/09 = 0x69 = 'i'.<br>
      * No parameter default value.
-     * If the DEVICE COMPONENT SELECT MODE is set to PRESENTATION, SPH is used to establish at
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE is set to PRESENTATION, SPH is used to establish at
      * line position n in the active page (the page that contains the active presentation position) and subsequent
      * pages in the presentation component the position to which the active presentation position will be moved
      * by subsequent occurrences of FORM FEED (FF) in the data stream; where n equals the value of Pn. In
@@ -1345,13 +1545,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The established position is called the page home position and remains in effect until the next occurrence
      * of SPH in the data stream.
      */
-    SPH_SET_PAGE_HOME("{s} i"),
+    SPH("{s} i"),
 
     /**
-     * Notation: (Pn1;Pn2)
-     * Representation: CSI Pn1;Pn2 02/00=0x20=' ' 04/07=0x47='G'
+     * SPACING INCREMENT.
+     *
+     * <p>Notation: (Pn1;Pn2).<br>
+     * Representation: CSI Pn1;Pn2 02/00 = 0x20 = ' ' 04/07 = 0x47 = 'G'.<br>
      * No parameter default values.
-     * SPI is used to establish the line spacing and the character spacing for subsequent text. The established
+     *
+     * <p>SPI is used to establish the line spacing and the character spacing for subsequent text. The established
      * line spacing remains in effect until the next occurrence of SPI or of SET LINE SPACING (SLS) or of
      * SELECT LINE SPACING (SVS) in the data stream. The established character spacing remains in effect
      * until the next occurrence of SET CHARACTER SPACING (SCS) or of SELECT CHARACTER
@@ -1361,13 +1564,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The unit in which the parameter values are expressed is that established by the parameter value of
      * SELECT SIZE UNIT (SSU).
      */
-    SPI_SPACING_INCREMENT("{s};{s} G"),
+    SPI("{s};{s} G"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/10=0x6a='j'
+     * SET PAGE LIMIT.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/10 = 0x6a = 'j'.<br>
      * No parameter default value.
-     * If the DEVICE COMPONENT SELECT MODE is set to PRESENTATION, SPL is used to establish at
+     *
+     * <p>If the DEVICE COMPONENT SELECT MODE is set to PRESENTATION, SPL is used to establish at
      * line position n in the active page (the page that contains the active presentation position) and pages of
      * subsequent text in the presentation component the position beyond which the active presentation position
      * can normally not be moved; where n equals the value of Pn. In the case of a device without data
@@ -1379,34 +1585,43 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The established position is called the page limit position and remains in effect until the next occurrence
      * of SPL in the data stream.
      */
-    SPL_SET_PAGE_LIMIT("{s} j"),
+    SPL("{s} j"),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 05/08=0x58='X'
-     * Parameter default value: Ps = 0
-     * SPQR is used to select the relative print quality and the print speed for devices the output quality and
+     * SELECT PRINT QUALITY AND RAPIDITY.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 05/08 = 0x58 = 'X'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SPQR is used to select the relative print quality and the print speed for devices the output quality and
      * speed of which are inversely related. The selected values remain in effect until the next occurrence of
      * SPQR in the data stream. The parameter values are
      */
-    SPQR_SELECT_PRINT_QUALITY_AND_RAPIDITY("{s} X", List.of(0)),
+    SPQR("{s} X", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 04/01=0x41='A'
-     * Parameter default value: Pn = 1
-     * SR causes the data in the presentation component to be moved by n character positions if the line
+     * SCROLL RIGHT.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 04/01 = 0x41 = 'A'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>SR causes the data in the presentation component to be moved by n character positions if the line
      * orientation is horizontal, or by n line positions if the line orientation is vertical, such that the data appear
      * to move to the right; where n equals the value of Pn.
      * The active presentation position is not affected by this control function.
      */
-    SR_SCROLL_RIGHT("{s} A", List.of(1)),
+    SR("{s} A", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/06=0x66='f'
-     * Parameter default value: Pn = 0
-     * SRCS is used to establish reduced inter-character escapement for subsequent text. The established
+     * SET REDUCED CHARACTER SEPARATION.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/06 = 0x66 = 'f'.<br>
+     * Parameter default value: Pn = 0.
+     *
+     * <p>SRCS is used to establish reduced inter-character escapement for subsequent text. The established
      * reduced escapement remains in effect until the next occurrence of SRCS or of SET ADDITIONAL
      * CHARACTER SEPARATION (SACS) in the data stream or until it is reset to the default value by a
      * subsequent occurrence of CARRIAGE RETURN/LINE FEED (CR/LF) or of NEXT LINE (NEL) in the
@@ -1415,13 +1630,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The unit in which the parameter values are expressed is that established by the parameter value of
      * SELECT SIZE UNIT (SSU).
      */
-    SRCS_SET_REDUCED_CHARACTER_SEPARATION("{s} f", List.of(0)),
+    SRCS("{s} f", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 05/11=0x5b='['
-     * Parameter default value: Ps = 0
-     * SRS is used to establish in the data component the beginning and the end of a string of characters as well
+     * START REVERSED STRING.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 05/11 = 0x5b = '['.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SRS is used to establish in the data component the beginning and the end of a string of characters as well
      * as the direction of the string. This direction is opposite to that currently established. The indicated string
      * follows the preceding text. The established character progression is not affected.
      * The beginning of a reversed string is indicated by SRS with a parameter value of 1. A reversed string
@@ -1444,23 +1662,29 @@ public enum ControlSequenceFunction implements ControlFunction {
      * The control functions for area definition (DAQ, EPA, ESA, SPA, SSA) should not be used within an SRS
      * string.
      */
-    SRS_START_REVERSED_STRING("{s}[", List.of(0)),
+    SRS("{s}[", List.of(0)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 04/09=0x49='I'
-     * Parameter default value: Ps = 0
-     * SSU is used to establish the unit in which the numeric parameters of certain control functions are
+     * SELECT SIZE UNIT.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 04/09 = 0x49 = 'I'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SSU is used to establish the unit in which the numeric parameters of certain control functions are
      * expressed. The established unit remains in effect until the next occurrence of SSU in the data stream.
      * The parameter values are
      */
-    SSU_SELECT_SIZE_UNIT("{s} I", List.of(0)),
+    SSU("{s} I", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 05/11=0x5b='['
+     * SET SPACE WIDTH.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 05/11 = 0x5b = '['.<br>
      * No parameter default value.
-     * SSW is used to establish for subsequent text the character escapement associated with the character
+     *
+     * <p>SSW is used to establish for subsequent text the character escapement associated with the character
      * SPACE. The established escapement remains in effect until the next occurrence of SSW in the data
      * stream or until it is reset to the default value by a subsequent occurrence of CARRIAGE RETURN/LINE
      * FEED (CR/LF), CARRIAGE RETURN/FORM FEED (CR/FF), or of NEXT LINE (NEL) in the data
@@ -1473,36 +1697,45 @@ public enum ControlSequenceFunction implements ControlFunction {
      * SPACING INCREMENT (SPI) in the data stream if the current font has constant spacing, or is specified
      * by the nominal width of the character SPACE in the current font if that font has proportional spacing.
      */
-    SSW_SET_SPACE_WIDTH("{s} ["),
+    SSW("{s} ["),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 05/14=0x5e='^'
+     * SELECTIVE TABULATION.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 05/14 = 0x5e = '^'.<br>
      * No parameter default value.
-     * STAB causes subsequent text in the presentation component to be aligned according to the position and
+     *
+     * <p>STAB causes subsequent text in the presentation component to be aligned according to the position and
      * the properties of a tabulation stop which is selected from a list according to the value of the parameter
      * Ps.
      * The use of this control function and means of specifying a list of tabulation stops to be referenced by the
      * control function are specified in other standards, for example ISO 8613-6.
      */
-    STAB_SELECTIVE_TABULATION("{s} ^"),
+    STAB("{s} ^"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 05/03=0x53='S'
-     * Parameter default value: Pn = 1
-     * SU causes the data in the presentation component to be moved by n line positions if the line orientation
+     * SCROLL UP.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 05/03 = 0x53 = 'S'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>SU causes the data in the presentation component to be moved by n line positions if the line orientation
      * is horizontal, or by n character positions if the line orientation is vertical, such that the data appear to
      * move up; where n equals the value of Pn.
      * The active presentation position is not affected by this control function.
      */
-    SU_SCROLL_UP("{s}S", List.of(1)),
+    SU("{s}S", List.of(1)),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 02/00=0x20=' ' 04/12=0x4c='L'
-     * Parameter default value: Ps = 0
-     * SVS is used to establish the line spacing for subsequent text. The established spacing remains in effect
+     * SELECT LINE SPACING.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 02/00 = 0x20 = ' ' 04/12 = 0x4c = 'L'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>SVS is used to establish the line spacing for subsequent text. The established spacing remains in effect
      * until the next occurrence of SVS or of SET LINE SPACING (SLS) or of SPACING INCREMENT (SPI)
      * in the data stream. The parameter values are:
      * 0 6 lines per 25,4 mm
@@ -1516,13 +1749,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * 8 12 lines per 30,0 mm
      * 9 2 lines per 25,4 mm
      */
-    SVS_SELECT_LINE_SPACING("{s} L", List.of(0)),
+    SVS("{s} L", List.of(0)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/02=0x62='b'
+     * TABULATION ALIGNED CENTRED.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/02 = 0x62 = 'b'.<br>
      * No parameter default value.
-     * TAC causes a character tabulation stop calling for centring to be set at character position n in the active
+     *
+     * <p>TAC causes a character tabulation stop calling for centring to be set at character position n in the active
      * line (the line that contains the active presentation position) and lines of subsequent text in the
      * presentation component, where n equals the value of Pn. TAC causes the replacement of any tabulation
      * stop previously set at that character position, but does not affect other tabulation stops.
@@ -1530,13 +1766,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * the) first graphic character and the (leading edge of the) last graphic character are at approximately equal
      * distances from the tabulation stop.
      */
-    TAC_TABULATION_ALIGNED_CENTRED("{s} b"),
+    TAC("{s} b"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/01=0x61='a'
+     * TABULATION ALIGNED LEADING EDGE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/01 = 0x61 = 'a'.<br>
      * No parameter default value.
-     * TALE causes a character tabulation stop calling for leading edge alignment to be set at character
+     *
+     * <p>TALE causes a character tabulation stop calling for leading edge alignment to be set at character
      * position n in the active line (the line that contains the active presentation position) and lines of
      * subsequent text in the presentation component, where n equals the value of Pn. TALE causes the
      * replacement of any tabulation stop previously set at that character position, but does not affect other
@@ -1544,13 +1783,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * A text string aligned with a tabulation stop set by TALE will be positioned so that the (leading edge of
      * the) last graphic character of the string is placed at the tabulation stop.
      */
-    TALE_TABULATION_ALIGNED_LEADING_EDGE("{s} a"),
+    TALE("{s} a"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/00=0x60='`'
+     * TABULATION ALIGNED TRAILING EDGE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/00 = 0x60 = '`'.<br>
      * No parameter default value.
-     * TATE causes a character tabulation stop calling for trailing edge alignment to be set at character
+     *
+     * <p>TATE causes a character tabulation stop calling for trailing edge alignment to be set at character
      * position n in the active line (the line that contains the active presentation position) and lines of
      * subsequent text in the presentation component, where n equals the value of Pn. TATE causes the
      * replacement of any tabulation stop previously set at that character position, but does not affect other
@@ -1558,13 +1800,16 @@ public enum ControlSequenceFunction implements ControlFunction {
      * A text string aligned with a tabulation stop set by TATE will be positioned so that the (trailing edge of
      * the) first graphic character of the string is placed at the tabulation stop.
      */
-    TATE_TABULATION_ALIGNED_TRAILING_EDGE("{s} `"),
+    TATE("{s} `"),
 
     /**
-     * Notation: (Ps)
-     * Representation: CSI Ps 06/07=0x67='g'
-     * Parameter default value: Ps = 0
-     * TBC causes one or more tabulation stops in the presentation component to be cleared, depending on the
+     * TABULATION CLEAR.
+     *
+     * <p>Notation: (Ps).<br>
+     * Representation: CSI Ps 06/07 = 0x67 = 'g'.<br>
+     * Parameter default value: Ps = 0.
+     *
+     * <p>TBC causes one or more tabulation stops in the presentation component to be cleared, depending on the
      * parameter value:
      * 0 the character tabulation stop at the active presentation position is cleared
      * 1 the line tabulation stop at the active line is cleared
@@ -1575,14 +1820,17 @@ public enum ControlSequenceFunction implements ControlFunction {
      * In the case of parameter value 0 or 2 the number of lines affected depends on the setting of the
      * TABULATION STOP MODE (TSM).
      */
-    TBC_TABULATION_CLEAR("{s}g", List.of(0)),
+    TBC("{s}g", List.of(0)),
 
     /**
-     * Notation: (Pn1;Pn2)
-     * Representation: CSI Pn1;Pn2 02/00=0x20=' ' 06/03=0x63='c'
-     * No parameter default value for Pn1
-     * Parameter default value: Pn2 = 32
-     * TCC causes a character tabulation stop calling for alignment of a target graphic character to be set at
+     * TABULATION CENTRED ON CHARACTER.
+     *
+     * <p>Notation: (Pn1;Pn2).<br>
+     * Representation: CSI Pn1;Pn2 02/00 = 0x20 = ' ' 06/03 = 0x63 = 'c'.<br>
+     * No parameter default value for Pn1.<br>
+     * Parameter default value: Pn2 = 32.
+     *
+     * <p>TCC causes a character tabulation stop calling for alignment of a target graphic character to be set at
      * character position n in the active line (the line that contains the active presentation position) and lines of
      * subsequent text in the presentation component, where n equals the value of Pn1, and the target character
      * about which centring is to be performed is specified by Pn2. TCC causes the replacement of any
@@ -1595,56 +1843,71 @@ public enum ControlSequenceFunction implements ControlFunction {
      * invoked code. For a 7-bit code, the permissible range of values is 32 to 127; for an 8-bit code, the
      * permissible range of values is 32 to 127 and 160 to 255.
      */
-    TCC_TABULATION_CENTRED_ON_CHARACTER("{s};{s} c", Arrays.asList(null, 32)),
+    TCC("{s};{s} c", Arrays.asList(null, 32)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 06/04=0x64='d'
+     * TABULATION STOP REMOVE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 06/04 = 0x64 = 'd'.<br>
      * No parameter default value.
-     * TSR causes any character tabulation stop at character position n in the active line (the line that contains
+     *
+     * <p>TSR causes any character tabulation stop at character position n in the active line (the line that contains
      * the active presentation position) and lines of subsequent text in the presentation component to be
      * cleared, but does not affect other tabulation stops. n equals the value of Pn.
      */
-    TSR_TABULATION_STOP_REMOVE("{s} d"),
+    TSR("{s} d"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 02/00=0x20=' ' 04/05=0x45='E'
+     * THIN SPACE SPECIFICATION.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 02/00 = 0x20 = ' ' 04/05 = 0x45 = 'E'.<br>
      * No parameter default value.
-     * TSS is used to establish the width of a thin space for subsequent text. The established width remains in
+     *
+     * <p>TSS is used to establish the width of a thin space for subsequent text. The established width remains in
      * effect until the next occurrence of TSS in the data stream, see annex C.
      * Pn specifies the width of the thin space.
      * The unit in which the parameter value is expressed is that established by the parameter value of SELECT
      * SIZE UNIT (SSU).
      */
-    TSS_THIN_SPACE_SPECIFICATION("{s} E"),
+    TSS("{s} E"),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 06/04=0x64='d'
-     * Parameter default value: Pn = 1
-     * VPA causes the active data position to be moved to line position n in the data component in a direction
+     * LINE POSITION ABSOLUTE.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 06/04 = 0x64 = 'd'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>VPA causes the active data position to be moved to line position n in the data component in a direction
      * parallel to the line progression, where n equals the value of Pn.
      */
-    VPA_LINE_POSITION_ABSOLUTE("{s}d", List.of(1)),
+    VPA("{s}d", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 06/11=0x6b='k'
-     * Parameter default value: Pn = 1
-     * VPB causes the active data position to be moved by n line positions in the data component in a direction
+     * LINE POSITION BACKWARD.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 06/11 = 0x6b = 'k'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>VPB causes the active data position to be moved by n line positions in the data component in a direction
      * opposite to that of the line progression, where n equals the value of Pn.
      */
-    VPB_LINE_POSITION_BACKWARD("{s}k", List.of(1)),
+    VPB("{s}k", List.of(1)),
 
     /**
-     * Notation: (Pn)
-     * Representation: CSI Pn 06/05=0x65='e'
-     * Parameter default value: Pn = 1
-     * VPR causes the active data position to be moved by n line positions in the data component in a direction
+     * LINE POSITION FORWARD.
+     *
+     * <p>Notation: (Pn).<br>
+     * Representation: CSI Pn 06/05 = 0x65 = 'e'.<br>
+     * Parameter default value: Pn = 1.
+     *
+     * <p>VPR causes the active data position to be moved by n line positions in the data component in a direction
      * parallel to the line progression, where n equals the value of Pn.
      */
-    VPR_LINE_POSITION_FORWARD("{s}e", List.of(1));
+    VPR("{s}e", List.of(1));
 
     private final String pattern;
 
