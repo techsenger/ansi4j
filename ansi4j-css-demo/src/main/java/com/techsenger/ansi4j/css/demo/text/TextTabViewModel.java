@@ -192,6 +192,7 @@ public class TextTabViewModel extends AbstractTabViewModel {
             default:
                 throw new AssertionError();
         }
+        this.content.set(null);
         this.content.set(c);
     }
 

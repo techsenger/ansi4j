@@ -198,7 +198,7 @@ public class TextTabView extends AbstractTabView<TextTabViewModel> {
             this.outputNodeWrapper.setStyle("-fx-background-color:" + ColorUtils.toHex(iBgColor));
             getViewModel().run();
         });
-        getViewModel().contentProperty().addListener((ov, oldV, newV) -> showContent());
+        getViewModel().contentProperty().addListener((ov, oldV, newV) -> showContent(newV));
         this.runButton.disableProperty().bind(getViewModel().runButtonDisableProperty());
         VBox.setMargin(this.outputNodeWrapper, new Insets(Constants.INSET, 0, Constants.INSET, 0));
         this.outputNodeWrapper.getStyleClass().add(Styles.BORDER_DEFAULT);
@@ -227,13 +227,16 @@ public class TextTabView extends AbstractTabView<TextTabViewModel> {
         return content;
     }
 
-    private void showContent() {
+    private void showContent(Object content) {
+        if (content == null) {
+            return;
+        }
         Node outputNode = null;
         var defFgColor = ColorUtils.toInt(this.fgColorPicker.getValue());
         var defBgColor = ColorUtils.toInt(this.bgColorPicker.getValue());
         switch (this.controlComboBox.getSelectionModel().getSelectedIndex()) {
             case 0:
-                var webContent = (String) getViewModel().contentProperty().get();
+                var webContent = (String) content;
                     var webViewBox = FxUtils.createWebView();
                     WebView webView = (WebView) webViewBox.getChildren().get(0);
                     var engine = webView.getEngine();
@@ -248,7 +251,7 @@ public class TextTabView extends AbstractTabView<TextTabViewModel> {
                     outputNode = webViewBox;
                 break;
             case 1:
-                var textFlowContent = (List<Text>) getViewModel().contentProperty().get();
+                var textFlowContent = (List<Text>) content;
                     EventHandler<MouseEvent> handler = event -> {
                         Text source = (Text) event.getSource();
                         printSpanInfo(source.getText(), source.getStyle());
@@ -259,7 +262,7 @@ public class TextTabView extends AbstractTabView<TextTabViewModel> {
                     outputNode = FxUtils.createTextFlow(defFgColor, defBgColor, textFlowContent.toArray(Text[]::new));
                 break;
             case 2:
-                var rtfxContent = (Pair<String, StyleSpans<String>>) getViewModel().contentProperty().get();
+                var rtfxContent = (Pair<String, StyleSpans<String>>) content;
                     var textScrollPane = FxUtils.createRtfxTextArea(defFgColor, defBgColor);
                     InlineCssTextArea textArea = (InlineCssTextArea) textScrollPane.getContent();
                     textArea.caretPositionProperty().addListener((ov, oldV, newV) -> {
