@@ -11,7 +11,7 @@ package com.techsenger.ansi4j.core.api.iso6429;
  *
  * @author Pavel Castornii
  */
-public interface IcfAlias {
+public interface IndependentControlFunctionAlias {
 
     /**
      * See {@link IndependentControlFunction#CMD}.

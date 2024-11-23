@@ -11,7 +11,7 @@ package com.techsenger.ansi4j.core.api.iso6429;
  *
  * @author Pavel Castornii
  */
-public interface C1cfAlias {
+public interface C1ControlFunctionAlias {
 
     /**
      * See {@link C1ControlFunction#APC}.

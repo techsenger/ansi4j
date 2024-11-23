@@ -11,7 +11,7 @@ package com.techsenger.ansi4j.core.api.iso6429;
  *
  * @author Pavel Castornii
  */
-public interface C0cfAlias {
+public interface C0ControlFunctionAlias {
 
     /**
      * See {@link C0ControlFunction#ACK}.

@@ -12,6 +12,7 @@ package com.techsenger.ansi4j.core.api.iso6429;
  *
  * @author Pavel Castornii
  */
-public interface CfAlias extends C0cfAlias, C1cfAlias, CsfAlias, IcfAlias {
+public interface AllControlFunctionAlias extends C0ControlFunctionAlias, C1ControlFunctionAlias,
+        ControlSequenceFunctionAlias, IndependentControlFunctionAlias {
 
 }
