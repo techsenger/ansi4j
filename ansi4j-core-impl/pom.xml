@@ -11,6 +11,7 @@
     <artifactId>ansi4j-core-impl</artifactId>
     <packaging>jar</packaging>
     <name>Ansi4j - Core IMPL</name>
+    <description>Implementation of text parsing</description>
 
     <dependencies>
         <dependency>

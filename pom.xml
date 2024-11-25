@@ -12,6 +12,7 @@
     <version>2.0.0</version>
     <packaging>pom</packaging>
     <name>Ansi4j</name>
+    <description>Techsenger Ansi4j provides ISO/IEC 6429 text parsing and styling with CSS</description>
 
     <licenses>
         <license>
@@ -25,10 +26,24 @@
     </licenses>
 
     <url>https://github.com/techsenger/ansi4j</url>
+
+    <scm>
+        <connection>scm:git:https://github.com/techsenger/ansi4j.git</connection>
+        <developerConnection>scm:git:https://github.com/techsenger/ansi4j.git</developerConnection>
+        <url>https://github.com/techsenger/ansi4j</url>
+    </scm>
+
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/techsenger/ansi4j/issues</url>
     </issueManagement>
+
+    <developers>
+        <developer>
+            <id>pavel-castornii</id>
+            <name>Pavel Castornii</name>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.release>14</maven.compiler.release>

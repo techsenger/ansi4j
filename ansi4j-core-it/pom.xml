@@ -11,6 +11,7 @@
     <artifactId>ansi4j-core-it</artifactId>
     <packaging>jar</packaging>
     <name>Ansi4j - Core IT</name>
+    <description>Integration tests for text parsing</description>
 
     <properties>
         <javadoc.plugin.skip>true</javadoc.plugin.skip>

@@ -11,6 +11,7 @@
     <artifactId>ansi4j-css-it</artifactId>
     <packaging>jar</packaging>
     <name>Ansi4j - CSS IT</name>
+    <description>Integration tests for text styling with CSS</description>
 
     <properties>
         <javadoc.plugin.skip>true</javadoc.plugin.skip>

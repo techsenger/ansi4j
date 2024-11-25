@@ -11,6 +11,7 @@
     <artifactId>ansi4j-css-demo</artifactId>
     <packaging>jar</packaging>
     <name>Ansi4j - CSS Demo</name>
+    <description>Demo of text styling with CSS</description>
 
     <properties>
         <javadoc.plugin.skip>true</javadoc.plugin.skip>
