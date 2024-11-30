@@ -16,13 +16,9 @@
 
     <licenses>
         <license>
-            <name>GNU AGPL version 3</name>
-            <url>https://www.gnu.org/licenses/agpl-3.0.html</url>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
-        <license>
-			<name>Commercial License</name>
-			<comments>Commercial license and support are available</comments>
-		</license>
     </licenses>
 
     <url>https://github.com/techsenger/ansi4j</url>
