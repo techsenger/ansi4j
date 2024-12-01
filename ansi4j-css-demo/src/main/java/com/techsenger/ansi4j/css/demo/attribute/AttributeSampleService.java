@@ -64,10 +64,10 @@ class AttributeSampleService {
         list.add(new ItalicSample(true, false, true, true, true));
         list.add(new UnderlineSample(Underline.OFF, Underline.SINGLE, true, true, true));
         list.add(new UnderlineSample(Underline.SINGLE, Underline.OFF, false, true, true));
-        list.add(new UnderlineSample(Underline.OFF, Underline.DOUBLE, true, false, false));
-        list.add(new UnderlineSample(Underline.DOUBLE, Underline.OFF, false, false, false));
-        list.add(new UnderlineSample(Underline.SINGLE, Underline.DOUBLE, true, false, false));
-        list.add(new UnderlineSample(Underline.DOUBLE, Underline.SINGLE, false, false, false));
+        list.add(new UnderlineSample(Underline.OFF, Underline.DOUBLE, true, false, true));
+        list.add(new UnderlineSample(Underline.DOUBLE, Underline.OFF, false, false, true));
+        list.add(new UnderlineSample(Underline.SINGLE, Underline.DOUBLE, true, false, true));
+        list.add(new UnderlineSample(Underline.DOUBLE, Underline.SINGLE, false, false, true));
         list.add(new StrikethroughSample(false, true, true, true, true));
         list.add(new StrikethroughSample(true, false, true, true, true));
         list.add(new FgColorSample(Constants.FG_COLOR, 0xFBA71B, true, true, true));

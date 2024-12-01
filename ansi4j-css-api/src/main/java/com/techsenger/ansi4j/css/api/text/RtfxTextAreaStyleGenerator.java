@@ -60,17 +60,22 @@ public class RtfxTextAreaStyleGenerator extends AbstractTextStyleGenerator {
         declarations.add("-rtfx-underline-color: #" + toHexColor(resolveFgColor()));
         declarations.add("-rtfx-underline-width: 1px");
         declarations.add("-rtfx-underline-offset: 1px");
+        declarations.add("-rtfx-underline-double-gap: null");
     }
 
     @Override
     protected void doUnderlineDouble(List<String> declarations) {
-        doUnderlineSingle(declarations);
+        declarations.add("-rtfx-underline-color: #" + toHexColor(resolveFgColor()));
+        declarations.add("-rtfx-underline-width: 1px");
+        declarations.add("-rtfx-underline-offset: 1px");
+        declarations.add("-rtfx-underline-double-gap: 1px");
     }
 
     @Override
     protected void doUnderlineOff(List<String> declarations) {
         declarations.add("-rtfx-underline-width: 0");
         declarations.add("-rtfx-underline-offset: 0");
+        declarations.add("-rtfx-underline-double-gap: null");
     }
 
     @Override

@@ -72,6 +72,8 @@ public class AttributeTabView extends AbstractTabView<AttributeTabViewModel> {
 
     private final TextField rtfxCurrentTextField = new TextField();
 
+    private String rtfxCssResource;
+
     public AttributeTabView(AttributeTabViewModel viewModel) {
         super(viewModel);
         var sampleTableView = buildSampleTableView();
@@ -224,9 +226,13 @@ public class AttributeTabView extends AbstractTabView<AttributeTabViewModel> {
 
     private void showRtfxTextAreaContent(SampleContent<Pair<String, StyleSpans<String>>> c) {
         rtfxTextArea.clear();
-        rtfxTextArea.getStylesheets().clear();
+        if (this.rtfxCssResource != null) {
+            //we don't clear all stylesheets, see https://github.com/FXMisc/RichTextFX/issues/1257
+            rtfxTextArea.getStylesheets().remove(this.rtfxCssResource);
+        }
         var css = FxUtils.createRtfxCss(Constants.FG_COLOR, c.getDefaultStyle());
-        rtfxTextArea.getStylesheets().add(StylesheetStorage.addCssResource(css));
+        this.rtfxCssResource = StylesheetStorage.addCssResource(css);
+        rtfxTextArea.getStylesheets().add(this.rtfxCssResource);
         rtfxTextArea.appendText(c.getValue().getKey());
         rtfxTextArea.setStyleSpans(0, c.getValue().getValue());
         printStyleInfo(c.getDefaultStyle(), c.getCurrentStyle(), rtfxDefaultTextField,

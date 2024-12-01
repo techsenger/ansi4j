@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.techsenger.maven-root</groupId>
         <artifactId>maven-root</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
     </parent>
 
     <groupId>com.techsenger.ansi4j</groupId>
@@ -52,9 +52,29 @@
             <dependency>
                 <groupId>com.techsenger.osp-bom</groupId>
                 <artifactId>osp-bom</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.techsenger.ansi4j</groupId>
+                <artifactId>ansi4j-core-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.techsenger.ansi4j</groupId>
+                <artifactId>ansi4j-core-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.techsenger.ansi4j</groupId>
+                <artifactId>ansi4j-css-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.techsenger.ansi4j</groupId>
+                <artifactId>ansi4j-css-impl</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
