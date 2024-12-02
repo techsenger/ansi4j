@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.techsenger.ansi4j.css.api.StyleProcessor;
-import com.techsenger.ansi4j.css.api.TargetControl;
 import com.techsenger.ansi4j.css.api.attribute.AttributeChange;
 import com.techsenger.ansi4j.css.api.color.Palette256;
 import com.techsenger.ansi4j.css.api.text.WebViewStyleGenerator;
@@ -85,7 +84,7 @@ public class StyleProcessorIT {
             } else if (fragment.getType() == FragmentType.FUNCTION) {
                 FunctionFragment functionFragment = (FunctionFragment) fragment;
                 if (functionFragment.getFunction() == ControlSequenceFunction.SGR) {
-                    var result = processor.process(functionFragment, TargetControl.WEB_VIEW);
+                    var result = processor.process(functionFragment);
                     assertThat(result.getAttributeChanges()).hasSize(1);
                     var change = (AttributeChange<Boolean>) result.getAttributeChanges().get(0);
                     assertThat(change.getOldValue() == Boolean.TRUE);

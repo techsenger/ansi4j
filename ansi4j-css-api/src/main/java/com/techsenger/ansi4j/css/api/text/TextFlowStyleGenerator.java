@@ -16,7 +16,6 @@
 
 package com.techsenger.ansi4j.css.api.text;
 
-import com.techsenger.ansi4j.css.api.TargetControl;
 import java.util.List;
 
 /**
@@ -24,11 +23,6 @@ import java.util.List;
  * @author Pavel Castornii
  */
 public class TextFlowStyleGenerator extends AbstractTextStyleGenerator {
-
-    @Override
-    public TargetControl getTargetControl() {
-        return TargetControl.TEXT_FLOW;
-    }
 
     @Override
     protected void doIntensityIncreased(List<String> declarations) {

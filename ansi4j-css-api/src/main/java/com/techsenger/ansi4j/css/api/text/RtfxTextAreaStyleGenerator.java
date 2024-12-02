@@ -16,7 +16,6 @@
 
 package com.techsenger.ansi4j.css.api.text;
 
-import com.techsenger.ansi4j.css.api.TargetControl;
 import java.util.List;
 
 /**
@@ -24,11 +23,6 @@ import java.util.List;
  * @author Pavel Castornii
  */
 public class RtfxTextAreaStyleGenerator extends AbstractTextStyleGenerator {
-
-    @Override
-    public TargetControl getTargetControl() {
-        return TargetControl.RTFX_TEXT_AREA;
-    }
 
     @Override
     protected void doIntensityIncreased(List<String> declarations) {

@@ -18,7 +18,7 @@ package com.techsenger.ansi4j.css.demo.content;
 
 import com.google.common.escape.Escaper;
 import com.google.common.html.HtmlEscapers;
-import com.techsenger.ansi4j.css.api.TargetControl;
+import com.techsenger.ansi4j.css.demo.TargetControl;
 import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.demo.Constants;
 import java.util.Map;

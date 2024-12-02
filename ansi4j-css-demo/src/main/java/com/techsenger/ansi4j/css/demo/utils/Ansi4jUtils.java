@@ -19,6 +19,7 @@ package com.techsenger.ansi4j.css.demo.utils;
 import com.techsenger.ansi4j.core.api.Environment;
 import com.techsenger.ansi4j.core.api.ParserFactory;
 import com.techsenger.ansi4j.core.api.iso6429.ControlFunctionType;
+import com.techsenger.ansi4j.css.api.GroupStyleGenerator;
 import com.techsenger.ansi4j.css.api.StyleProcessor;
 import com.techsenger.ansi4j.css.api.color.Color;
 import com.techsenger.ansi4j.css.api.color.ColorUtils;
@@ -29,6 +30,7 @@ import com.techsenger.ansi4j.css.api.text.TextAttributeGroupConfig;
 import com.techsenger.ansi4j.css.api.text.TextFlowStyleGenerator;
 import com.techsenger.ansi4j.css.api.text.WebViewStyleGenerator;
 import com.techsenger.ansi4j.css.demo.Constants;
+import com.techsenger.ansi4j.css.demo.TargetControl;
 import java.util.List;
 
 /**
@@ -50,7 +52,8 @@ public final class Ansi4jUtils {
         return factory;
     }
 
-    public static StyleProcessor createProcessor(int defaultFgColor, int defaultBgColor, Palette16 palette16) {
+    public static StyleProcessor createProcessor(TargetControl targetControl, int defaultFgColor, int defaultBgColor,
+            Palette16 palette16) {
         Palette256 palette256 = null;
         if (palette16 instanceof Palette256) {
             palette256 = (Palette256) palette16;
@@ -64,11 +67,24 @@ public final class Ansi4jUtils {
                 .palette256(palette256)
                 .build();
 
+        GroupStyleGenerator generator;
+        switch (targetControl) {
+            case WEB_VIEW:
+                generator = new WebViewStyleGenerator();
+                break;
+            case TEXT_FLOW:
+                generator = new TextFlowStyleGenerator();
+                break;
+            case RTFX_TEXT_AREA:
+                generator = new RtfxTextAreaStyleGenerator();
+                break;
+            default:
+                throw new AssertionError();
+        }
+
         var processor = new StyleProcessor.Builder()
                 .configs(config)
-                .generators(new WebViewStyleGenerator(),
-                        new TextFlowStyleGenerator(),
-                        new RtfxTextAreaStyleGenerator())
+                .generators(generator)
                 .build();
         return processor;
     }

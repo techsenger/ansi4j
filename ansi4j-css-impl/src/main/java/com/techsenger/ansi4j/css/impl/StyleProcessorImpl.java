@@ -28,7 +28,6 @@ import com.techsenger.ansi4j.css.api.StyleProcessor;
 import com.techsenger.ansi4j.css.api.attribute.AttributeRegistry;
 import com.techsenger.ansi4j.css.api.GroupStyleGenerator;
 import com.techsenger.ansi4j.css.api.ProcessorResult;
-import com.techsenger.ansi4j.css.api.TargetControl;
 
 /**
  *
@@ -38,8 +37,7 @@ public final class StyleProcessorImpl implements StyleProcessor {
 
     private final Map<Function, FunctionEvaluator> evaluatorsByFunction = new HashMap<>();
 
-    private final Map<TargetControl, Map<AttributeGroup.Key<?>, GroupStyleGenerator<?>>>
-            generatorsByControlAndGroupKey = new HashMap<>();
+    private final Map<AttributeGroup.Key<?>, GroupStyleGenerator<?>> generatorsByGroupKey = new HashMap<>();
 
     private final AttributeRegistryImpl attributeRegistry;
 
@@ -52,24 +50,13 @@ public final class StyleProcessorImpl implements StyleProcessor {
         config.getGenerators().forEach(g -> {
             var group = this.attributeRegistry.getGroup(g.getGroupKey());
             ((GroupStyleGenerator) g).initialize(group);
-
-            var generatorsByGroupAndKey = this.generatorsByControlAndGroupKey.get(g.getTargetControl());
-            if (generatorsByGroupAndKey == null) {
-                generatorsByGroupAndKey = new HashMap<>();
-                this.generatorsByControlAndGroupKey.put(g.getTargetControl(), generatorsByGroupAndKey);
-            }
-            generatorsByGroupAndKey.put(g.getGroupKey(), g);
+            generatorsByGroupKey.put(g.getGroupKey(), g);
         });
     }
 
     @Override
-    public <T extends AttributeGroup<T>> GroupStyleGenerator<T> getGenerator(TargetControl targetControl,
-            AttributeGroup.Key<T> key) {
-        var generatorsByGroup = this.generatorsByControlAndGroupKey.get(targetControl);
-        if (generatorsByGroup == null) {
-            return null;
-        }
-        return (GroupStyleGenerator<T>) generatorsByGroup.get(key);
+    public <T extends AttributeGroup<T>> GroupStyleGenerator<T> getGenerator(AttributeGroup.Key<T> key) {
+        return (GroupStyleGenerator<T>) generatorsByGroupKey.get(key);
     }
 
     @Override
@@ -78,19 +65,16 @@ public final class StyleProcessorImpl implements StyleProcessor {
     }
 
     @Override
-    public ProcessorResult process(FunctionFragment functionFragment, TargetControl targetControl) {
+    public ProcessorResult process(FunctionFragment functionFragment) {
         var result = new ProcessorResultImpl();
         var function = functionFragment.getFunction();
         var evaluator = this.evaluatorsByFunction.get(function);
         if (evaluator != null) {
             evaluator.evaluate(functionFragment, result);
             this.attributeRegistry.applyChanges(result.getAttributeChanges());
-            var generatorsByGroup = this.generatorsByControlAndGroupKey.get(targetControl);
-            if (generatorsByGroup != null) {
-                for (var generator : generatorsByGroup.values()) {
-                    var declarations = generator.generate();
-                    result.getStyleDeclarations().addAll(declarations);
-                }
+            for (var generator : generatorsByGroupKey.values()) {
+                var declarations = generator.generate();
+                result.getStyleDeclarations().addAll(declarations);
             }
         }
         result.makeListsUnmodifiable();

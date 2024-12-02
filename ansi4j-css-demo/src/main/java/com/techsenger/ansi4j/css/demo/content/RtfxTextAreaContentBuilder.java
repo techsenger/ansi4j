@@ -16,7 +16,7 @@
 
 package com.techsenger.ansi4j.css.demo.content;
 
-import com.techsenger.ansi4j.css.api.TargetControl;
+import com.techsenger.ansi4j.css.demo.TargetControl;
 import javafx.util.Pair;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;

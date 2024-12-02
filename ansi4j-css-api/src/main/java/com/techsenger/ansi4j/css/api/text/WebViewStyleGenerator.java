@@ -16,7 +16,6 @@
 
 package com.techsenger.ansi4j.css.api.text;
 
-import com.techsenger.ansi4j.css.api.TargetControl;
 import java.util.List;
 
 /**
@@ -27,11 +26,6 @@ public class WebViewStyleGenerator extends AbstractTextStyleGenerator {
 
     public WebViewStyleGenerator() {
 
-    }
-
-    @Override
-    public TargetControl getTargetControl() {
-        return TargetControl.WEB_VIEW;
     }
 
     @Override

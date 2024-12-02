@@ -29,13 +29,6 @@ import javax.annotation.concurrent.NotThreadSafe;
 public interface GroupStyleGenerator<T extends AttributeGroup<T>> {
 
     /**
-     * Returns the type of the control this generator creates declarations for.
-     *
-     * @return
-     */
-    TargetControl getTargetControl();
-
-    /**
      * Returns the key of the attribute group this generator creates declarations for.
      *
      * @return

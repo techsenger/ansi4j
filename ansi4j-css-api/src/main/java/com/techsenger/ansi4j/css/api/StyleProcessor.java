@@ -75,11 +75,10 @@ public interface StyleProcessor {
     AttributeRegistry getAttributeRegistry();
 
     /**
-     * Returns a generator for for the specified control and group.
+     * Returns a generator for for the specified group.
      * @return
      */
-    <T extends AttributeGroup<T>> GroupStyleGenerator<T> getGenerator(TargetControl targetControl,
-            AttributeGroup.Key<T> key);
+    <T extends AttributeGroup<T>> GroupStyleGenerator<T> getGenerator(AttributeGroup.Key<T> key);
 
     /**
      * Processes a function fragment using attribute registry and generators.
@@ -87,5 +86,5 @@ public interface StyleProcessor {
      * @param functionFragment
      * @return declarations or empty list.
      */
-    ProcessorResult process(FunctionFragment functionFragment, TargetControl targetControl);
+    ProcessorResult process(FunctionFragment functionFragment);
 }

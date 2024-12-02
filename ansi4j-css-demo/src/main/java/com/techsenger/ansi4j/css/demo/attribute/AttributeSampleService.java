@@ -36,6 +36,7 @@ import org.fxmisc.richtext.model.StyleSpans;
 import static com.techsenger.ansi4j.css.api.text.TextAttributeGroup.Blinking;
 import static com.techsenger.ansi4j.css.api.text.TextAttributeGroup.Underline;
 import static com.techsenger.ansi4j.css.api.text.TextAttributeGroup.Intensity;
+import com.techsenger.ansi4j.css.demo.TargetControl;
 
 /**
  *
@@ -46,8 +47,9 @@ class AttributeSampleService {
     private final TextAttributeGroup attributeGroup;
 
     AttributeSampleService() {
-        this.attributeGroup = Ansi4jUtils.createProcessor(Constants.FG_COLOR, Constants.BG_COLOR,
-            new XtermPalette256()).getAttributeRegistry().getGroup(TextAttributeGroup.KEY);
+        //we need only group instance.
+        this.attributeGroup = Ansi4jUtils.createProcessor(TargetControl.WEB_VIEW, Constants.FG_COLOR,
+                Constants.BG_COLOR, new XtermPalette256()).getAttributeRegistry().getGroup(TextAttributeGroup.KEY);
     }
 
     public List<AbstractAttributeSample<?>> createSamples() {

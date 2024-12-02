@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.techsenger.ansi4j.css.api;
+package com.techsenger.ansi4j.css.demo;
 
 /**
  *

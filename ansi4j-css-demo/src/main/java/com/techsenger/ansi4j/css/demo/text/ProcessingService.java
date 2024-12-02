@@ -73,7 +73,8 @@ class ProcessingService {
 
     private <T> T getContent(String inputText, int defFgColor, int defBgColor,
             Palette16 palette, ContentBuilder<T> contentBuilder) {
-        var styleProcessor = Ansi4jUtils.createProcessor(defFgColor, defBgColor, palette);
+        var styleProcessor = Ansi4jUtils.createProcessor(contentBuilder.getTargetControl(),
+                defFgColor, defBgColor, palette);
         parse(inputText, styleProcessor, contentBuilder);
         return contentBuilder.build();
     }
@@ -91,7 +92,7 @@ class ProcessingService {
                         contentBuilder.endStyle();
                         styleStarted = false;
                     }
-                    var result = styleProcessor.process(functionFragment, contentBuilder.getTargetControl());
+                    var result = styleProcessor.process(functionFragment);
                     if (!result.getStyleDeclarations().isEmpty()) {
                         style = String.join(";", result.getStyleDeclarations());
                         styleStarted = true;

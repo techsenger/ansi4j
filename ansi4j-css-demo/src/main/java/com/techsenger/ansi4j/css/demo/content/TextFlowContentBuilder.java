@@ -16,7 +16,7 @@
 
 package com.techsenger.ansi4j.css.demo.content;
 
-import com.techsenger.ansi4j.css.api.TargetControl;
+import com.techsenger.ansi4j.css.demo.TargetControl;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.text.Text;
