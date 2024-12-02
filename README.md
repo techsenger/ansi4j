@@ -141,13 +141,21 @@ module.
 
 ## CSS extension <a name="ansi4j-css"></a>
 
-### Overview <a name="ansi4j-css-overview"></a>
+Overview <a name="ansi4j-css-overview"></a>
 
-CSS extension allows to generate CSS declarations one the base of SGR function and its arguments. For example, this
-extension can be used to style program outputs, log messages, documentation, and more.
+The CSS extension allows you to style text using CSS in a way that mirrors the styling applied by SGR functions.
+For example, this extension can be used to style program outputs, log messages, documentation, and more.
 
-Currently the following text attributes are supported: intensity, italic, underline, blink, reverse video,
-visibility, strikethrough, font, foreground color, background color.
+To display styled text, you can use components from any platform (JavaFX, Swing), as neither the core library nor
+the CSS extension (except for the demo module) depend on the classes of these platforms.
+
+Out of the box, the library provides three style generators for `JavaFX WebView`, `JavaFX TextFlow`, and
+`RichTextFX InlineCssTextArea`. These generators are located in the API module and can be easily modified. A table
+listing the features supported by each of these components is available in the demo application. We recommend using
+`InlineCssTextArea` because: 1) it supports nearly all features, 2) it is lightweight, and 3) it allows text editing.
+
+Currently, the following text attributes are supported: intensity, italic, underline, blink, reverse video, visibility,
+strikethrough, font, foreground color, and background color.
 
 ### Demo <a name="ansi4j-css-demo"></a>
 
@@ -165,8 +173,7 @@ To run the demo application, execute the following commands in the project root:
 * `AttributeRegistry` stores model attributes, separated into groups.
 * `AttributeGroup` contains a group of logically related attributes. Currently, there is only one group for the SGR function.
 * `GroupStyleGenerator` generates CSS declarations based on attribute value changes of a specific group. Thus,
-    each generator is used for only one attribute group. Currently, the library has 3 generators for `WebView`, `TextFlow`,
-    and RichTextFX `InlineCssTextArea`. These generators are located in the API module and can be easily modified
+    each generator is used for only one attribute group.
 * `StyleProcessor`, which is called for each SGR function, updates the attribute values and returns the generated
     CSS declarations.
 * `Palette` - ISO 6429 supports only 8 colors (3 bits). However, today many terminals supports 4, 8 and 24 bit colors.
@@ -241,7 +248,6 @@ This project is available on Maven Central:
                 ...
             }
         }
-
     }
 
 ### Thread-safety <a name="ansi4j-css-thread"></a>
