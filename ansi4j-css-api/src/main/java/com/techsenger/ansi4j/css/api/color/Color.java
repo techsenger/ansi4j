@@ -37,7 +37,7 @@ public class Color {
     /**
      * Color as RRGGBB. This is the only place where RGB is used. Everywhere RGBA is used.
      *
-     * @param rgba
+     * @param rgb
      */
     public Color(int rgb) {
         this.rgb = rgb;
