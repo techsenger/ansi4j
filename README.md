@@ -2,12 +2,14 @@
 * [Overview](#ansi4j-overview)
     * [Core](#ansi4j-core)
         * [Overview](#ansi4j-core-overview)
+        * [Base components](#ansi4j-core-base)
         * [Dependencies](#ansi4j-core-dependencies)
         * [Usage](#ansi4j-core-usage)
         * [Thread-safety](#ansi4j-core-thread)
     * [CSS extension](#ansi4j-css)
         * [Overview](#ansi4j-css-overview)
         * [Demo](#ansi4j-css-demo)
+        * [Base components](#ansi4j-css-base)
         * [Dependencies](#ansi4j-css-dependencies)
         * [Usage](#ansi4j-css-usage)
         * [Thread-safety](#ansi4j-css-thread)
@@ -41,7 +43,7 @@ function arguments.
 
 Core contains all base classes for working with control functions, parsers and text.
 
-Base components:
+### Base components <a name="ansi4j-core-base"></a>
 
 * `ParserFactory` is thread-safe instance of factory, that can be used for creating N parsers for parsing N texts.
 So, usually there is only one factory.
@@ -147,7 +149,18 @@ extension can be used to style program outputs, log messages, documentation, and
 Currently the following text attributes are supported: intensity, italic, underline, blink, reverse video,
 visibility, strikethrough, font, foreground color, background color.
 
-Base components:
+### Demo <a name="ansi4j-css-demo"></a>
+
+To work with the CSS extension and understand its principles, we have developed a demo application:
+
+![image info](./css-demo.gif)
+
+To run the demo application, execute the following commands in the project root:
+
+    cd ansi4j-css-demo
+    mvn javafx:run
+
+### Base components <a name="ansi4j-css-base"></a>
 
 * `AttributeRegistry` stores model attributes, separated into groups.
 * `AttributeGroup` contains a group of logically related attributes. Currently, there is only one group for the SGR function.
@@ -184,17 +197,6 @@ Important notes:
 
 * RichTextFX `InlineCssTextArea` will support blink when this [issue](https://github.com/FXMisc/RichTextFX/issues/1252)
 is resolved.
-
-### Demo <a name="ansi4j-css-demo"></a>
-
-To work with the CSS extension and understand its principles, we have developed a demo application:
-
-![image info](./css-demo.gif)
-
-To run the demo application, execute the following commands in the project root:
-
-    cd ansi4j-css-demo
-    mvn javafx:run
 
 ### Dependencies <a name="ansi4j-css-dependencies"></a>
 
