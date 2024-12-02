@@ -171,18 +171,23 @@ public abstract class AbstractTextStyleGenerator implements GroupStyleGenerator<
      * @param declarations
      */
     protected void generateColor(List<String> declarations) {
-        boolean rvOn = false;
+        boolean force = false;
         //when reverse video is on then style declarations are generated in any case
         var rvAttr = this.group.getReverseVideoAttribute();
         if (Boolean.TRUE.equals(rvAttr.getDefaultValue()) || Boolean.TRUE.equals(rvAttr.getValue())) {
-            rvOn = true;
+            force = true;
+        }
+        var intensityAttr = this.group.getIntensityAttribute();
+        if (intensityAttr.getDefaultValue() != TextAttributeGroup.Intensity.NORMAL
+                || intensityAttr.getValue() != TextAttributeGroup.Intensity.NORMAL) {
+            force = true;
         }
         var attribute = this.group.getFgColorAttribute();
-        if (attribute.getDefaultValue() != this.resolvedFgRgba) {
+        if (attribute.getDefaultValue() != this.resolvedFgRgba || force) {
             doFgColor(declarations);
         }
         attribute = this.group.getBgColorAttribute();
-        if (attribute.getDefaultValue() != this.resolvedBgRgba) {
+        if (attribute.getDefaultValue() != this.resolvedBgRgba  || force) {
             doBgColor(declarations);
         }
     };
