@@ -193,7 +193,7 @@ Important notes:
 
 * To enable blink for `WebView` is is necessary to add the following keyframes to your stylesheet:
 
-    @keyframes ansi4j-blinker {50% { opacity: 0; }}.
+        @keyframes ansi4j-blinker {50% { opacity: 0; }}.
 
 * RichTextFX `InlineCssTextArea` will support blink when this [issue](https://github.com/FXMisc/RichTextFX/issues/1252)
 is resolved.
