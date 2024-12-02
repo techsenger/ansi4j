@@ -26,13 +26,7 @@ import javax.annotation.concurrent.Immutable;
 public interface FunctionArgument {
 
     /**
-     * If function supports default value, but parser can't resolve it (for example, default value = currentRow + 1)
-     * then this value is used.
-     */
-    Object UNSUPPORTED_DEFAULT_VALUE = new Object();
-
-    /**
-     * Returns value of the parameter. It can be an explicit value, a default value or UNSUPPORTED_DEFAULT_VALUE.
+     * Returns the value of the parameter. It can be either an explicit value or a default value.
      *
      */
     Object getValue();
