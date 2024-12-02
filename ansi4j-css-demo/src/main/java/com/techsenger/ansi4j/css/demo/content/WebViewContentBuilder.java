@@ -19,7 +19,7 @@ package com.techsenger.ansi4j.css.demo.content;
 import com.google.common.escape.Escaper;
 import com.google.common.html.HtmlEscapers;
 import com.techsenger.ansi4j.css.api.TargetControl;
-import com.techsenger.ansi4j.css.demo.utils.ColorUtils;
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.demo.Constants;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -33,17 +33,18 @@ public class WebViewContentBuilder implements ContentBuilder<String> {
     private final Escaper escaper = HtmlEscapers.htmlEscaper();
 
     private static final String HTML_BASE =
-            "<html><head><style>"
+            "<!DOCTYPE html><html><head><style>"
             + "body{background-color:${bgColor};color:${fgColor};"
             + "white-space: pre;font-family:" + Constants.FONT_FAMILY + ";"
-            + "font-size:" + Constants.FONT_SIZE + "px;"
-            + "${defaultStyle}}"
+            + "font-size:" + Constants.FONT_SIZE + "px;}"
             + "@keyframes ansi4j-blinker {50% { opacity: 0; }}"
             + "</style><script>"
             + "${script}"
             + "</script></head>"
             + "<body ${bodyClick}>"
+            + "<span style=\"${defaultStyle}\">"
             + "${content}"
+            + "</span>"
             + "</body></html>";
 
     private final StringBuilder stringBuilder = new StringBuilder();

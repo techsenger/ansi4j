@@ -35,7 +35,6 @@ import com.techsenger.ansi4j.css.api.StyleProcessor;
 import com.techsenger.ansi4j.css.api.TargetControl;
 import com.techsenger.ansi4j.css.api.attribute.AttributeChange;
 import com.techsenger.ansi4j.css.api.color.Palette256;
-import com.techsenger.ansi4j.css.api.text.TextAttributeGroup;
 import com.techsenger.ansi4j.css.api.text.WebViewStyleGenerator;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -63,12 +62,12 @@ public class StyleProcessorIT {
     }
 
     @Test
-    public void process_normalWeightWithDefaultBold_correctDeclarations() {
-        var text = "Some bold text \u001b[22m some normal text";
+    public void process_noItalicWithDefaultItalic_correctDeclarations() {
+        var text = "Some bold text \u001b[23m some normal text";
         var parser = factory.createParser(text);
         Palette256 palette256 = new XtermPalette256();
         TextAttributeGroupConfig groupConfig = new TextAttributeGroupConfig.Builder()
-                .defaultWeight(TextAttributeGroup.Weight.BOLD)
+                .defaultItalic(true)
                 .fontFamilies(List.of("Arial"))
                 .extraColorsEnabled(true)
                 .palette16(palette256)
@@ -88,12 +87,12 @@ public class StyleProcessorIT {
                 if (functionFragment.getFunction() == ControlSequenceFunction.SGR) {
                     var result = processor.process(functionFragment, TargetControl.WEB_VIEW);
                     assertThat(result.getAttributeChanges()).hasSize(1);
-                    var change = (AttributeChange<TextAttributeGroup.Weight>) result.getAttributeChanges().get(0);
-                    assertThat(change.getOldValue() == TextAttributeGroup.Weight.BOLD);
-                    assertThat(change.getNewValue() == TextAttributeGroup.Weight.NORMAL);
-                    assertThat(change.getAttribute().getName()).isEqualTo("Weight");
+                    var change = (AttributeChange<Boolean>) result.getAttributeChanges().get(0);
+                    assertThat(change.getOldValue() == Boolean.TRUE);
+                    assertThat(change.getNewValue() == Boolean.FALSE);
+                    assertThat(change.getAttribute().getName()).isEqualTo("Italic");
                     assertThat(result.getStyleDeclarations()).hasSize(1);
-                    assertThat(result.getStyleDeclarations().get(0)).isEqualTo("font-weight: normal");
+                    assertThat(result.getStyleDeclarations()).hasSameElementsAs(List.of("font-style: normal"));
                 }
             }
         }

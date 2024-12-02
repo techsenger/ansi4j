@@ -16,6 +16,7 @@
 
 package com.techsenger.ansi4j.css.api.text;
 
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.api.attribute.AttributeGroup;
 import com.techsenger.ansi4j.css.api.GroupStyleGenerator;
 import java.util.ArrayList;
@@ -29,6 +30,14 @@ public abstract class AbstractTextStyleGenerator implements GroupStyleGenerator<
 
     private TextAttributeGroup group;
 
+    private String resolvedFgColor;
+
+    private String resolvedBgColor;
+
+    private int resolvedFgRgba;
+
+    private int resolvedBgRgba;
+
     @Override
     public AttributeGroup.Key<TextAttributeGroup> getGroupKey() {
         return TextAttributeGroup.KEY;
@@ -41,6 +50,8 @@ public abstract class AbstractTextStyleGenerator implements GroupStyleGenerator<
 
     @Override
     public List<String> generate() {
+        this.resolveFgColor();
+        this.resolveBgColor();
         List<String> declarations = new ArrayList<>();
         generateBlinking(declarations);
         generateColor(declarations);
@@ -49,7 +60,7 @@ public abstract class AbstractTextStyleGenerator implements GroupStyleGenerator<
         generateStrikethrough(declarations);
         generateUnderline(declarations);
         generateVisibility(declarations);
-        generateWeight(declarations);
+        generateIntensity(declarations);
         return declarations;
     }
 
@@ -57,18 +68,18 @@ public abstract class AbstractTextStyleGenerator implements GroupStyleGenerator<
         return group;
     }
 
-    protected void generateWeight(List<String> declarations) {
-        var attribute = this.group.getWeightAttribute();
+    protected void generateIntensity(List<String> declarations) {
+        var attribute = this.group.getIntensityAttribute();
         if (!attribute.isValueDefault()) {
             switch (attribute.getValue()) {
-                case BOLD:
-                    doWeightBold(declarations);
+                case INCREASED:
+                    doIntensityIncreased(declarations);
                     break;
-                case FAINT:
-                    doWeightFaint(declarations);
+                case DECREASED:
+                    doIntensityDecreased(declarations);
                     break;
                 case NORMAL:
-                    doWeightNormal(declarations);
+                    doIntensityNormal(declarations);
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown value=" + attribute.getValue());
@@ -155,6 +166,10 @@ public abstract class AbstractTextStyleGenerator implements GroupStyleGenerator<
         }
     };
 
+    /**
+     * Color is generated always.
+     * @param declarations
+     */
     protected void generateColor(List<String> declarations) {
         boolean rvOn = false;
         //when reverse video is on then style declarations are generated in any case
@@ -163,46 +178,28 @@ public abstract class AbstractTextStyleGenerator implements GroupStyleGenerator<
             rvOn = true;
         }
         var attribute = this.group.getFgColorAttribute();
-        var color = resolveFgColor();
-        if (attribute.getDefaultValue() != color || rvOn) {
-            doFgColor(color, declarations);
+        if (attribute.getDefaultValue() != this.resolvedFgRgba) {
+            doFgColor(declarations);
         }
         attribute = this.group.getBgColorAttribute();
-        color = resolveBgColor();
-        if (attribute.getDefaultValue() != color || rvOn) {
-            doBgColor(color, declarations);
+        if (attribute.getDefaultValue() != this.resolvedBgRgba) {
+            doBgColor(declarations);
         }
     };
 
-    protected String toHexColor(int i) {
-        return String.format("%06X", i);
+    protected String getResolvedFgColor() {
+        return resolvedFgColor;
     }
 
-    protected int resolveFgColor() {
-        int color;
-        if (Boolean.TRUE.equals(this.group.getReverseVideoAttribute().getValue())) {
-            color = this.group.getBgColorAttribute().getValue();
-        } else {
-            color = this.group.getFgColorAttribute().getValue();
-        }
-        return color;
+    protected String getResolvedBgColor() {
+        return resolvedBgColor;
     }
 
-    protected int resolveBgColor() {
-        int color;
-        if (Boolean.TRUE.equals(this.group.getReverseVideoAttribute().getValue())) {
-            color = this.group.getFgColorAttribute().getValue();
-        } else {
-            color = this.group.getBgColorAttribute().getValue();
-        }
-        return color;
-    }
+    protected abstract void doIntensityIncreased(List<String> declarations);
 
-    protected abstract void doWeightBold(List<String> declarations);
+    protected abstract void doIntensityDecreased(List<String> declarations);
 
-    protected abstract void doWeightFaint(List<String> declarations);
-
-    protected abstract void doWeightNormal(List<String> declarations);
+    protected abstract void doIntensityNormal(List<String> declarations);
 
     protected abstract void doItalicOn(List<String> declarations);
 
@@ -230,7 +227,31 @@ public abstract class AbstractTextStyleGenerator implements GroupStyleGenerator<
 
     protected abstract void doFont(String font, List<String> declarations);
 
-    protected abstract void doFgColor(int color, List<String> declarations);
+    protected abstract void doFgColor(List<String> declarations);
 
-    protected abstract void doBgColor(int color, List<String> declarations);
+    protected abstract void doBgColor(List<String> declarations);
+
+    private void resolveFgColor() {
+        if (Boolean.TRUE.equals(this.group.getReverseVideoAttribute().getValue())) {
+            this.resolvedFgRgba = this.group.getBgColorAttribute().getValue();
+        } else {
+            this.resolvedFgRgba = this.group.getFgColorAttribute().getValue();
+        }
+        if (getGroup().getIntensityAttribute().getValue() == TextAttributeGroup.Intensity.DECREASED) {
+            this.resolvedFgRgba = ColorUtils.setAlpha(this.resolvedFgRgba, 128);
+        } else {
+            this.resolvedFgRgba = ColorUtils.setAlpha(this.resolvedFgRgba, 255);
+        }
+        this.resolvedFgColor = ColorUtils.toHex(this.resolvedFgRgba);
+    }
+
+    private void resolveBgColor() {
+        if (Boolean.TRUE.equals(this.group.getReverseVideoAttribute().getValue())) {
+            this.resolvedBgRgba = this.group.getFgColorAttribute().getValue();
+        } else {
+            this.resolvedBgRgba = this.group.getBgColorAttribute().getValue();
+        }
+        this.resolvedBgRgba = ColorUtils.setAlpha(this.resolvedBgRgba, 255);
+        this.resolvedBgColor = ColorUtils.toHex(this.resolvedBgRgba);
+    }
 }

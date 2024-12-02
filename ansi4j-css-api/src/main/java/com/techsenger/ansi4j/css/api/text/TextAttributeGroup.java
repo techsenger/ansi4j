@@ -25,8 +25,8 @@ import com.techsenger.ansi4j.css.api.attribute.AttributeGroup;
  */
 public interface TextAttributeGroup extends AttributeGroup<TextAttributeGroup> {
 
-    enum Weight {
-        NORMAL, BOLD, FAINT
+    enum Intensity {
+        NORMAL, INCREASED, DECREASED
     }
 
     enum Underline {
@@ -43,8 +43,16 @@ public interface TextAttributeGroup extends AttributeGroup<TextAttributeGroup> {
 
     Attribute<String> getFontAttribute();
 
+    /**
+     * Color as RRGGBBAA.
+     * @return
+     */
     Attribute<Integer> getFgColorAttribute();
 
+    /**
+     * Color as RRGGBBAA.
+     * @return
+     */
     Attribute<Integer> getBgColorAttribute();
 
     Attribute<Boolean> getItalicAttribute();
@@ -53,7 +61,7 @@ public interface TextAttributeGroup extends AttributeGroup<TextAttributeGroup> {
 
     Attribute<Underline> getUnderlineAttribute();
 
-    Attribute<Weight> getWeightAttribute();
+    Attribute<Intensity> getIntensityAttribute();
 
     Attribute<Boolean> getVisibilityAttribute();
 

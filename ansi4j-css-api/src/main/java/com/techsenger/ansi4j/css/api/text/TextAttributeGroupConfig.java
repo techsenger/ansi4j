@@ -25,6 +25,9 @@ import com.techsenger.ansi4j.css.api.color.Color;
 import com.techsenger.ansi4j.css.api.color.Palette16;
 import com.techsenger.ansi4j.css.api.color.Palette256;
 import com.techsenger.ansi4j.css.api.color.Palette8;
+import static com.techsenger.ansi4j.css.api.color.PaletteType.PALETTE_16;
+import static com.techsenger.ansi4j.css.api.color.PaletteType.PALETTE_256;
+import static com.techsenger.ansi4j.css.api.color.PaletteType.PALETTE_8;
 
 /**
  *
@@ -44,7 +47,7 @@ public final class TextAttributeGroupConfig implements AttributeGroupConfig<Text
 
         private TextAttributeGroup.Underline defaultUnderline;
 
-        private TextAttributeGroup.Weight defaultWeight;
+        private TextAttributeGroup.Intensity defaultIntensity;
 
         private Boolean defaultVisibility;
 
@@ -91,8 +94,8 @@ public final class TextAttributeGroupConfig implements AttributeGroupConfig<Text
             return this;
         }
 
-        public Builder defaultWeight(TextAttributeGroup.Weight defaultWeight) {
-            this.defaultWeight = defaultWeight;
+        public Builder defaultIntensity(TextAttributeGroup.Intensity defaultIntensity) {
+            this.defaultIntensity = defaultIntensity;
             return this;
         }
 
@@ -168,31 +171,9 @@ public final class TextAttributeGroupConfig implements AttributeGroupConfig<Text
          * @return
          */
         public TextAttributeGroupConfig build() {
-            this.resolvePaletteColors();
             this.validate();
             var config = new TextAttributeGroupConfig(this);
             return config;
-        }
-
-        private void resolvePaletteColors() {
-            if (defaultFgColor != null && defaultFgColor.getPaletteType() != null) {
-                var value = this.resolveColorValue(defaultFgColor);
-                this.defaultFgColor = new Color(defaultFgColor.getPaletteType(), defaultFgColor.getIndex(), value);
-            }
-            if (defaultBgColor != null && defaultBgColor.getPaletteType() != null) {
-                var value = this.resolveColorValue(defaultBgColor);
-                this.defaultBgColor = new Color(defaultBgColor.getPaletteType(), defaultBgColor.getIndex(), value);
-            }
-        }
-
-        private int resolveColorValue(Color color) {
-            switch (color.getPaletteType()) {
-                case PALETTE_8: return this.palette8.getColors()[color.getIndex()];
-                case PALETTE_16: return this.palette16.getColors()[color.getIndex()];
-                case PALETTE_256: return this.palette256.getColors()[color.getIndex()];
-                default:
-                    throw new IllegalArgumentException("Unknown palette type: " + color.getPaletteType());
-            }
         }
 
         private void validate() {
@@ -209,6 +190,44 @@ public final class TextAttributeGroupConfig implements AttributeGroupConfig<Text
                 }
             }
         }
+
+        private Color resolveFgColor() {
+            if (this.defaultFgColor != null) {
+                if (defaultFgColor.getPaletteType() != null && defaultFgColor.getIndex() != -1) {
+                    this.resolveRgbFromPalette(defaultFgColor);
+                }
+                return this.defaultFgColor;
+            }
+            return null;
+        }
+
+        private Color resolveBgColor() {
+            if (this.defaultBgColor != null) {
+                if (defaultBgColor.getPaletteType() != null && this.defaultBgColor.getIndex() != -1) {
+                    this.resolveRgbFromPalette(defaultBgColor);
+                }
+                return this.defaultBgColor;
+            }
+            return null;
+        }
+
+        private void resolveRgbFromPalette(Color color) {
+            int rgb = 0;
+            switch (color.getPaletteType()) {
+                case PALETTE_8:
+                    rgb = this.palette8.getColors()[color.getIndex()];
+                    break;
+                case PALETTE_16:
+                    rgb = this.palette16.getColors()[color.getIndex()];
+                    break;
+                case PALETTE_256:
+                    rgb = this.palette256.getColors()[color.getIndex()];
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown palette type: " + color.getPaletteType());
+            }
+            color.setRgb(rgb);
+        }
     }
 
     private final Color defaultFgColor;
@@ -221,7 +240,7 @@ public final class TextAttributeGroupConfig implements AttributeGroupConfig<Text
 
     private final TextAttributeGroup.Underline defaultUnderline;
 
-    private final TextAttributeGroup.Weight defaultWeight;
+    private final TextAttributeGroup.Intensity defaultIntensity;
 
     private final Boolean defaultVisibility;
 
@@ -264,8 +283,8 @@ public final class TextAttributeGroupConfig implements AttributeGroupConfig<Text
         return defaultUnderline;
     }
 
-    public TextAttributeGroup.Weight getDefaultWeight() {
-        return defaultWeight;
+    public TextAttributeGroup.Intensity getDefaultIntensity() {
+        return defaultIntensity;
     }
 
     public Boolean getDefaultVisibility() {
@@ -331,15 +350,15 @@ public final class TextAttributeGroupConfig implements AttributeGroupConfig<Text
     }
 
     private TextAttributeGroupConfig(Builder builder) {
-        this.defaultFgColor = builder.defaultFgColor;
-        this.defaultBgColor = builder.defaultBgColor;
+        this.defaultFgColor = builder.resolveFgColor();
+        this.defaultBgColor = builder.resolveBgColor();
         this.defaultBlinking = builder.defaultBlinking;
         this.defaultItalic = builder.defaultItalic;
         this.defaultReverseVideo = builder.defaultReverseVideo;
         this.defaultStrikethrough = builder.defaultStrikethrough;
         this.defaultUnderline = builder.defaultUnderline;
         this.defaultVisibility = builder.defaultVisibility;
-        this.defaultWeight = builder.defaultWeight;
+        this.defaultIntensity = builder.defaultIntensity;
 
         this.fontFamilies = Collections.unmodifiableList(new ArrayList<>(builder.fontFamilies));
         this.extraColorsEnabled = builder.extraColorsEnabled;

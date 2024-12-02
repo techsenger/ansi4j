@@ -141,8 +141,8 @@ module.
 ### Overview <a name="ansi4j-css-overview"></a>
 
 CSS extension allows to generate CSS declarations one the base of SGR function and its arguments. Currently the
-following text attributes are supported: weight, italic, underline, blinking, reverse video, visibility, strikethrough,
-font, foreground color, background color.
+following text attributes are supported: intensity, italic, underline, blinking, reverse video, visibility,
+strikethrough, font, foreground color, background color.
 
 Important notes:
 

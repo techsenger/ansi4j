@@ -35,17 +35,17 @@ public class WebViewStyleGenerator extends AbstractTextStyleGenerator {
     }
 
     @Override
-    protected void doWeightBold(List<String> declarations) {
+    protected void doIntensityIncreased(List<String> declarations) {
         declarations.add("font-weight: bold");
     }
 
     @Override
-    protected void doWeightFaint(List<String> declarations) {
-        declarations.add("font-weight: lighter");
+    protected void doIntensityDecreased(List<String> declarations) {
+        declarations.add("font-weight: normal");
     }
 
     @Override
-    protected void doWeightNormal(List<String> declarations) {
+    protected void doIntensityNormal(List<String> declarations) {
         declarations.add("font-weight: normal");
     }
 
@@ -67,7 +67,7 @@ public class WebViewStyleGenerator extends AbstractTextStyleGenerator {
     @Override
     protected void doUnderlineSingle(List<String> declarations) {
         declarations.add("border-bottom-style: solid");
-        declarations.add("border-bottom-color: #" + this.toHexColor(resolveFgColor()));
+        declarations.add("border-bottom-color: " + getResolvedFgColor());
         declarations.add("border-bottom-width: 1px");
     }
 
@@ -78,7 +78,7 @@ public class WebViewStyleGenerator extends AbstractTextStyleGenerator {
     @Override
     protected void doUnderlineDouble(List<String> declarations) {
         declarations.add("border-bottom-style: double");
-        declarations.add("border-bottom-color: #" + this.toHexColor(resolveFgColor()));
+        declarations.add("border-bottom-color: " + getResolvedFgColor());
     }
 
     /**
@@ -144,12 +144,12 @@ public class WebViewStyleGenerator extends AbstractTextStyleGenerator {
     }
 
     @Override
-    protected void doFgColor(int color, List<String> declarations) {
-        declarations.add("color: #" + toHexColor(color));
+    protected void doFgColor(List<String> declarations) {
+        declarations.add("color: " + getResolvedFgColor());
     }
 
     @Override
-    protected void doBgColor(int color, List<String> declarations) {
-        declarations.add("background-color: #" + toHexColor(color));
+    protected void doBgColor(List<String> declarations) {
+        declarations.add("background-color: " + getResolvedBgColor());
     }
 }

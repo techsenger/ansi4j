@@ -50,7 +50,7 @@ class SgrHelpViewModel implements ViewModel {
             new SgrParameter(18, "Alternative font 8", true),
             new SgrParameter(19, "Alternative font 9", true),
             new SgrParameter(20, "Fraktur (rarely supported)", false),
-            new SgrParameter(21, "Bold off or Double underline", true),
+            new SgrParameter(21, "Double underline", true),
             new SgrParameter(22, "Normal color or intensity", true),
             new SgrParameter(23, "Not italic, not Fraktur", true),
             new SgrParameter(24, "Underline off", true),

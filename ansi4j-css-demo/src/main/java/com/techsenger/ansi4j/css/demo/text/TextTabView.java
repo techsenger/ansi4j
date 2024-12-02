@@ -18,11 +18,11 @@ package com.techsenger.ansi4j.css.demo.text;
 
 import atlantafx.base.controls.ModalPane;
 import atlantafx.base.theme.Styles;
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.demo.AbstractTabView;
 import com.techsenger.ansi4j.css.demo.Constants;
 import com.techsenger.ansi4j.css.demo.material.Dialog;
 import com.techsenger.ansi4j.css.demo.material.StatusBar;
-import com.techsenger.ansi4j.css.demo.utils.ColorUtils;
 import com.techsenger.ansi4j.css.demo.utils.FxUtils;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -203,7 +203,7 @@ public class TextTabView extends AbstractTabView<TextTabViewModel> {
         getViewModel().fgColorProperty().bind(this.fgColorPicker.valueProperty());
         getViewModel().bgColorProperty().bind(this.bgColorPicker.valueProperty());
         this.runButton.setOnAction(e ->  {
-            var iBgColor = ColorUtils.toInt(this.bgColorPicker.getValue());
+            var iBgColor = FxUtils.toInt(this.bgColorPicker.getValue());
             this.outputNodeWrapper.setStyle("-fx-background-color:" + ColorUtils.toHex(iBgColor));
             getViewModel().run();
         });
@@ -241,8 +241,8 @@ public class TextTabView extends AbstractTabView<TextTabViewModel> {
             return;
         }
         Node outputNode = null;
-        var defFgColor = ColorUtils.toInt(this.fgColorPicker.getValue());
-        var defBgColor = ColorUtils.toInt(this.bgColorPicker.getValue());
+        var defFgColor = FxUtils.toInt(this.fgColorPicker.getValue());
+        var defBgColor = FxUtils.toInt(this.bgColorPicker.getValue());
         switch (this.controlComboBox.getSelectionModel().getSelectedIndex()) {
             case 0:
                 var webContent = (String) content;

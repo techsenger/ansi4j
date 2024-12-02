@@ -26,24 +26,23 @@ public class Color {
 
     private final int index;
 
-    private int value;
+    private int rgb;
 
     public Color(PaletteType paletteType, int index) {
         this.paletteType = paletteType;
         this.index = index;
-        this.value = -1;
+        this.rgb = -1;
     }
 
-    public Color(int value) {
-        this.value = value;
+    /**
+     * Color as RRGGBB. This is the only place where RGB is used. Everywhere RGBA is used.
+     *
+     * @param rgba
+     */
+    public Color(int rgb) {
+        this.rgb = rgb;
         this.paletteType = null;
         this.index = -1;
-    }
-
-    public Color(PaletteType paletteType, int index, int value) {
-        this.paletteType = paletteType;
-        this.index = index;
-        this.value = value;
     }
 
     /**
@@ -65,11 +64,19 @@ public class Color {
     }
 
     /**
-     * Returns the value of the color.
+     * Returns color as RRGGBBAA.
      *
      * @return
      */
-    public int getValue() {
-        return value;
+    public int getRgb() {
+        return rgb;
+    }
+
+    /**
+     * Sets rgba.
+     * @param rgb
+     */
+    public void setRgb(int rgb) {
+        this.rgb = rgb;
     }
 }

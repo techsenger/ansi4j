@@ -32,9 +32,9 @@ public final class Constants {
 
     public static final String ALTERNATIVE_FONT_FAMILY = "Arial";
 
-    public static final int FG_COLOR = 0xf8f8f2; // -color-fg-default
+    public static final int FG_COLOR = 0xf8f8f2FF; // -color-fg-default
 
-    public static final int BG_COLOR = 0x181920; // -color-bg-inset
+    public static final int BG_COLOR = 0x181920FF; // -color-bg-inset
 
     public static final int FONT_SIZE = 13;
 

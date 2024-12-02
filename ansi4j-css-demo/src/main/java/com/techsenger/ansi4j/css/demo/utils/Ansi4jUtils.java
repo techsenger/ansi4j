@@ -21,6 +21,7 @@ import com.techsenger.ansi4j.core.api.ParserFactory;
 import com.techsenger.ansi4j.core.api.iso6429.ControlFunctionType;
 import com.techsenger.ansi4j.css.api.StyleProcessor;
 import com.techsenger.ansi4j.css.api.color.Color;
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.api.color.Palette16;
 import com.techsenger.ansi4j.css.api.color.Palette256;
 import com.techsenger.ansi4j.css.api.text.RtfxTextAreaStyleGenerator;
@@ -55,8 +56,8 @@ public final class Ansi4jUtils {
             palette256 = (Palette256) palette16;
         }
         TextAttributeGroupConfig config = new TextAttributeGroupConfig.Builder()
-                .defaultFgColor(new Color(defaultFgColor))
-                .defaultBgColor(new Color(defaultBgColor))
+                .defaultFgColor(new Color(ColorUtils.getRgb(defaultFgColor)))
+                .defaultBgColor(new Color(ColorUtils.getRgb(defaultBgColor)))
                 .fontFamilies(List.of(Constants.FONT_FAMILY, Constants.ALTERNATIVE_FONT_FAMILY))
                 .extraColorsEnabled(true)
                 .palette16(palette16)

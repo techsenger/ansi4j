@@ -23,15 +23,15 @@ import com.techsenger.ansi4j.css.api.text.TextAttributeGroup;
  *
  * @author Pavel Castornii
  */
-class WeightSample extends AbstractAttributeSample<TextAttributeGroup.Weight> {
+class IntensitySample extends AbstractAttributeSample<TextAttributeGroup.Intensity> {
 
-    WeightSample(TextAttributeGroup.Weight defaultValue, TextAttributeGroup.Weight currentValue,
+    IntensitySample(TextAttributeGroup.Intensity defaultValue, TextAttributeGroup.Intensity currentValue,
             boolean supportedInWebView, boolean supportedInTextFlow, boolean supportedInRtfxTextArea) {
         super(defaultValue, currentValue, supportedInWebView, supportedInTextFlow, supportedInRtfxTextArea);
     }
 
     @Override
-    public Attribute<TextAttributeGroup.Weight> resolveAttribute(TextAttributeGroup group) {
-        return group.getWeightAttribute();
+    public Attribute<TextAttributeGroup.Intensity> resolveAttribute(TextAttributeGroup group) {
+        return group.getIntensityAttribute();
     }
 }

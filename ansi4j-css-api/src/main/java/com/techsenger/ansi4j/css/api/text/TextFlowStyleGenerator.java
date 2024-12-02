@@ -31,18 +31,21 @@ public class TextFlowStyleGenerator extends AbstractTextStyleGenerator {
     }
 
     @Override
-    protected void doWeightBold(List<String> declarations) {
+    protected void doIntensityIncreased(List<String> declarations) {
         declarations.add("-fx-font-weight: bold");
+        //declarations.add("-fx-opacity: 1");
     }
 
     @Override
-    protected void doWeightFaint(List<String> declarations) {
-        declarations.add("-fx-font-weight: 300");
-    }
-
-    @Override
-    protected void doWeightNormal(List<String> declarations) {
+    protected void doIntensityDecreased(List<String> declarations) {
         declarations.add("-fx-font-weight: normal");
+        //declarations.add("-fx-opacity: 0.5");
+    }
+
+    @Override
+    protected void doIntensityNormal(List<String> declarations) {
+        declarations.add("-fx-font-weight: normal");
+        //declarations.add("-fx-opacity: 1");
     }
 
     @Override
@@ -111,13 +114,13 @@ public class TextFlowStyleGenerator extends AbstractTextStyleGenerator {
     }
 
     @Override
-    protected void doFgColor(int color, List<String> declarations) {
-        declarations.add("-fx-fill: #" + toHexColor(color));
+    protected void doFgColor(List<String> declarations) {
+        declarations.add("-fx-fill: " + getResolvedFgColor());
     }
 
     @Override
-    protected void doBgColor(int color, List<String> declarations) {
-        declarations.add("-fx-background-color: #" + toHexColor(color));
+    protected void doBgColor(List<String> declarations) {
+        declarations.add("-fx-background-color: " + getResolvedBgColor());
     }
 
 }

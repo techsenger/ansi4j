@@ -17,6 +17,7 @@
 package com.techsenger.ansi4j.css.demo.utils;
 
 import atlantafx.base.theme.Styles;
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.demo.Constants;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -24,6 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.web.WebView;
@@ -115,6 +117,13 @@ public final class FxUtils {
                 requestFocus(node);
             }
         });
+    }
+
+    public static int toInt(Color color) {
+        int rgb = ((int) (color.getRed() * 255) << 16)
+                | ((int) (color.getGreen() * 255) << 8)
+                | (int) (color.getBlue() * 255);
+        return ColorUtils.getRgba(rgb, 255);
     }
 
     private FxUtils() {

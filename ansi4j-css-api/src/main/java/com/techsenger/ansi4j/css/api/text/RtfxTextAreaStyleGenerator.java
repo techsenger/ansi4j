@@ -31,18 +31,21 @@ public class RtfxTextAreaStyleGenerator extends AbstractTextStyleGenerator {
     }
 
     @Override
-    protected void doWeightBold(List<String> declarations) {
+    protected void doIntensityIncreased(List<String> declarations) {
         declarations.add("-fx-font-weight: bold");
+        //declarations.add("-fx-opacity: 1");
     }
 
     @Override
-    protected void doWeightFaint(List<String> declarations) {
-        declarations.add("-fx-font-weight: lighter");
-    }
-
-    @Override
-    protected void doWeightNormal(List<String> declarations) {
+    protected void doIntensityDecreased(List<String> declarations) {
         declarations.add("-fx-font-weight: normal");
+        //declarations.add("-fx-opacity: 0.5");
+    }
+
+    @Override
+    protected void doIntensityNormal(List<String> declarations) {
+        declarations.add("-fx-font-weight: normal");
+        //declarations.add("-fx-opacity: 1");
     }
 
     @Override
@@ -57,7 +60,7 @@ public class RtfxTextAreaStyleGenerator extends AbstractTextStyleGenerator {
 
     @Override
     protected void doUnderlineSingle(List<String> declarations) {
-        declarations.add("-rtfx-underline-color: #" + toHexColor(resolveFgColor()));
+        declarations.add("-rtfx-underline-color: " + getResolvedFgColor());
         declarations.add("-rtfx-underline-width: 1px");
         declarations.add("-rtfx-underline-offset: 1px");
         declarations.add("-rtfx-underline-double-gap: null");
@@ -65,7 +68,7 @@ public class RtfxTextAreaStyleGenerator extends AbstractTextStyleGenerator {
 
     @Override
     protected void doUnderlineDouble(List<String> declarations) {
-        declarations.add("-rtfx-underline-color: #" + toHexColor(resolveFgColor()));
+        declarations.add("-rtfx-underline-color: " + getResolvedFgColor());
         declarations.add("-rtfx-underline-width: 1px");
         declarations.add("-rtfx-underline-offset: 1px");
         declarations.add("-rtfx-underline-double-gap: 1px");
@@ -119,12 +122,12 @@ public class RtfxTextAreaStyleGenerator extends AbstractTextStyleGenerator {
     }
 
     @Override
-    protected void doFgColor(int color, List<String> declarations) {
-        declarations.add("-fx-fill: #" + toHexColor(color));
+    protected void doFgColor(List<String> declarations) {
+        declarations.add("-fx-fill: " + getResolvedFgColor());
     }
 
     @Override
-    protected void doBgColor(int color, List<String> declarations) {
-        declarations.add("-rtfx-background-color: #" + toHexColor(color));
+    protected void doBgColor(List<String> declarations) {
+        declarations.add("-rtfx-background-color: " + getResolvedBgColor());
     }
 }

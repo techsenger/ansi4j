@@ -35,7 +35,7 @@ import javafx.util.Pair;
 import org.fxmisc.richtext.model.StyleSpans;
 import static com.techsenger.ansi4j.css.api.text.TextAttributeGroup.Blinking;
 import static com.techsenger.ansi4j.css.api.text.TextAttributeGroup.Underline;
-import static com.techsenger.ansi4j.css.api.text.TextAttributeGroup.Weight;
+import static com.techsenger.ansi4j.css.api.text.TextAttributeGroup.Intensity;
 
 /**
  *
@@ -52,18 +52,24 @@ class AttributeSampleService {
 
     public List<AbstractAttributeSample<?>> createSamples() {
         var list = new ArrayList<AbstractAttributeSample<?>>();
-        list.add(new BgColorSample(Constants.BG_COLOR, 0x4258C9, true, false, true));
-        list.add(new BgColorSample(0x4258C9, Constants.BG_COLOR, true, false, true));
+        list.add(new BgColorSample(Constants.BG_COLOR, 0x4258C9FF, true, false, true));
+        list.add(new BgColorSample(0x4258C9FF, Constants.BG_COLOR, true, false, true));
         list.add(new BlinkingSample(Blinking.OFF, Blinking.SLOW, true, false, false));
         list.add(new BlinkingSample(Blinking.SLOW, Blinking.OFF, false, false, false));
         list.add(new BlinkingSample(Blinking.OFF, Blinking.RAPID, true, false, false));
         list.add(new BlinkingSample(Blinking.RAPID, Blinking.OFF, false, false, false));
         list.add(new BlinkingSample(Blinking.SLOW, Blinking.RAPID, true, false, false));
         list.add(new BlinkingSample(Blinking.RAPID, Blinking.SLOW, true, false, false));
-        list.add(new FgColorSample(Constants.FG_COLOR, 0xFBA71B, true, true, true));
-        list.add(new FgColorSample(0xFBA71B, Constants.FG_COLOR, true, true, true));
+        list.add(new FgColorSample(Constants.FG_COLOR, 0xFBA71BFF, true, true, true));
+        list.add(new FgColorSample(0xFBA71BFF, Constants.FG_COLOR, true, true, true));
         list.add(new FontSample(Constants.FONT_FAMILY, Constants.ALTERNATIVE_FONT_FAMILY, true, true, true));
         list.add(new FontSample(Constants.ALTERNATIVE_FONT_FAMILY, Constants.FONT_FAMILY, true, true, true));
+        list.add(new IntensitySample(Intensity.NORMAL, Intensity.INCREASED, true, true, true));
+        list.add(new IntensitySample(Intensity.INCREASED, Intensity.NORMAL, true, true, true));
+        list.add(new IntensitySample(Intensity.DECREASED, Intensity.INCREASED, true, true, true));
+        list.add(new IntensitySample(Intensity.INCREASED, Intensity.DECREASED, true, true, true));
+        list.add(new IntensitySample(Intensity.DECREASED, Intensity.NORMAL, true, true, true));
+        list.add(new IntensitySample(Intensity.NORMAL, Intensity.DECREASED, true, true, true));
         list.add(new ItalicSample(false, true, true, true, true));
         list.add(new ItalicSample(true, false, true, true, true));
         list.add(new ReverseVideoSample(false, true, true, false, true));
@@ -78,12 +84,6 @@ class AttributeSampleService {
         list.add(new UnderlineSample(Underline.DOUBLE, Underline.SINGLE, false, false, true));
         list.add(new VisibilitySample(true, false, true, true, true));
         list.add(new VisibilitySample(false, true, true, true, true));
-        list.add(new WeightSample(Weight.NORMAL, Weight.BOLD, true, true, true));
-        list.add(new WeightSample(Weight.BOLD, Weight.NORMAL, true, true, true));
-        list.add(new WeightSample(Weight.FAINT, Weight.BOLD, false, false, false));
-        list.add(new WeightSample(Weight.BOLD, Weight.FAINT, false, false, false));
-        list.add(new WeightSample(Weight.FAINT, Weight.NORMAL, false, false, false));
-        list.add(new WeightSample(Weight.NORMAL, Weight.FAINT, false, false, false));
         return list;
     }
 
@@ -102,8 +102,8 @@ class AttributeSampleService {
         var generator = new WebViewStyleGenerator();
         generator.initialize(this.attributeGroup);
         var styles = createContent(sample, generator, contentBuilder);
+        contentBuilder.setDefaultStyle(styles.getKey());
         var html = contentBuilder.build();
-        html = "<span style=\"" + styles.getKey() + "\">" + html + "</span>";
         return new SampleContent<String>(html, styles.getKey(), styles.getValue());
     }
 

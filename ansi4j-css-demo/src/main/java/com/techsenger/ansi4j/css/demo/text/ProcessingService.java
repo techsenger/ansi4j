@@ -24,13 +24,13 @@ import com.techsenger.ansi4j.core.api.TextFragment;
 import com.techsenger.ansi4j.core.api.iso6429.C0ControlFunction;
 import com.techsenger.ansi4j.core.api.iso6429.ControlSequenceFunction;
 import com.techsenger.ansi4j.css.api.StyleProcessor;
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.api.color.Palette16;
 import com.techsenger.ansi4j.css.demo.content.ContentBuilder;
 import com.techsenger.ansi4j.css.demo.content.RtfxTextAreaContentBuilder;
 import com.techsenger.ansi4j.css.demo.content.TextFlowContentBuilder;
 import com.techsenger.ansi4j.css.demo.content.WebViewContentBuilder;
 import com.techsenger.ansi4j.css.demo.utils.Ansi4jUtils;
-import com.techsenger.ansi4j.css.demo.utils.ColorUtils;
 import java.util.List;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
@@ -44,7 +44,7 @@ class ProcessingService {
 
     private final ParserFactory parserFactory = Ansi4jUtils.createParserFactory();
 
-    String getWebViewContent(String inputText, int defFgColor, int defBgColor, Palette16 palette) {
+    public String getWebViewContent(String inputText, int defFgColor, int defBgColor, Palette16 palette) {
         var contentBuilder = new WebViewContentBuilder();
         contentBuilder.setScript("function handleBodyClick(event){"
                 + "  let el = event.target;"

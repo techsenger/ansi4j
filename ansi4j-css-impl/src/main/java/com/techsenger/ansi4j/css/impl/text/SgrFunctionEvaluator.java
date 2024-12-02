@@ -33,9 +33,10 @@ import com.techsenger.ansi4j.css.api.attribute.AttributeRegistry;
 import com.techsenger.ansi4j.css.api.color.SgrExtraColorValue;
 import static com.techsenger.ansi4j.css.impl.text.TextAttributeGroupImpl.Blinking;
 import static com.techsenger.ansi4j.css.impl.text.TextAttributeGroupImpl.Underline;
-import static com.techsenger.ansi4j.css.impl.text.TextAttributeGroupImpl.Weight;
+import static com.techsenger.ansi4j.css.impl.text.TextAttributeGroupImpl.Intensity;
 import com.techsenger.ansi4j.css.impl.FunctionEvaluator;
 import com.techsenger.ansi4j.css.api.ProcessorResult;
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.api.text.FontIndex;
 import com.techsenger.ansi4j.css.api.text.TextAttributeGroup;
 import com.techsenger.ansi4j.css.impl.ProcessorResultImpl;
@@ -83,10 +84,10 @@ public class SgrFunctionEvaluator implements FunctionEvaluator {
         }
     }
 
-    private final class WeightEvaluator extends AbstractEvaluator<Weight> {
+    private final class IntensityEvaluator extends AbstractEvaluator<Intensity> {
 
-        WeightEvaluator() {
-            super(attributeGroup.getWeightAttribute(), List.of(
+        IntensityEvaluator() {
+            super(attributeGroup.getIntensityAttribute(), List.of(
                     SgrParameterValue.BOLD_OR_INCREASED_INTENSITY,
                     SgrParameterValue.FAINT_OR_DECREASED_INTENSITY_OR_SECOND_COLOUR,
                     SgrParameterValue.NORMAL_COLOUR_OR_NORMAL_INTENSITY
@@ -95,16 +96,16 @@ public class SgrFunctionEvaluator implements FunctionEvaluator {
 
         @Override
         void evaluate(FunctionArgument argument, Queue<FunctionArgument> argumentQueue, ProcessorResultImpl result) {
-            Weight value;
+            Intensity value;
             switch ((Integer) argument.getValue()) {
                 case SgrParameterValue.BOLD_OR_INCREASED_INTENSITY:
-                    value = Weight.BOLD;
+                    value = Intensity.INCREASED;
                     break;
                 case SgrParameterValue.FAINT_OR_DECREASED_INTENSITY_OR_SECOND_COLOUR:
-                    value = Weight.FAINT;
+                    value = Intensity.DECREASED;
                     break;
                 case SgrParameterValue.NORMAL_COLOUR_OR_NORMAL_INTENSITY:
-                    value = Weight.NORMAL;
+                    value = Intensity.NORMAL;
                     break;
                 default:
                     throw new AssertionError();
@@ -256,6 +257,7 @@ public class SgrFunctionEvaluator implements FunctionEvaluator {
                     newColor = config.getPalette16().getColors()[colorIndex];
                 }
             }
+            newColor = ColorUtils.getRgba(newColor, 255);
             if (attribute.getValue() != newColor) {
                 var change = new AttributeChange<Integer>(attribute, attribute.getValue(), newColor);
                 result.getAttributeChanges().add(change);
@@ -424,7 +426,7 @@ public class SgrFunctionEvaluator implements FunctionEvaluator {
     public SgrFunctionEvaluator(AttributeRegistry registry) {
         this.attributeGroup = (TextAttributeGroupImpl) registry.getGroup(TextAttributeGroup.KEY);
         List<AbstractEvaluator<?>> evaluators = new ArrayList<>();
-        evaluators.add(new WeightEvaluator());
+        evaluators.add(new IntensityEvaluator());
         evaluators.add(new UnderlineEvaluator());
         evaluators.add(new BlinkingEvaluator());
         evaluators.add(new VisibilityEvaluator());

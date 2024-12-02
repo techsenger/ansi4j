@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package com.techsenger.ansi4j.css.demo.utils;
-
-import javafx.scene.paint.Color;
+package com.techsenger.ansi4j.css.api.color;
 
 /**
  *
@@ -24,15 +22,32 @@ import javafx.scene.paint.Color;
  */
 public final class ColorUtils {
 
-    public static String toHex(int color) {
-        return String.format("#%06X", color);
+    /**
+     * Returns #RRGGBBAA string.
+     *
+     * @param rgba
+     * @return
+     */
+    public static String toHex(int rgba) {
+        String hex = Integer.toUnsignedString(rgba, 16);
+        hex = "#" + "0".repeat(8 - hex.length()) + hex;
+        return hex;
     }
 
-    public static int toInt(Color color) {
-        int rgb = ((int) (color.getRed() * 255) << 16)
-                | ((int) (color.getGreen() * 255) << 8)
-                | (int) (color.getBlue() * 255);
+    public static int getRgba(int rgb, int alpha) {
+        alpha = Math.max(0, Math.min(255, alpha));
+        return (rgb << 8) | (alpha & 0xFF);
+    }
+
+    public static int getRgb(int rgba) {
+        var rgb = (rgba >>> 8);
         return rgb;
+    }
+
+    public static int setAlpha(int rgba, int alpha) {
+        alpha = Math.max(0, Math.min(255, alpha));
+        rgba = (rgba & 0xFFFFFF00) | (alpha & 0xFF);
+        return rgba;
     }
 
     private ColorUtils() {

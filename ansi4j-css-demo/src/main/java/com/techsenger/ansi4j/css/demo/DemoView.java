@@ -103,7 +103,6 @@ public class DemoView extends Application implements View<DemoViewModel> {
     public void start(Stage primaryStage) throws Exception {
         Application.setUserAgentStylesheet(new Dracula().getUserAgentStylesheet());
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-            System.out.println(e.getMessage());
             logger.error("Error in FxApplication", e);
         });
         var scene = new Scene(getNode(), 1000, 800);

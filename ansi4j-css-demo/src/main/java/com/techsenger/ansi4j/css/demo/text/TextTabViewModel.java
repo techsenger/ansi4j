@@ -23,7 +23,7 @@ import com.techsenger.ansi4j.css.api.color.XtermPalette16;
 import com.techsenger.ansi4j.css.api.color.XtermPalette256;
 import com.techsenger.ansi4j.css.demo.AbstractTabViewModel;
 import com.techsenger.ansi4j.css.demo.mvvm.ComponentService;
-import com.techsenger.ansi4j.css.demo.utils.ColorUtils;
+import com.techsenger.ansi4j.css.demo.utils.FxUtils;
 import com.techsenger.ansi4j.css.demo.utils.TextUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -184,8 +184,8 @@ public class TextTabViewModel extends AbstractTabViewModel {
         if (!TextUtils.isEscHidden(inputText)) {
             inputText = TextUtils.hideEsc(inputText);
         }
-        int defFgColor = ColorUtils.toInt(fgColor.getValue());
-        int defBgColor = ColorUtils.toInt(bgColor.getValue());
+        int defFgColor = FxUtils.toInt(fgColor.getValue());
+        int defBgColor = FxUtils.toInt(bgColor.getValue());
         var palette = createPalette();
         Object c;
         switch (this.selectedControlIndex.get()) {
@@ -236,7 +236,6 @@ public class TextTabViewModel extends AbstractTabViewModel {
     }
 
     public Task<String> createCommandTask(List<String> commands) {
-        System.out.println(commands);
         return new Task<String>() {
             @Override
             protected String call() throws IOException, InterruptedException {

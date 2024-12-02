@@ -17,8 +17,8 @@
 package com.techsenger.ansi4j.css.demo.attribute;
 
 import com.techsenger.ansi4j.css.api.attribute.Attribute;
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.api.text.TextAttributeGroup;
-import com.techsenger.ansi4j.css.demo.utils.ColorUtils;
 
 /**
  *

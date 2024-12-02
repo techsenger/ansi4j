@@ -23,8 +23,8 @@ package com.techsenger.ansi4j.css.demo.text;
 final class TextSamples {
 
     static final String ALL_PARAMETERS = "Single Attribute Samples\n"
-            + "This is a ESC[1msample stringESC[22m for bold\n"
-            + "This is a ESC[2msample stringESC[22m for faint\n"
+            + "This is a ESC[1msample stringESC[22m for increased intensity\n"
+            + "This is a ESC[2msample stringESC[22m for decreased intensity\n"
             + "This is a ESC[3msample stringESC[23m for italic\n"
             + "This is a ESC[4msample stringESC[24m for underline\n"
             + "This is a ESC[5msample stringESC[25m for slow blink\n"
@@ -73,7 +73,9 @@ final class TextSamples {
             + "This is a ESC[107msample stringESC[49m for background color bright white\n\n"
             + "Multiple Attribute Samples\n"
             + "This is a ESC[35msample ESC[4mstrESC[24mingESC[0m for color and sinle underline\n"
-            + "This is a ESC[35msample ESC[5mstrESC[25mingESC[0m for color and blinking";
+            + "This is a ESC[35msample ESC[5mstrESC[25mingESC[0m for color and blinking\n"
+            + "This is a ESC[2msample ESC[7mstrESC[27mingESC[0m for faint and reverse video\n";
+
 
     static final String LOG_MESSAGES = "2022-03-26 22:51:28.753 [main] ESC[35;1m[INFO]ESC[m "
                     + "org.springframework.context.support"

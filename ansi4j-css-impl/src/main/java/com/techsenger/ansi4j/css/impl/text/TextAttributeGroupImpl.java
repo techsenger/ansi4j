@@ -17,6 +17,7 @@
 package com.techsenger.ansi4j.css.impl.text;
 
 import com.techsenger.ansi4j.css.api.attribute.Attribute;
+import com.techsenger.ansi4j.css.api.color.ColorUtils;
 import com.techsenger.ansi4j.css.api.text.FontIndex;
 import com.techsenger.ansi4j.css.api.text.TextAttributeGroupConfig;
 import java.util.List;
@@ -31,7 +32,7 @@ import com.techsenger.ansi4j.css.impl.attribute.AttributeImpl;
 public final class TextAttributeGroupImpl extends AbstractAttributeGroup<TextAttributeGroup>
         implements TextAttributeGroup {
 
-    private final AttributeImpl<Weight> weightAttribute = new AttributeImpl<>(this, "Weight");
+    private final AttributeImpl<Intensity> intensityAttribute = new AttributeImpl<>(this, "Intensity");
 
     private final AttributeImpl<Boolean> italicAttribute = new AttributeImpl<>(this, "Italic");
 
@@ -61,7 +62,7 @@ public final class TextAttributeGroupImpl extends AbstractAttributeGroup<TextAtt
         this.fgColorAttribute = new AttributeImpl<>(this, "FgColor");
         this.bgColorAttribute = new AttributeImpl<>(this, "BgColor");
         this.attributes = List.of(
-                weightAttribute,
+                intensityAttribute,
                 italicAttribute,
                 underlineAttribute,
                 blinkingAttribute,
@@ -85,8 +86,8 @@ public final class TextAttributeGroupImpl extends AbstractAttributeGroup<TextAtt
     }
 
     @Override
-    public Attribute<Weight> getWeightAttribute() {
-        return weightAttribute;
+    public Attribute<Intensity> getIntensityAttribute() {
+        return intensityAttribute;
     }
 
     @Override
@@ -141,9 +142,9 @@ public final class TextAttributeGroupImpl extends AbstractAttributeGroup<TextAtt
 
     @Override
     public void reset() {
-        var weight = this.config.getDefaultWeight();
-        weight = (weight != null) ? weight : Weight.NORMAL;
-        this.weightAttribute.setBothValues(weight);
+        var intensity = this.config.getDefaultIntensity();
+        intensity = (intensity != null) ? intensity : Intensity.NORMAL;
+        this.intensityAttribute.setBothValues(intensity);
 
         var italic = this.config.getDefaultItalic();
         italic = (italic != null) ? italic : false;
@@ -173,16 +174,16 @@ public final class TextAttributeGroupImpl extends AbstractAttributeGroup<TextAtt
 
         var fgColor = this.config.getDefaultFgColor();
         if (fgColor != null) {
-            this.fgColorAttribute.setBothValues(fgColor.getValue());
+            this.fgColorAttribute.setBothValues(ColorUtils.getRgba(fgColor.getRgb(), 255));
         } else {
-            this.fgColorAttribute.setBothValues(0x000000);
+            this.fgColorAttribute.setBothValues(0x000000FF);
         }
 
         var bgColor = this.config.getDefaultBgColor();
         if (bgColor != null) {
-            this.bgColorAttribute.setBothValues(bgColor.getValue());
+            this.bgColorAttribute.setBothValues(ColorUtils.getRgba(bgColor.getRgb(), 255));
         } else {
-            this.bgColorAttribute.setBothValues(0xFFFFFF);
+            this.bgColorAttribute.setBothValues(0xFFFFFFFF);
         }
     }
 }
