@@ -37,6 +37,7 @@ public class CommandViewModel implements ViewModel {
     }
 
     private final ObservableList<String> commands = FXCollections.observableArrayList(List.of(
+            "git log --color",
             "source-highlight -f esc256 -i pom.xml",
             "mvn help:help -Dstyle.color=always",
             "ls -la / --color"));
