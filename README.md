@@ -7,10 +7,10 @@
         * [Thread-safety](#ansi4j-core-thread)
     * [CSS extension](#ansi4j-css)
         * [Overview](#ansi4j-css-overview)
+        * [Demo](#ansi4j-css-demo)
         * [Dependencies](#ansi4j-css-dependencies)
         * [Usage](#ansi4j-css-usage)
         * [Thread-safety](#ansi4j-css-thread)
-        * [Example](#ansi4j-css-example)
     * [Code building](#ansi4j-building)
     * [Feedback](#ansi4j-feedback)
 * [Theory](#theory)
@@ -59,11 +59,14 @@ There are two types of parsers:
 * `Fragment` is a processed piece of text. There are two types of fragments:
     * `TextFragment` that contains information about text pieces without functions.
     * `FunctionFragment` that contains information about functions in text.
+* `ControlFunction` is the base interface implemented by all enumerations used for ANSI function identification. These
+enumerations contain short function names in accordance with the standard. At the same time, for each enumeration X,
+there is an XAlias interface that provides the full function names. These aliases can be used by those who do not
+remember the short names.
 
 ### Dependencies <a name="ansi4j-core-dependencies"></a>
 
-This project will be added to the central Maven repository soon. Until then, you can only use the local repository
- (after [code building](#ansi4j-building)):
+This project is available on Maven Central:
 
     <dependency>
         <groupId>com.techsenger.ansi4j</groupId>
@@ -80,17 +83,15 @@ This project will be added to the central Maven repository soon. Until then, you
 
 Step 0 - Creating `ParserFactory`
 
-    ParserFactory factory = new DefaultParserFactory.Builder()
+    ParserFactory factory = new ParserFactory.Builder()
             .environment(Environment._7_BIT)
-            .textHandler(new DefaultTextHandler())
-            .functionFinder(new DefaultFunctionFinder())
             //if you don't need some types of functions just don't provide handlers for them
-            .functionHandlers(
-                    new C0ControlFunctionHandler(),
-                    new C1ControlFunctionHandler(),
-                    new ControlSequenceHandler(),
-                    new IndependentControlFunctionHandler(),
-                    new ControlStringHandler())
+            .functionTypes(
+                    ControlFunctionType.C0_SET,
+                    ControlFunctionType.C1_SET,
+                    ControlFunctionType.CONTROL_SEQUENCE,
+                    ControlFunctionType.INDEPENDENT_FUNCTION,
+                    ControlFunctionType.CONTROL_STRING)
             .build();
 
 Step 1A - Creating `StringParser`
@@ -123,12 +124,12 @@ Step 2 - Parsing
             ...
         } else if (fragment.getType() == FragmentType.FUNCTION) {
             FunctionFragment functionFragment = (FunctionFragment) fragment;
-            if (functionFragment.getFunction() == ControlSequenceFunction.SGR_SELECT_GRAPHIC_RENDITION) {
+            //or functionFragment.getFunction() == ControlSequenceFunctionAlias.SELECT_GRAPHIC_RENDITION
+            if (functionFragment.getFunction() == ControlSequenceFunction.SGR) {
                 ...
             }
         }
     }
-
 
 ### Thread-safety <a name="ansi4j-core-thread"></a>
 
@@ -140,37 +141,64 @@ module.
 
 ### Overview <a name="ansi4j-css-overview"></a>
 
-CSS extension allows to generate CSS declarations one the base of SGR function and its arguments. Currently the
-following text attributes are supported: intensity, italic, underline, blinking, reverse video, visibility,
-strikethrough, font, foreground color, background color.
+CSS extension allows to generate CSS declarations one the base of SGR function and its arguments. For example, this
+extension can be used to style program outputs, log messages, documentation, and more.
 
-Important notes:
-
-* To enable blinking with Css3Generator is is necessary to add the following keyframes to your stylesheet:
-@keyframes ansi4j-blinker {50% { opacity: 0; }}.
-* Blinking with JavaFX using CSS doesn't work, as JavaFX won't support CSS animation until this
-[issue](https://bugs.openjdk.java.net/browse/JDK-8283676) is resolved. If blinking is required it is possible to
-work with AttributeContext directly and create keyframes programmatically.
+Currently the following text attributes are supported: intensity, italic, underline, blink, reverse video,
+visibility, strikethrough, font, foreground color, background color.
 
 Base components:
 
+* `AttributeRegistry` stores model attributes, separated into groups.
+* `AttributeGroup` contains a group of logically related attributes. Currently, there is only one group for the SGR function.
+* `GroupStyleGenerator` generates CSS declarations based on attribute value changes of a specific group. Thus,
+    each generator is used for only one attribute group. Currently, the library has 3 generators for `WebView`, `TextFlow`,
+    and RichTextFX `InlineCssTextArea`. These generators are located in the API module and can be easily modified
+* `StyleProcessor`, which is called for each SGR function, updates the attribute values and returns the generated
+    CSS declarations.
 * `Palette` - ISO 6429 supports only 8 colors (3 bits). However, today many terminals supports 4, 8 and 24 bit colors.
 However, these extra colors are not included in the standard. So, to support them use `extraColorsEnabled()` method
 in config. `Palette` is an interface, so it is easy to add custom 8, 16, 256 color palette.
-* `AttributeConfig` that is created for every `Attribute` enumeration class.
-* `AttributeContext` keeps information about current attributes and their values.
-* `AttributeResolver` resolves attributes on base of function arguments and saves attributes to context. Finally returns
-list of attribute changes.
-* `CssGenerator` generates CSS declarations on the base of attribute changes. Currently there are two types of CSS
-generators: CSS3 generator and JavaFX CSS generator. The latter one is used when it is required to create styles
-for JavaFX nodes.
 
-Such architecture allows easily to create new attribute types and resolvers with CSS generators for them.
+How it works:
+
+Each attribute in the registry has a default value. Therefore, initially, you need to set values that correspond to
+your settings. For example, if the default is italicized text with a red color, you should set the default values for
+the `italic` and `fgColor` attributes:
+
+    TextAttributeGroupConfig.Builder()
+            .defaultItalic(true)
+            .defaultFgColor(new Color(0xff0000))
+            ...
+
+When text parsing begins, each SGR function is passed to the `StyleProcessor`. Based on the arguments of this function,
+the attribute values are updated. Then, the generator identifies the attributes whose values differ from the default
+ones and generates a style for a single span, which will be closed before the next SGR function. Thus, the generated
+styles will only be applied to the text between the current SGR function and the next one.
+
+Important notes:
+
+* To enable blink for `WebView` is is necessary to add the following keyframes to your stylesheet:
+
+    @keyframes ansi4j-blinker {50% { opacity: 0; }}.
+
+* RichTextFX `InlineCssTextArea` will support blink when this [issue](https://github.com/FXMisc/RichTextFX/issues/1252)
+is resolved.
+
+### Demo <a name="ansi4j-css-demo"></a>
+
+To work with the CSS extension and understand its principles, we have developed a demo application:
+
+![image info](./css-demo.png)
+
+To run the demo application, execute the following commands in the project root:
+
+    cd ansi4j-css-demo
+    mvn javafx:run
 
 ### Dependencies <a name="ansi4j-css-dependencies"></a>
 
-This project will be added to the central Maven repository soon. Until then, you can only use the local repository
-(after [code building](#ansi4j-building)):
+This project is available on Maven Central:
 
     <dependency>
         <groupId>com.techsenger.ansi4j</groupId>
@@ -185,34 +213,31 @@ This project will be added to the central Maven repository soon. Until then, you
 
 ### Usage <a name="ansi4j-css-usage"></a>
 
-    //First of all we create configuration for text attributes.
+    //First of all we create the configuration for text group.
     var palette = new XtermPalette256();
-    AttributeConfig config = new DefaultTextAttributeConfig.Builder()
-            .defaultForegroundColor(0x000000)
-            .defaultBackgroundColor(0xffffff)
-            .fontFamilies(List.of("Arial", "'Times New Roman', Times, serif"))
+    TextAttributeGroupConfig groupConfig = new TextAttributeGroupConfig.Builder()
+            .fontFamilies(List.of("monospace", "Arial"))
             .extraColorsEnabled(true)
-            .palette16(palette)
-            .palette256(palette)
+            .palette16(palette256)
+            .palette256(palette256)
             .build();
 
-    //Now we need context that will keep attributes.
-    AttributeContext context = new DefaultAttributeContext(List.of(config));
-
-    //Now we create a function processor.
-    var processor = new DefaultCssFunctionProcessor.Builder()
-            .resolvers(new DefaultTextAttributeResolver())
-            .generators(new JavaFxCssGenerator())
-            .build();
+    //Now we create a style processor.
+    var processor = new StyleProcessor.Builder()
+                .configs(groupConfig)
+                .generators(new WebViewStyleGenerator())
+                .build();
     ...
     //To generate CSS declarations we need to process function fragments. Currently only SGR functions are supported
     Fragment fragment = ... ;
     if (fragment.getType() == FragmentType.FUNCTION) {
         FunctionFragment functionFragment = (FunctionFragment) fragment;
-        if (functionFragment.getFunction() == ControlSequenceFunction.SGR_SELECT_GRAPHIC_RENDITION) {
-            List<String> declarations = processor.process(functionFragment, context);
-            var style = String.join(";", declarations);
-            ...
+        if (functionFragment.getFunction() == ControlSequenceFunction.SGR) {
+            var result = processor.process(functionFragment);
+            if (!result.getStyleDeclarations().isEmpty()) {
+                var style = String.join(";", result.getStyleDeclarations());
+                ...
+            }
         }
 
     }
@@ -221,21 +246,6 @@ This project will be added to the central Maven repository soon. Until then, you
 
 Config, processor, attribute resolver and CSS generators are thread-safe. Attribute context is not thread-safe.
 Detailed information about thread-safety is provided in every interface in CSS API module.
-
-### Example <a name="ansi4j-css-example"></a>
-
-The following text with SGR function (escape character is replaced with ESC):
-
-    2022-03-26 22:51:28.753 [main] ESC[35;1m[INFO]ESC[m org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'subjectDAO' of type [org.apache.shiro.mgt.DefaultSubjectDAO] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-    2022-03-26 22:51:28.753 [main] ESC[32m[DEBUG]ESC[m org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'subjectFactory'
-    2022-03-26 22:51:28.754 [main] ESC[35;1m[INFO]ESC[m org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'subjectFactory' of type [org.apache.shiro.mgt.DefaultSubjectFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-    2022-03-26 22:51:28.754 [main] ESC[32m[DEBUG]ESC[m org.springframework.beans.factory.support.DefaultListableBeanFactory - Creating shared instance of singleton bean 'rememberMeManager'
-    2022-03-26 22:51:28.755 [main] ESC[35;1m[INFO]ESC[m org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'rememberMeManager' of type [org.springframework.beans.factory.support.NullBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-    2022-03-26 22:51:28.755 [main] ESC[32m[DEBUG]ESC[m org.springframework.context.annotation.ConfigurationClassEnhancer - @Bean method ShiroConfiguration.rememberMeManager called as bean reference for type [org.apache.shiro.mgt.RememberMeManager] returned null bean; resolving to null value.
-
-was styled this way in JavaFX (RichTextFX):
-
-![image info](./demo.png)
 
 ## Code building <a name="ansi4j-building"></a>
 
