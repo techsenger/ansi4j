@@ -189,7 +189,7 @@ is resolved.
 
 To work with the CSS extension and understand its principles, we have developed a demo application:
 
-![image info](./css-demo.png)
+![image info](./css-demo.gif)
 
 To run the demo application, execute the following commands in the project root:
 
