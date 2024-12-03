@@ -159,9 +159,13 @@ strikethrough, font, foreground color, and background color.
 
 ### Demo <a name="ansi4j-css-demo"></a>
 
-To work with the CSS extension and understand its principles, we have developed a demo application:
+The demo application showcases examples of styling the output of common programs:
 
-![image info](./css-demo.gif)
+![css text](./css-text.gif)
+
+The demo application also allows you to see which styles are generated for each attribute across different controls
+
+![css attr](./css-attr.gif)
 
 To run the demo application, execute the following commands in the project root:
 
