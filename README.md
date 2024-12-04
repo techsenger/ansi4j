@@ -87,7 +87,7 @@ Step 0 - Creating `ParserFactory`
 
     ParserFactory factory = new ParserFactory.Builder()
             .environment(Environment._7_BIT)
-            //if you don't need some types of functions just don't provide handlers for them
+            //Specify only the types you need
             .functionTypes(
                     ControlFunctionType.C0_SET,
                     ControlFunctionType.C1_SET,
