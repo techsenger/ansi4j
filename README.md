@@ -14,7 +14,7 @@
         * [Usage](#ansi4j-css-usage)
         * [Thread-safety](#ansi4j-css-thread)
     * [Code building](#ansi4j-building)
-    * [👉Support Us](#ansi4j-support-us)
+    * [👉 Support Us](#ansi4j-support-us)
 * [Theory](#theory)
     * [Control character](#theory-control)
     * [Control character and encoding](#theory-encoding)
@@ -37,7 +37,7 @@ types of functions and mechanism to process them.
 Techsenger Ansi4j consists of a core that includes parser and CSS extension that allows to create CSS declaration using
 function arguments.
 
-👉If you like this project and find it useful, please consider [supporting us](#ansi4j-support-us).
+👉 If you like this project and find it useful, please consider [supporting us](#ansi4j-support-us).
 
 ## Core <a name="ansi4j-core"></a>
 
