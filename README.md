@@ -14,7 +14,7 @@
         * [Usage](#ansi4j-css-usage)
         * [Thread-safety](#ansi4j-css-thread)
     * [Code building](#ansi4j-building)
-    * [Feedback](#ansi4j-feedback)
+    * [Support Us](#ansi4j-support-us)
 * [Theory](#theory)
     * [Control character](#theory-control)
     * [Control character and encoding](#theory-encoding)
@@ -36,6 +36,8 @@ types of functions and mechanism to process them.
 
 Techsenger Ansi4j consists of a core that includes parser and CSS extension that allows to create CSS declaration using
 function arguments.
+
+If you like this project and find it useful, please consider [supporting us](#ansi4j-support-us).
 
 ## Core <a name="ansi4j-core"></a>
 
@@ -267,10 +269,13 @@ To build the library use standard Git and Maven commands:
     cd ansi4j
     mvn clean install
 
-## Feedback <a name="ansi4j-feedback"></a>
+## Support Us <a name="ansi4j-support-us"></a>
 
-Any feedback is welcome. Besides, it would be interesting to know for what cases this project is used.
-It will help to understand the way the project should go and provide more information in documentation.
+You can support us financially through [GitHub Sponsors](https://github.com/sponsors/techsenger). Your
+contribution directly helps us keep our open-source projects active, improve their features, and offer ongoing support.
+Besides, we offer multiple sponsorship tiers, with different rewards.
+
+You can also give this project a star ⭐, which will help other users find it and increase its popularity.
 
 # Theory <a name="theory"></a>
 
