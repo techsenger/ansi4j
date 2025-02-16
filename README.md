@@ -14,6 +14,7 @@
         * [Usage](#ansi4j-css-usage)
         * [Thread-safety](#ansi4j-css-thread)
     * [Code building](#ansi4j-building)
+    * [Contributing](#ansi4j-contributing)
     * [👉 Support Us](#ansi4j-support-us)
 * [Theory](#theory)
     * [Control character](#theory-control)
@@ -28,6 +29,10 @@
     * [Parameter examples](#theory-parameters)
 * [Useful resources](#resources)
 
+| Support the Project! |
+|:-------------|
+| This project is open-source and free to use, both commercially and non-commercially, which is why we need your help in its development. If you like it, please give it a star ⭐ on GitHub — it helps others discover the project and increases its visibility. You can also contribute, for example, by fixing bugs or suggesting improvements — see [Contributing](#ansi4j-contributing). If you can, financial support is always appreciated — see [👉 Support Us](#ansi4j-support-us). Thank you for your support! |
+
 # Overview <a name="ansi4j-overview"></a>
 
 Techsenger Ansi4j is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992.
@@ -36,8 +41,6 @@ types of functions and mechanism to process them.
 
 Techsenger Ansi4j consists of a core that includes parser and CSS extension that allows to create CSS declaration using
 function arguments.
-
-👉 If you like this project and find it useful, please consider [supporting us](#ansi4j-support-us).
 
 ## Core <a name="ansi4j-core"></a>
 
@@ -269,13 +272,16 @@ To build the library use standard Git and Maven commands:
     cd ansi4j
     mvn clean install
 
+## Contributing <a name="ansi4j-contributing"></a>
+
+We welcome all contributions. You can help by reporting bugs, suggesting improvements, or submitting pull requests
+with fixes and new features. If you have any questions, feel free to reach out — we’ll be happy to assist you.
+
 ## 👉 Support Us <a name="ansi4j-support-us"></a>
 
 You can support us financially through [GitHub Sponsors](https://github.com/sponsors/techsenger). Your
 contribution directly helps us keep our open-source projects active, improve their features, and offer ongoing support.
 Besides, we offer multiple sponsorship tiers, with different rewards.
-
-You can also give this project a star ⭐, which will help other users find it and increase its popularity.
 
 # Theory <a name="theory"></a>
 
