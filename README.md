@@ -1,21 +1,27 @@
 # Techsenger Ansi4j
+
+| Support the Project! |
+|:-------------|
+| This project is open-source and free to use, both commercially and non-commercially, which is why we need your help in its development. If you like it, please give it a star ⭐ on GitHub — it helps others discover the project and increases its visibility. You can also contribute, for example, by fixing bugs 🐛 or suggesting improvements 💡 — see [Contributing](#ansi4j-contributing). If you can, financial support 💰 is always appreciated — see [Support Us](#ansi4j-support-us). Thank you for your support! |
+
+## Table of Contents
 * [Overview](#ansi4j-overview)
-    * [Core](#ansi4j-core)
-        * [Overview](#ansi4j-core-overview)
-        * [Base components](#ansi4j-core-base)
-        * [Dependencies](#ansi4j-core-dependencies)
-        * [Usage](#ansi4j-core-usage)
-        * [Thread-safety](#ansi4j-core-thread)
-    * [CSS extension](#ansi4j-css)
-        * [Overview](#ansi4j-css-overview)
-        * [Demo](#ansi4j-css-demo)
-        * [Base components](#ansi4j-css-base)
-        * [Dependencies](#ansi4j-css-dependencies)
-        * [Usage](#ansi4j-css-usage)
-        * [Thread-safety](#ansi4j-css-thread)
-    * [Code building](#ansi4j-building)
-    * [Contributing](#ansi4j-contributing)
-    * [👉 Support Us](#ansi4j-support-us)
+* [Core](#ansi4j-core)
+    * [Overview](#ansi4j-core-overview)
+    * [Base components](#ansi4j-core-base)
+    * [Dependencies](#ansi4j-core-dependencies)
+    * [Usage](#ansi4j-core-usage)
+    * [Thread-safety](#ansi4j-core-thread)
+* [CSS extension](#ansi4j-css)
+    * [Overview](#ansi4j-css-overview)
+    * [Demo](#ansi4j-css-demo)
+    * [Base components](#ansi4j-css-base)
+    * [Dependencies](#ansi4j-css-dependencies)
+    * [Usage](#ansi4j-css-usage)
+    * [Thread-safety](#ansi4j-css-thread)
+* [Code building](#ansi4j-building)
+* [Contributing](#ansi4j-contributing)
+* [👉 Support Us](#ansi4j-support-us)
 * [Theory](#theory)
     * [Control character](#theory-control)
     * [Control character and encoding](#theory-encoding)
@@ -27,13 +33,9 @@
         * [ISO](#theory-standard-iso)
     * [Types of control functions](#theory-types)
     * [Parameter examples](#theory-parameters)
-* [Useful resources](#resources)
+    * [Useful resources](#theory-resources)
 
-| Support the Project! |
-|:-------------|
-| This project is open-source and free to use, both commercially and non-commercially, which is why we need your help in its development. If you like it, please give it a star ⭐ on GitHub — it helps others discover the project and increases its visibility. You can also contribute, for example, by fixing bugs 🐛 or suggesting improvements 💡 — see [Contributing](#ansi4j-contributing). If you can, financial support 💰 is always appreciated — see [Support Us](#ansi4j-support-us). Thank you for your support! |
-
-# Overview <a name="ansi4j-overview"></a>
+## Overview <a name="ansi4j-overview"></a>
 
 Techsenger Ansi4j is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992.
 It supports all functions of all five types. At the same time parser architecture allows to add easily any other custom
@@ -283,9 +285,9 @@ You can support us financially through [GitHub Sponsors](https://github.com/spon
 contribution directly helps us keep our open-source projects active, improve their features, and offer ongoing support.
 Besides, we offer multiple sponsorship tiers, with different rewards.
 
-# Theory <a name="theory"></a>
+## Theory <a name="theory"></a>
 
-## Control character <a name="theory-control"></a>
+### Control character <a name="theory-control"></a>
 
 In computing and telecommunication, a control character or non-printing character (NPC) is a code point (a number) in a
 character set, that does not represent a written symbol. They are used as in-band signaling to cause effects other than
@@ -293,9 +295,9 @@ the addition of a symbol to the text. All other characters are mainly printing, 
 except perhaps for the "space" character (see ASCII printable characters). Details are
 [here](https://en.wikipedia.org/wiki/Control_character).
 
-## Control character and encoding <a name="theory-encoding"></a>
+### Control character and encoding <a name="theory-encoding"></a>
 
-### Control character in ASCII <a name="theory-encoding-ascii"></a>
+#### Control character in ASCII <a name="theory-encoding-ascii"></a>
 
 All entries in the ASCII table below code 32 (technically the C0 control code set) are control characters, including
 CR and LF used to separate lines of text. The code 127 (DEL) is also a control character. Extended ASCII sets defined
@@ -308,7 +310,7 @@ ASCII and derivatives of ASCII. The codes represent additional information about
 cursor, an instruction to start a new line, or a message that the text has been received. Details are
 [here](https://en.wikipedia.org/wiki/C0_and_C1_control_codes).
 
-### Control character in Unicode <a name="theory-encoding-unicode"></a>
+#### Control character in Unicode <a name="theory-encoding-unicode"></a>
 
 Many Unicode characters are used to control the interpretation or display of text, but these characters themselves have
 no visual or spatial representation. For example, the null character (U+0000 NULL) is used in C-programming application
@@ -320,9 +322,9 @@ In the narrowest sense, a control code is a character with the general category 
 control codes, a concept defined in ISO/IEC 2022 and inherited by Unicode, with the most common set being defined in
 ISO/IEC 6429. Details are [here](https://en.wikipedia.org/wiki/Unicode_control_characters).
 
-## Control Function Standards <a name="theory-standard"></a>
+### Control Function Standards <a name="theory-standard"></a>
 
-### ECMA <a name="theory-standard-ecma"></a>
+#### ECMA <a name="theory-standard-ecma"></a>
 
 The first edition of this Standard ECMA-48 was published in 1976. Further editions followed. The fourth edition,
 published in 1986 was adopted by ISO/IEC under the fast-track procedure as second edition of ISO 6429. It
@@ -338,20 +340,20 @@ functions. Moreover, the concept of "device" had to be revised.
 
 The fifth edition was contributed to ISO/IEC for adoption as third edition of ISO/IEC 6429.
 
-### ANSI <a name="theory-standard-ansi"></a>
+#### ANSI <a name="theory-standard-ansi"></a>
 
 The name "ANSI escape sequence" dates from 1979 when ANSI adopted ANSI X3.64. The ANSI X3L2 committee collaborated with
 the ECMA committee TC 1 to produce nearly identical standards. These two standards were merged into an international
 standard, ISO 6429. In 1994, ANSI withdrew its standard in favor of the international standard.
 
-### ISO <a name="theory-standard-iso"></a>
+#### ISO <a name="theory-standard-iso"></a>
 
 * ISO 6429:1983 (withdrawn),
 * ISO 6429:1988(withdrawn),
 * ISO/IEC 6429:1992 (current), almost identical to the fifth edition of ECMA-48. There is only one
 difference in function set - ISO/IEC 6429:1992 has one extra function DEL-DELETE.
 
-## Types of control functions <a name="theory-types"></a>
+### Types of control functions <a name="theory-types"></a>
 
 Each control function in ECMA-48/5th belongs to one of the following types (section 5.1):
 
@@ -361,7 +363,7 @@ Each control function in ECMA-48/5th belongs to one of the following types (sect
 4. independent control functions;
 5. control strings.
 
-## Parameter examples <a name="theory-parameters"></a>
+### Parameter examples <a name="theory-parameters"></a>
 
 * no params or one default value (see 5.4.2, e)) - CSI H
 * one explicit param - CSI 10 H
@@ -374,7 +376,7 @@ Each control function in ECMA-48/5th belongs to one of the following types (sect
 
 Note: spaces near parameters are not used in real function code.
 
-# Useful resources <a name="resources"></a>
+### Useful resources <a name="theory-resources"></a>
 
 * [ECMA-48](https://www.ecma-international.org/publications-and-standards/standards/ecma-48/)
 * [ISO/IEC 6429:1992 - preview](https://www.iso.org/obp/ui/#iso:std:iso-iec:6429:ed-3:v1:en)
