@@ -2,26 +2,26 @@
 
 | Support the Project! |
 |:-------------|
-| This project is open-source and free to use, both commercially and non-commercially, which is why we need your help in its development. If you like it, please give it a star ⭐ on GitHub — it helps others discover the project and increases its visibility. You can also contribute, for example, by fixing bugs 🐛 or suggesting improvements 💡 — see [Contributing](#ansi4j-contributing). If you can, financial support 💰 is always appreciated — see [Support Us](#ansi4j-support-us). Thank you for your support! |
+| This project is open-source and free to use, both commercially and non-commercially, which is why we need your help in its development. If you like it, please give it a star ⭐ on GitHub — it helps others discover the project and increases its visibility. You can also contribute, for example, by fixing bugs 🐛 or suggesting improvements 💡 — see [Contributing](#contributing). If you can, financial support 💰 is always appreciated — see [Support Us](#support-us). Thank you for your support! |
 
 ## Table of Contents
-* [Overview](#ansi4j-overview)
-* [Core](#ansi4j-core)
-    * [Overview](#ansi4j-core-overview)
-    * [Base components](#ansi4j-core-base)
-    * [Dependencies](#ansi4j-core-dependencies)
-    * [Usage](#ansi4j-core-usage)
-    * [Thread-safety](#ansi4j-core-thread)
-* [CSS extension](#ansi4j-css)
-    * [Overview](#ansi4j-css-overview)
-    * [Demo](#ansi4j-css-demo)
-    * [Base components](#ansi4j-css-base)
-    * [Dependencies](#ansi4j-css-dependencies)
-    * [Usage](#ansi4j-css-usage)
-    * [Thread-safety](#ansi4j-css-thread)
-* [Code building](#ansi4j-building)
-* [Contributing](#ansi4j-contributing)
-* [👉 Support Us](#ansi4j-support-us)
+* [Overview](#overview)
+* [Core](#core)
+    * [Overview](#core-overview)
+    * [Base components](#core-base)
+    * [Dependencies](#core-dependencies)
+    * [Usage](#core-usage)
+    * [Thread-safety](#core-thread)
+* [CSS extension](#css)
+    * [Overview](#css-overview)
+    * [Demo](#css-demo)
+    * [Base components](#css-base)
+    * [Dependencies](#css-dependencies)
+    * [Usage](#css-usage)
+    * [Thread-safety](#css-thread)
+* [Code building](#building)
+* [Contributing](#contributing)
+* [👉 Support Us](#support-us)
 * [Theory](#theory)
     * [Control character](#theory-control)
     * [Control character and encoding](#theory-encoding)
@@ -35,7 +35,7 @@
     * [Parameter examples](#theory-parameters)
     * [Useful resources](#theory-resources)
 
-## Overview <a name="ansi4j-overview"></a>
+## Overview <a name="overview"></a>
 
 Techsenger Ansi4j is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992.
 It supports all functions of all five types. At the same time parser architecture allows to add easily any other custom
@@ -44,13 +44,13 @@ types of functions and mechanism to process them.
 Techsenger Ansi4j consists of a core that includes parser and CSS extension that allows to create CSS declaration using
 function arguments.
 
-## Core <a name="ansi4j-core"></a>
+## Core <a name="core"></a>
 
-### Overview <a name="ansi4j-core-overview"></a>
+### Overview <a name="core-overview"></a>
 
 Core contains all base classes for working with control functions, parsers and text.
 
-### Base components <a name="ansi4j-core-base"></a>
+### Base components <a name="core-base"></a>
 
 * `ParserFactory` is thread-safe instance of factory, that can be used for creating N parsers for parsing N texts.
 So, usually there is only one factory.
@@ -73,7 +73,7 @@ enumerations contain short function names in accordance with the standard. At th
 there is an XAlias interface that provides the full function names. These aliases can be used by those who do not
 remember the short names.
 
-### Dependencies <a name="ansi4j-core-dependencies"></a>
+### Dependencies <a name="core-dependencies"></a>
 
 This project is available on Maven Central:
 
@@ -88,7 +88,7 @@ This project is available on Maven Central:
         <version>2.0.0</version>
     </dependency>
 
-### Usage <a name="ansi4j-core-usage"></a>
+### Usage <a name="core-usage"></a>
 
 Step 0 - Creating `ParserFactory`
 
@@ -140,15 +140,15 @@ Step 2 - Parsing
         }
     }
 
-### Thread-safety <a name="ansi4j-core-thread"></a>
+### Thread-safety <a name="core-thread"></a>
 
 `ParserFactory` is thread-safe. `StringParser` and `StreamParser` are not thread-safe. `FunctionFinder`, `TextHandler` and
 `FunctionHandler`s are thread-safe. Detailed information about thread-safety is provided in every interface in core API
 module.
 
-## CSS extension <a name="ansi4j-css"></a>
+## CSS extension <a name="css"></a>
 
-Overview <a name="ansi4j-css-overview"></a>
+### Overview <a name="css-overview"></a>
 
 The CSS extension allows you to style text using CSS in a way that mirrors the styling applied by SGR functions.
 For example, this extension can be used to style program outputs, log messages, documentation, and more.
@@ -164,7 +164,7 @@ listing the features supported by each of these components is available in the d
 Currently, the following text attributes are supported: intensity, italic, underline, blink, reverse video, visibility,
 strikethrough, font, foreground color, and background color.
 
-### Demo <a name="ansi4j-css-demo"></a>
+### Demo <a name="css-demo"></a>
 
 The demo application showcases examples of styling the output of common programs:
 
@@ -179,7 +179,7 @@ To run the demo application, execute the following commands in the project root:
     cd ansi4j-css-demo
     mvn javafx:run
 
-### Base components <a name="ansi4j-css-base"></a>
+### Base components <a name="css-base"></a>
 
 * `AttributeRegistry` stores model attributes, separated into groups.
 * `AttributeGroup` contains a group of logically related attributes. Currently, there is only one group for the SGR function.
@@ -216,7 +216,7 @@ Important notes:
 * RichTextFX `InlineCssTextArea` will support blink when this [issue](https://github.com/FXMisc/RichTextFX/issues/1252)
 is resolved.
 
-### Dependencies <a name="ansi4j-css-dependencies"></a>
+### Dependencies <a name="css-dependencies"></a>
 
 This project is available on Maven Central:
 
@@ -231,7 +231,7 @@ This project is available on Maven Central:
         <version>2.0.0</version>
     </dependency>
 
-### Usage <a name="ansi4j-css-usage"></a>
+### Usage <a name="css-usage"></a>
 
     //First of all we create the configuration for text group.
     var palette = new XtermPalette256();
@@ -261,12 +261,12 @@ This project is available on Maven Central:
         }
     }
 
-### Thread-safety <a name="ansi4j-css-thread"></a>
+### Thread-safety <a name="css-thread"></a>
 
 Config, processor, attribute resolver and CSS generators are thread-safe. Attribute context is not thread-safe.
 Detailed information about thread-safety is provided in every interface in CSS API module.
 
-## Code building <a name="ansi4j-building"></a>
+## Code building <a name="building"></a>
 
 To build the library use standard Git and Maven commands:
 
@@ -274,12 +274,12 @@ To build the library use standard Git and Maven commands:
     cd ansi4j
     mvn clean install
 
-## Contributing <a name="ansi4j-contributing"></a>
+## Contributing <a name="contributing"></a>
 
 We welcome all contributions. You can help by reporting bugs, suggesting improvements, or submitting pull requests
 with fixes and new features. If you have any questions, feel free to reach out — we’ll be happy to assist you.
 
-## 👉 Support Us <a name="ansi4j-support-us"></a>
+## 👉 Support Us <a name="support-us"></a>
 
 You can support us financially through [GitHub Sponsors](https://github.com/sponsors/techsenger). Your
 contribution directly helps us keep our open-source projects active, improve their features, and offer ongoing support.
