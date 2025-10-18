@@ -1,8 +1,11 @@
 # Techsenger ANSI4J
 
-| Support the Project! |
-|:-------------|
-| This project is open-source and free to use, both commercially and non-commercially, which is why we need your help in its development. If you like it, please give it a star ⭐ on GitHub — it helps others discover the project and increases its visibility. You can also contribute, for example, by fixing bugs 🐛 or suggesting improvements 💡, see [Contributing](#contributing). If you can, financial support 💰 is always appreciated, see [Support Us](#support-us). Thank you for your support! |
+Techsenger ANSI4J is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992.
+It supports all functions of all five types. At the same time parser architecture allows to add easily any other custom
+types of functions and mechanism to process them.
+
+Techsenger ANSI4J consists of a core that includes parser and CSS extension that allows to create CSS declaration using
+function arguments.
 
 ## Table of Contents
 * [Overview](#overview)
@@ -21,7 +24,7 @@
     * [Thread-safety](#css-thread)
 * [Code building](#building)
 * [Contributing](#contributing)
-* [👉 Support Us](#support-us)
+* [Support Us](#support-us)
 * [Theory](#theory)
     * [Control character](#theory-control)
     * [Control character and encoding](#theory-encoding)
@@ -34,15 +37,6 @@
     * [Types of control functions](#theory-types)
     * [Parameter examples](#theory-parameters)
     * [Useful resources](#theory-resources)
-
-## Overview <a name="overview"></a>
-
-Techsenger ANSI4J is a Java library that parses ANSI escape codes in full accordance with ISO/IEC 6429:1992.
-It supports all functions of all five types. At the same time parser architecture allows to add easily any other custom
-types of functions and mechanism to process them.
-
-Techsenger ANSI4J consists of a core that includes parser and CSS extension that allows to create CSS declaration using
-function arguments.
 
 ## Core <a name="core"></a>
 
@@ -279,11 +273,11 @@ To build the library use standard Git and Maven commands:
 We welcome all contributions. You can help by reporting bugs, suggesting improvements, or submitting pull requests
 with fixes and new features. If you have any questions, feel free to reach out — we’ll be happy to assist you.
 
-## 👉 Support Us <a name="support-us"></a>
+## Support Us <a name="support-us"></a>
 
-You can support us financially through [GitHub Sponsors](https://github.com/sponsors/techsenger). Your
-contribution directly helps us keep our open-source projects active, improve their features, and offer ongoing support.
-Besides, we offer multiple sponsorship tiers, with different rewards.
+You can support our open-source work through [GitHub Sponsors](https://github.com/sponsors/techsenger).
+Your contribution helps us maintain projects, develop new features, and provide ongoing improvements.
+Multiple sponsorship tiers are available, each offering different levels of recognition and benefits.
 
 ## Theory <a name="theory"></a>
 
