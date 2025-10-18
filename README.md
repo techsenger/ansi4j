@@ -8,7 +8,6 @@ Techsenger ANSI4J consists of a core that includes parser and CSS extension that
 function arguments.
 
 ## Table of Contents
-* [Overview](#overview)
 * [Core](#core)
     * [Overview](#core-overview)
     * [Base components](#core-base)
