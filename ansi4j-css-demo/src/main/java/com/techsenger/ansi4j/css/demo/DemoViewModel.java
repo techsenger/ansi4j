@@ -30,7 +30,7 @@ import javafx.beans.property.StringProperty;
  */
 public class DemoViewModel implements ViewModel {
 
-    private final StringProperty stageTitle = new SimpleStringProperty("Techsenger Ansi4j CSS Demo");
+    private final StringProperty stageTitle = new SimpleStringProperty("Techsenger ANSI4J CSS Demo");
 
     private DemoComponentService componentService;
 

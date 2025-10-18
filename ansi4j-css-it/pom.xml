@@ -10,7 +10,7 @@
     <groupId>com.techsenger.ansi4j</groupId>
     <artifactId>ansi4j-css-it</artifactId>
     <packaging>jar</packaging>
-    <name>Ansi4j - CSS IT</name>
+    <name>ANSI4J - CSS IT</name>
     <description>Integration tests for text styling with CSS</description>
 
     <properties>

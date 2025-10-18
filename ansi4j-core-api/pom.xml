@@ -10,7 +10,7 @@
     <groupId>com.techsenger.ansi4j</groupId>
     <artifactId>ansi4j-core-api</artifactId>
     <packaging>jar</packaging>
-    <name>Ansi4j - Core API</name>
+    <name>ANSI4J - Core API</name>
     <description>API for text parsing</description>
 
     <dependencies>
